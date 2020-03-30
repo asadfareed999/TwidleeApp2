@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_simple"
+        android:fitsSystemWindows="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:paddingTop="@dimen/BaseLayout_rhythmThird"
+        android:paddingBottom="@dimen/BaseLayout_rhythmOneAndASixth">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/imageViewProfilePicProfile"
+                android:layout_width="@dimen/small_action_buttons_width"
+                android:layout_height="@dimen/small_action_buttons_width"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/default_margin"
+                android:src="@drawable/ic_placeholder_avatar"
+                app:civ_border_color="@color/colorAccent"
+                app:civ_border_width="4dp"
+                app:civ_shadow="false" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutNameProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/BaseLayout_rhythm"
+                android:layout_marginTop="@dimen/BaseLayout_rhythmHalf"
+                android:layout_marginEnd="@dimen/BaseLayout_rhythm"
+                android:hint="@string/hint_name"
+                android:textColorHint="@color/color_red"
+                app:hintTextAppearance="@style/TextAppearance.Text.XLarge.Bold">
+
+                <EditText
+                    style="@style/TextAppearance.Text.Medium.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    tools:text="Developer">
+
+                </EditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/BaseLayout_rhythm"
+                android:layout_marginTop="@dimen/BaseLayout_rhythmHalf"
+                android:layout_marginEnd="@dimen/BaseLayout_rhythm">
+
+                <com.rilixtech.widget.countrycodepicker.CountryCodePicker
+                    android:id="@+id/ccp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:ccp_hideNameCode="true"
+                    app:ccp_hidePhoneCode="false"
+                    app:ccp_defaultCode="92"
+                    app:ccp_keyboardAutoPopOnSearch="false"
+                    app:ccp_showFullName="false"
+                    app:ccp_textSize="12sp"
+                    app:layout_constrainedWidth="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/fragment_textInputLayout_mobileNumber_profile"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.65">
+
+                </com.rilixtech.widget.countrycodepicker.CountryCodePicker>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/fragment_textInputLayout_mobileNumber_profile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/BaseLayout_rhythmOneAndAHalf"
+                    android:hint="@string/hint_mobile_number"
+                    android:textColorHint="@color/color_red"
+                    app:hintTextAppearance="@style/TextAppearance.Text.XLarge.Bold"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintBaseline_toBaselineOf="@id/ccp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@id/ccp"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <EditText
+                        android:id="@+id/phone_number_profile"
+                        style="@style/TextAppearance.Text.Medium.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:inputType="phone"
+                        tools:text="@string/hint_mobile_number"></EditText>
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutEmailProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/BaseLayout_rhythm"
+                android:layout_marginTop="@dimen/BaseLayout_rhythmHalf"
+                android:layout_marginEnd="@dimen/BaseLayout_rhythm"
+                android:hint="@string/hint_email"
+                android:textColorHint="@color/color_red"
+                android:visibility="gone"
+                app:hintTextAppearance="@style/TextAppearance.Text.XLarge.Bold">
+
+                <EditText
+                    style="@style/TextAppearance.Text.Medium.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    tools:text="dev@gmail.com">
+
+                </EditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/viewVerificationCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/BaseLayout_rhythm"
+                android:layout_marginTop="@dimen/BaseLayout_rhythmHalf"
+                android:layout_marginEnd="@dimen/BaseLayout_rhythm"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/profileVerificationCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:hint="@string/hint_verification_code"
+                    android:textColorHint="@color/color_red"
+                    app:hintTextAppearance="@style/TextAppearance.Text.XLarge.Bold">
+
+                    <EditText
+                        style="@style/TextAppearance.Text.Medium.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:maxLength="4"
+                        tools:text="1234" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/BaseLayout_rhythmTwelfth"
+                    android:text="@string/message_verification_code"
+                    android:textAppearance="@style/TextAppearance.Text.RedColor" />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/buttonEditSaveProfile"
+                style="@style/Button.Action.Primary"
+                android:layout_width="match_parent"
+                android:layout_marginStart="@dimen/BaseLayout_rhythm"
+                android:layout_marginTop="@dimen/BaseLayout_rhythmHalf"
+                android:layout_marginEnd="@dimen/BaseLayout_rhythm"
+                android:layout_weight="1"
+                android:background="@drawable/button_background"
+                android:text="@string/hint_save" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

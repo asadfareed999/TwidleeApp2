@@ -1,0 +1,81 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="BaseLayout_rhythmThreeAndHalf">168dp</dimen>
+    <dimen name="BaseLayout_rhythmThree">144dp</dimen>
+    <dimen name="BaseLayout_rhythmDouble">96dp</dimen>
+    <dimen name="BaseLayout_rhythmOneAndTwoThirds">88dp</dimen>
+    <dimen name="BaseLayout_rhythmOneAndAHalf">72dp</dimen>
+    <dimen name="BaseLayout_rhythmOneAndAThird">64dp</dimen>
+    <dimen name="BaseLayout_rhythmOneAndASixth">56dp</dimen>
+    <dimen name="BaseLayout_rhythm">48dp</dimen>
+    <dimen name="BaseLayout_rhythmTwoThirds">32dp</dimen>
+    <dimen name="BaseLayout_rhythmHalf">24dp</dimen>
+    <dimen name="BaseLayout_rhythmThird">16dp</dimen>
+    <dimen name="BaseLayout_rhythmFourth">12dp</dimen>
+    <dimen name="BaseLayout_rhythmSixth">8dp</dimen>
+    <dimen name="BaseLayout_rhythmTwelfth">4dp</dimen>
+    <dimen name="BaseLayout_rhythmTwentyFourth">2dp</dimen>
+
+    <dimen name="activity_horizontal_margin">@dimen/BaseLayout_rhythmThird</dimen>
+    <dimen name="activity_vertical_margin">@dimen/BaseLayout_rhythmThird</dimen>
+    <dimen name="nav_header_vertical_spacing">@dimen/BaseLayout_rhythmSixth</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="default_margin">@dimen/BaseLayout_rhythmThird</dimen>
+    <dimen name="default_padding">@dimen/BaseLayout_rhythmThird</dimen>
+    <dimen name="actionBarSize">@dimen/BaseLayout_rhythm</dimen>
+    <dimen name="map_action_button_width">60dp</dimen>
+    <dimen name="progressbar_size">28dp</dimen>
+
+    <dimen name="searchBar_height">60dp</dimen>
+
+    <dimen name="Bottom_sheet_vehicle_image_height">98dp</dimen>
+    <dimen name="Bottom_sheet_vehicle_image_width">172dp</dimen>
+
+    <dimen name="list_item_padding_left_cuisines">44dp</dimen>
+    <dimen name="bottom_sheet_divider_height">1dp</dimen>
+    <dimen name="small_action_buttons_width">120dp</dimen>
+    <dimen name="small_action_buttons_height">40dp</dimen>
+
+    <dimen name="contact_map_height">200dp</dimen>
+    <dimen name="rate_feedback_rating_width">125dp</dimen>
+
+
+    <dimen name="card_corner_radius">@dimen/BaseLayout_rhythmThird</dimen>
+    <dimen name="rating_item_width">100dp</dimen>
+    <dimen name="rating_item_progressbar_width">150dp</dimen>
+    <dimen name="rating_item_progressbar_height">8dp</dimen>
+    <dimen name="rating_item_comment_user_image_size">50dp</dimen>
+
+
+    <!-- Bottom Menu Override -->
+    <dimen name="design_bottom_navigation_text_size" tools:override="true">12sp</dimen>
+    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">12sp</dimen>
+    <dimen name="list_item_deal_thumbnail_height">128dp</dimen>
+    <dimen name="margin_medium">12dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_narrow">6dp</dimen>
+    <dimen name="reserve_deal_details_min_height">28dp</dimen>
+    <dimen name="toolbar_drawable_padding">15dp</dimen>
+    <dimen name="item_deal_custom_two_lines_width">240dp</dimen>
+    <dimen name="restaurant_home_cover_height">280dp</dimen>
+    <dimen name="rating_bar_width_deals">92dp</dimen>
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // --- New Dimens --- //
+
+    <dimen name="BaseLayout_rhythmOneAndAThird_New">@dimen/_53sdp</dimen>
+    <dimen name="list_item_deal_thumbnail_height_new">@dimen/_100sdp</dimen>
+    <dimen name="fav_heart_new">@dimen/_50sdp</dimen>
+    <dimen name="list_item_padding_left_cuisines_new">30dp</dimen>
+    <dimen name="restaurant_home_cover_height_new">@dimen/_250sdp</dimen>
+    <dimen name="gradient_height_new">@dimen/_130sdp</dimen>
+
+    <dimen name="BaseLayout_rhythmDouble_new">@dimen/_79sdp</dimen>
+    <dimen name="BaseLayout_rhythmHalf_new">@dimen/_20sdp</dimen>
+    <dimen name="BaseLayout_rhythmTwoThirds_new">@dimen/_26sdp</dimen>
+    <dimen name="BaseLayout_rhythmThree_new">@dimen/_118sdp</dimen>
+    <dimen name="BaseLayout_rhythmThird_new">14dp</dimen>
+    <dimen name="rating_item_comment_user_image_size_new">@dimen/_44sdp</dimen>
+    <dimen name="rating_item_width_new">120dp</dimen>
+
+</resources>

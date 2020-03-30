@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_nav_deals"
+        android:title="@string/menu_home" />
+
+    <item
+        android:id="@+id/navigation_reservations"
+        android:icon="@drawable/ic_nav_reservations"
+        android:title="@string/menu_reservations" />
+
+    <item
+        android:id="@+id/navigation_history"
+        android:icon="@drawable/ic_nav_history"
+        android:title="@string/menu_history" />
+
+    <item
+        android:id="@+id/navigation_favorites"
+        android:icon="@drawable/ic_nav_favorites"
+        android:title="@string/menu_favorites" />
+
+    <item
+        android:id="@+id/navigation_account"
+        android:icon="@drawable/ic_burger"
+        android:title="@string/menu_account" />
+</menu>

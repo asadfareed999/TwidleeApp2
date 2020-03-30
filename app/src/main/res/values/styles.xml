@@ -1,0 +1,418 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/color_gray</item>
+    </style>
+
+    <!--  No Appbar Style  -->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!-- The launcher theme. It sets the main window background to the background_launch_screen drawable -->
+    <style name="AppTheme.NoActionBar.Launcher">
+        <item name="android:windowBackground">@drawable/background_launch_screen</item>
+        <item name="colorPrimaryDark">@color/colorAccent</item>
+    </style>
+
+    <style name="CustomTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--  Button Styles  -->
+    <style name="Button.Action.Primary" parent="Base.Widget.AppCompat.Button">
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:fontFamily">@font/font_roboto_bold</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:layout_height">38dp</item>
+    </style>
+
+    <!--  Text Styles  -->
+    <style name="EditTextAppearance">
+        <item name="android:background">@color/color_gray</item>
+    </style>
+
+    <style name="TextAppearance.Text" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/font_roboto_regular</item>
+    </style>
+
+    <style name="TextAppearance.Text.Roboto_Medium">
+        <item name="android:fontFamily">@font/font_roboto_medium</item>
+    </style>
+
+    <style name="TextAppearance.Text.Roboto_Medium.Black" parent="TextAppearance.Text.Small.Black">
+        <item name="android:fontFamily">@font/font_roboto_medium</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="TextAppearance.Text.Link">
+        <item name="android:textColor">?colorAccent</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+    <style name="TextAppearance.Text.RedColor">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="TextAppearance.Text.Bold">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/font_roboto_bold</item>
+    </style>
+
+    <style name="TextAppearance.Text.Bold.Gray">
+        <item name="android:textColor">@color/color_text_gray_medium</item>
+    </style>
+
+    <style name="TextAppearance.Text.Bold.Black">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/color_black</item>
+    </style>
+
+    <style name="TextAppearance.Text.Caps">
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="TextAppearance.Text.Heading4">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextAppearance.Text.Heading4.Medium_Accent">
+        <item name="android:fontFamily">@font/font_roboto_medium</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="TextAppearance.Text.XXLarge">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="TextAppearance.Text.Roboto_Medium.XXLarge">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="TextAppearance.Text.XLarge">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.Text.Large">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.Text.Large.Regular">
+        <item name="android:fontFamily">@font/font_roboto_regular</item>
+    </style>
+
+    <style name="TextAppearance.Text.Large.Regular.Gray">
+        <item name="android:textColor">@color/color_text_gray</item>
+    </style>
+
+    <style name="TextAppearance.Text.XLarge.Bold">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/font_roboto_bold</item>
+    </style>
+
+    <style name="TextAppearance.Text.XLarge.Bold.Gray">
+        <item name="android:textColor">@color/color_text_gray</item>
+    </style>
+
+    <style name="TextAppearance.Text.XLarge.Bold.Accent">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="TextAppearance.Text.Medium">
+        <item name="android:fontFamily">@font/font_roboto_medium</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:backgroundTint">@color/color_gray</item>
+    </style>
+
+    <style name="TextAppearance.Text.Medium.Accent">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="TextAppearance.Text.Medium.Accent.Bold">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/font_roboto_bold</item>
+    </style>
+
+    <style name="TextAppearance.Text.Medium.Regular">
+        <item name="android:fontFamily">@font/font_roboto_regular</item>
+    </style>
+
+    <style name="TextAppearance.Text.Medium.Gray">
+        <item name="android:textColor">@color/color_text_gray</item>
+    </style>
+
+    <style name="TextAppearance.Text.Medium.Gray.Regular">
+        <item name="android:fontFamily">@font/font_roboto_regular</item>
+    </style>
+
+    <style name="TextAppearance.Text.Medium.Gray.Bold">
+        <item name="android:fontFamily">@font/font_roboto_bold</item>
+    </style>
+
+    <style name="TextAppearance.Text.Small">
+        <item name="android:fontFamily">@font/font_roboto_regular</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="TextAppearance.Text.Small.Black">
+        <item name="android:textColor">@color/color_black</item>
+    </style>
+
+    <style name="TextAppearance.Text.Small.Gray">
+        <item name="android:textColor">@color/color_text_gray</item>
+    </style>
+
+    <style name="TextAppearance.Text.Small.Gray.Bold">
+        <item name="android:fontFamily">@font/font_roboto_bold</item>
+    </style>
+
+    <style name="TextAppearance.Text.ExtraSmall">
+        <item name="android:textSize">9sp</item>
+    </style>
+
+    <style name="TextAppearance.Text.ExtraSmall.Gray">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/color_text_gray</item>
+    </style>
+
+    <style name="TextAppearance.Text.Medium.EditText">
+        <item name="android:fontFamily">@font/font_roboto_regular</item>
+    </style>
+
+    <style name="TextView_default_padding_style">
+        <item name="android:paddingLeft">@dimen/BaseLayout_rhythmFourth</item>
+        <item name="android:paddingRight">@dimen/BaseLayout_rhythmFourth</item>
+        <item name="android:paddingTop">@dimen/BaseLayout_rhythmTwelfth</item>
+        <item name="android:paddingBottom">@dimen/BaseLayout_rhythmTwelfth</item>
+    </style>
+
+    <style name="customfontstyle_josefinsans_regular" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/font_josefinsans_regular</item>
+    </style>
+
+    <style name="customfontstyle_roboto_meduim" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/font_roboto_medium</item>
+    </style>
+
+    <style name="customfontstyle_roboto_bold" parent="TextAppearance.AppCompat">
+
+    </style>
+
+    <style name="customstyle_code_authentication" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/font_roboto_regular</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:color">@color/color_black</item>
+        <item name="android:padding">@dimen/default_padding</item>
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:inputType">number</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:cursorVisible">false</item>
+        <item name="android:layout_marginLeft">@dimen/BaseLayout_rhythmFourth</item>
+        <item name="android:layout_marginRight">@dimen/BaseLayout_rhythmFourth</item>
+    </style>
+
+    <style name="list_item_deal_offer_text" parent="TextView_default_padding_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@drawable/background_round_corner_narrow</item>
+        <item name="android:layout_marginStart">@dimen/BaseLayout_rhythmThird</item>
+        <item name="android:layout_marginTop">@dimen/default_margin</item>
+        <item name="android:paddingLeft">@dimen/BaseLayout_rhythmSixth</item>
+        <item name="android:fontFamily">@font/font_roboto_bold</item>
+    </style>
+
+    <style name="BaseLayout.BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="android:colorBackground">@color/color_white</item>
+    </style>
+
+    <style name="CustomRateBarFeedBack" parent="Widget.AppCompat.RatingBar.Indicator">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:isIndicator">false</item>
+        <item name="android:numStars">5</item>
+        <item name="android:scaleX">.5</item>
+        <item name="android:scaleY">.5</item>
+    </style>
+
+    <style name="CustomRateBarStyleRateFeedBack" parent="Widget.AppCompat.RatingBar.Indicator">
+        <item name="android:layout_marginLeft">@dimen/_35sdp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:isIndicator">false</item>
+        <item name="android:numStars">5</item>
+        <item name="android:stepSize">1</item>
+        <item name="android:scaleX">.6</item>
+        <item name="android:scaleY">.6</item>
+    </style>
+
+    <style name="TextAppearance.Text.XXLargeRedBold">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CustomProgressBarStyle" parent="Base.Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/background_round_corner_progressbar</item>
+        <item name="android:layout_width">@dimen/rating_item_progressbar_width</item>
+        <item name="android:layout_height">@dimen/rating_item_progressbar_height</item>
+        <item name="android:max">50</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="CustomRatingBarStyle" parent="Base.Widget.AppCompat.RatingBar.Small">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:numStars">5</item>
+    </style>
+
+    <style name="History_Status">
+        <item name="android:textSize">12dp</item>
+        <item name="android:color">@color/color_black</item>
+        <item name="android:fontFamily">@font/font_roboto_bold</item>
+    </style>
+
+    <style name="Tab_Style" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="textAllCaps">false</item>
+        <item name="android:fontFamily">@font/font_roboto_bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // --- New Style --- //
+
+    <style name="TextAppearance.Text.Large.New">
+        <item name="android:textSize">@dimen/_12sdp</item>
+    </style>
+
+    <style name="TextAppearance.Text.Medium.New">
+        <item name="android:fontFamily">@font/font_roboto_medium</item>
+        <item name="android:textSize">@dimen/_11sdp</item>
+        <item name="android:backgroundTint">@color/color_gray</item>
+    </style>
+
+    <style name="TextAppearance.Text.Medium.New2">
+        <item name="android:textSize">@dimen/_11sdp</item>
+    </style>
+
+    <style name="TextAppearance.Text.Small.New">
+        <item name="android:textSize">@dimen/_9sdp</item>
+    </style>
+
+    <style name="list_item_deal_offer_text_New" parent="TextView_default_padding_style">
+        <item name="android:textSize">@dimen/_10sdp</item>
+        <item name="android:background">@drawable/background_round_corner_narrow</item>
+        <item name="android:layout_marginStart">@dimen/BaseLayout_rhythmThird</item>
+        <item name="android:layout_marginTop">@dimen/_24sdp</item>
+        <item name="android:paddingLeft">@dimen/BaseLayout_rhythmSixth</item>
+        <item name="android:fontFamily">@font/font_roboto_bold</item>
+    </style>
+
+    <style name="TextAppearance.Text.Roboto_Medium.XXLarge.New">
+        <item name="android:textSize">@dimen/_18sdp</item>
+    </style>
+
+    <style name="TextAppearance.Text.ExtraSmall.White">
+        <item name="android:textSize">@dimen/_11sdp</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="TextAppearance.Text.ExtraSmall.White2">
+        <item name="android:textSize">@dimen/_9sdp</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <!--  Button Styles  -->
+    <style name="Button.Action.Primary.New" parent="Base.Widget.AppCompat.Button">
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:fontFamily">@font/font_roboto_bold</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/_10sdp</item>
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:layout_height">@dimen/_31sdp</item>
+    </style>
+
+    <style name="TextAppearance.Text.Small.Gray.New">
+        <item name="android:textSize">@dimen/_10sdp</item>
+        <item name="android:textColor">@color/color_text_gray</item>
+    </style>
+
+    <style name="TextAppearance.Text.Bold.Black.New">
+        <item name="android:textSize">@dimen/_10sdp</item>
+        <item name="android:textColor">@color/color_black</item>
+    </style>
+
+    <style name="TextAppearance.Text.Bold.Black.Large">
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:textColor">@color/color_black</item>
+    </style>
+
+    <style name="TextAppearance.Text.Bold.Black.Medium">
+        <item name="android:textSize">@dimen/_11sdp</item>
+        <item name="android:textColor">@color/color_black</item>
+    </style>
+
+    <style name="TextAppearance.Text.Bold.Red">
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:textColor">@color/color_red</item>
+    </style>
+
+    <style name="TextAppearance.Text.Red">
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:textColor">@color/color_red</item>
+    </style>
+
+    <style name="TextAppearance.Text.Black">
+        <item name="android:textSize">@dimen/_11sdp</item>
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:fontFamily">@font/font_roboto_regular</item>
+    </style>
+
+    <style name="History_Status_New">
+        <item name="android:textSize">@dimen/_10sdp</item>
+        <item name="android:color">@color/color_black</item>
+        <item name="android:fontFamily">@font/font_roboto_bold</item>
+    </style>
+
+    <style name="History_Status_New2">
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:color">@color/color_black</item>
+        <item name="android:fontFamily">@font/font_roboto_bold</item>
+    </style>
+
+    <style name="Account_TextView_Style">
+        <item name="android:background">@drawable/underline_textview</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/BaseLayout_rhythmTwoThirds</item>
+        <item name="android:layout_marginTop">@dimen/BaseLayout_rhythmHalf</item>
+        <item name="android:drawablePadding">@dimen/BaseLayout_rhythmThird</item>
+        <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.XLarge</item>
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Account_Spinner_Language_Style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/BaseLayout_rhythmTwoThirds</item>
+        <item name="android:layout_marginTop">@dimen/BaseLayout_rhythmHalf</item>
+    </style>
+
+</resources>

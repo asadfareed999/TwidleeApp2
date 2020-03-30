@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
+
+    <include
+        android:id="@+id/fragment_imageView_header"
+        layout="@layout/header_brand_logo"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/BaseLayout_rhythm"
+        android:layout_marginEnd="@dimen/BaseLayout_rhythm"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_imageView_header">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fragment_textInputLayout_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/BaseLayout_rhythmThird"
+            android:autofillHints="email"
+            android:hint="@string/hint_email"
+            app:hintTextAppearance="@style/TextAppearance.Text.Red">
+
+            <EditText
+                android:id="@+id/et_email_login"
+                style="@style/TextAppearance.Text.Black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                tools:text="@string/hint_email" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fragment_textInputLayout_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/BaseLayout_rhythmThird"
+            android:hint="@string/hint_password"
+            app:passwordToggleEnabled="true"
+            app:hintTextAppearance="@style/TextAppearance.Text.Red">
+
+            <EditText
+                android:id="@+id/et_password_login"
+                style="@style/TextAppearance.Text.Black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                tools:text="@string/hint_password" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/fragment_textView_forgotPassword"
+            style="@style/TextAppearance.Text.Red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/BaseLayout_rhythmThird"
+            android:fontFamily="@font/font_roboto_regular"
+            android:layout_gravity="end"
+            android:text="@string/hint_forget_password"
+            android:textAlignment="viewEnd" />
+
+        <Button
+            android:id="@+id/fragment_button_login"
+            style="@style/Button.Action.Primary.New"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/BaseLayout_rhythmHalf"
+            android:background="@drawable/button_background"
+            android:text="@string/hint_login" />
+
+        <TextView
+            android:id="@+id/fragment_textView_signUp"
+            style="@style/TextAppearance.Text.Red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/BaseLayout_rhythmHalf"
+            android:fontFamily="@font/font_roboto_regular"
+            android:text="@string/hint_create_new_account"
+            android:textAlignment="center" />
+
+        <View
+            android:layout_width="@dimen/_110sdp"
+            android:layout_height="1dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorAccent" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

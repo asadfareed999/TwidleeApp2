@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:paddingBottom="@dimen/BaseLayout_rhythmOneAndAThird"
+    android:background="?android:attr/colorBackground">
+
+    <ImageView
+        android:id="@+id/toolbarImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/color_white"
+        android:padding="@dimen/default_padding"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_twidlee" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarImage"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/imageViewProfilePic"
+                android:layout_width="@dimen/small_action_buttons_width"
+                android:layout_height="@dimen/small_action_buttons_width"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/default_margin"
+                android:src="@drawable/ic_placeholder_avatar"
+                app:civ_border_color="@color/colorAccent"
+                app:civ_border_width="4dp"
+                app:civ_shadow="false" />
+
+            <TextView
+                android:id="@+id/textViewName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/BaseLayout_rhythmFourth"
+                android:textAlignment="center"
+                tools:text="Sadra Adams" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bottom_sheet_divider_height"
+                android:background="@color/color_gray" />
+
+            <TextView
+                android:id="@+id/textViewProfile"
+                android:drawableStart="@drawable/ic_profile"
+                android:text="@string/hint_profile"
+                style="@style/Account_TextView_Style"/>
+
+            <TextView
+                android:id="@+id/textViewTerms"
+                android:drawableStart="@drawable/ic_terms_conditions"
+                android:text="@string/hint_terms_conditions"
+                style="@style/Account_TextView_Style"/>
+
+            <TextView
+                android:id="@+id/textViewPrivacy"
+                android:drawableStart="@drawable/ic_privacy_policy"
+                android:text="@string/hint_privacy_policy"
+                style="@style/Account_TextView_Style"/>
+
+            <TextView
+                android:id="@+id/textViewAbout"
+                android:text="@string/hint_about_us"
+                android:drawableStart="@drawable/ic_aboutus"
+                style="@style/Account_TextView_Style" />
+
+            <TextView
+                android:id="@+id/textViewChangePassword"
+                android:drawableStart="@drawable/ic_password"
+                android:text="@string/title_change_password"
+                style="@style/Account_TextView_Style"/>
+
+            <TextView
+                android:id="@+id/textViewLogout"
+                android:drawableStart="@drawable/ic_logout"
+                android:text="@string/hint_logout"
+                style="@style/Account_TextView_Style"/>
+
+            <Spinner
+                android:id="@+id/spinnerSelectLanguage"
+                style="@style/Account_Spinner_Language_Style"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/BaseLayout_rhythmTwoThirds"
+                android:layout_marginTop="@dimen/BaseLayout_rhythmHalf"
+                android:text="@string/hint_notification"
+                android:textAppearance="@style/TextAppearance.Text.XXLargeRedBold" />
+
+            <Switch
+                android:id="@+id/switchPushNotification"
+                android:drawableStart="@drawable/ic_push_notification"
+                android:text="@string/hint_push_notification"
+                android:paddingRight="@dimen/BaseLayout_rhythmThird"
+                style="@style/Account_TextView_Style" />
+
+            <Switch
+                android:id="@+id/switchEmailNotification"
+                android:paddingRight="@dimen/BaseLayout_rhythmThird"
+                android:text="@string/hint_email_notification"
+                android:drawableStart="@drawable/ic_email_notification"
+                style="@style/Account_TextView_Style"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

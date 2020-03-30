@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_simple"
+            android:fitsSystemWindows="true" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragmentReservationsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:paddingBottom="@dimen/BaseLayout_rhythmOneAndASixth"
+            android:paddingTop="@dimen/BaseLayout_rhythmThird"
+            tools:listitem="@layout/item_list_reservation"
+            tools:itemCount="5" />
+
+        <TextView
+            android:id="@+id/reloadView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_reload"
+            android:visibility="gone"
+            android:text="@string/reload"/>
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

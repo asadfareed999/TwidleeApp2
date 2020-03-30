@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.asadfareed.twidlee2.fragments.DealsFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_deals">
+       <!-- <action
+            android:id="@+id/action_navigate_to_restaurant_details"
+            app:destination="@+id/navigation_restaurant"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/navigation_home" />
+
+        <action
+            android:id="@+id/action_navigate_to_deals_map"
+            app:destination="@+id/navigation_deals_map"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/navigation_home" />
+
+        <action
+            android:id="@+id/action_navigate_to_filters"
+            app:destination="@+id/navigation_filters"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/navigation_home" />
+
+        <action
+            android:id="@+id/action_navigate_to_reservations"
+            app:destination="@+id/navigation_reservations"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/navigation_home" />-->
+    </fragment>
+
+    <!--<fragment
+        android:id="@+id/navigation_reservations"
+        android:name="com.twidlee.android.plugins.reservations.ReservationsFragment"
+        android:label="@string/title_reservations"
+        tools:layout="@layout/fragment_reservations" />
+
+    <fragment
+        android:id="@+id/navigation_history"
+        android:name="com.twidlee.android.plugins.history.HistoryFragment"
+        android:label="@string/title_history"
+        tools:layout="@layout/fragment_history">
+
+        <action
+            android:id="@+id/action_navigate_to_rate_feedback"
+            app:destination="@+id/navigation_rate_feedback"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/navigation_history" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_favorites"
+        android:name="com.twidlee.android.plugins.favorites.FavoritesFragment"
+        android:label="@string/title_favorites"
+        tools:layout="@layout/fragment_favorites">
+        <action
+            android:id="@+id/action_navigate_to_restaurant_details"
+            app:destination="@+id/navigation_restaurant"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/navigation_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="com.twidlee.android.plugins.account.AccountFragment"
+        android:label="@string/title_account"
+        tools:layout="@layout/fragment_account">
+        <action
+            android:id="@+id/action_navigation_terms_policy"
+            app:destination="@+id/navigation_terms_policy"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/navigation_account" />
+        <action
+            android:id="@+id/action_navigation_profile"
+            app:destination="@+id/navigation_profile"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/navigation_account" />
+        <action
+            android:id="@+id/action_navigation_change_password"
+            app:destination="@+id/navigation_change_password"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/navigation_account" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_restaurant"
+        android:name="com.twidlee.android.plugins.restaurant.RestaurantFragment"
+        android:label="@string/title_restaurant"
+        tools:layout="@layout/fragment_restaurant">
+        <argument
+            android:name="restaurantId"
+            app:argType="integer"
+            android:defaultValue="-1"/>
+        <argument
+            android:name="restaurantName"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_deals_map"
+        android:name="com.twidlee.android.plugins.map.DealsMapFragment"
+        tools:layout="@layout/fragment_deals_map">
+
+        <action
+            android:id="@+id/action_navigate_to_restaurant_details"
+            app:destination="@+id/navigation_restaurant"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/navigation_deals_map" />
+
+        <action
+            android:id="@+id/action_navigate_to_filters_map"
+            app:destination="@+id/navigation_filters"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/navigation_deals_map" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_rate_feedback"
+        android:name="com.twidlee.android.plugins.ratefeedback.RateFeedbackFragment"
+        tools:layout="@layout/fragment_rate_feedback" />
+
+    <fragment
+        android:id="@+id/navigation_terms_policy"
+        android:name="com.twidlee.android.plugins.account.termsprivacyaboutus.TermsPrivacyAboutUsFragment"
+        tools:layout="@layout/fragment_termservices_privacy" />
+
+    <fragment
+        android:id="@+id/navigation_filters"
+        android:name="com.twidlee.android.plugins.filters.FiltersFragment"
+        tools:layout="@layout/fragment_filters" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.twidlee.android.plugins.account.profile.ProfileFragment"
+        tools:layout="@layout/fragment_account">
+
+        <action
+            android:id="@+id/action_navigate_to_verification_screen"
+            app:destination="@+id/navigation_verification"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/navigation_profile" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_change_password"
+        android:name="com.twidlee.android.plugins.account.changepassword.ChangePasswordFragment"
+        tools:layout="@layout/fragment_change_password" />
+
+    <fragment
+        android:id="@+id/navigation_verification"
+        android:name="com.twidlee.android.plugins.user.verification.VerificationFragment"
+        tools:layout="@layout/fragment_verification" />-->
+
+</navigation>

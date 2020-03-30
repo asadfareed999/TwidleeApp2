@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/default_margin"
+    android:contentInsetStart="0dp"
+    android:contentInsetLeft="0dp"
+    android:contentInsetEnd="0dp"
+    android:contentInsetRight="0dp"
+    android:fitsSystemWindows="true"
+    android:padding="0dp"
+    app:contentInsetEnd="0dp"
+    app:contentInsetLeft="0dp"
+    app:contentInsetRight="0dp"
+    app:contentInsetStart="0dp"
+    app:popupTheme="@style/AppTheme.PopupOverlay">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/toolbarSearch"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/actionBarSize"
+            android:layout_marginEnd="@dimen/BaseLayout_rhythmSixth"
+            android:background="@drawable/background_round_corner"
+            android:drawableStart="@drawable/ic_search"
+            android:drawableEnd="@drawable/ic_filter"
+            android:drawablePadding="@dimen/BaseLayout_rhythmFourth"
+            android:ellipsize="end"
+            android:focusedByDefault="false"
+            android:hint="@string/search_hint"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/BaseLayout_rhythmThird"
+            android:paddingRight="@dimen/BaseLayout_rhythmThird"
+            android:scrollHorizontally="true"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/toolbarMapButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageButton
+            android:id="@+id/toolbarMapButton"
+            android:layout_width="@dimen/map_action_button_width"
+            android:layout_height="@dimen/actionBarSize"
+            android:background="@drawable/ic_map_selector"
+            android:padding="@dimen/BaseLayout_rhythmFourth"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_map"
+            android:tint="@drawable/ic_map_tint_selector"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.Toolbar>
