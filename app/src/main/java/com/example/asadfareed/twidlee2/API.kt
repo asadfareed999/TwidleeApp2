@@ -31,7 +31,7 @@ interface API {
     @POST("auth/update_password/")
     fun updatePassword(@Body updatePassword: UpdatePassword): Call<ResponseBody>?
 
-    @POST("auth/update_password/")
+    @POST("/update_profile/")
     fun updateProfile(@Body updateProfile: UpdateProfile): Call<ResponseBody>?
 
     companion object {
