@@ -263,7 +263,7 @@ class ViewModel : ViewModel() {
                 //Log.i("Response","Response : "+response.body())
                 if (response.isSuccessful && response.code() == 200) {
                     Toast.makeText(activity, "Profile Updated :  ", Toast.LENGTH_LONG).show()
-                    loadFragment(AccountFragment(), activity)
+                    //loadFragment(AccountFragment(), activity)
                 } else {
                     Toast.makeText(activity, "Error :  " + response.message(), Toast.LENGTH_LONG)
                         .show()
