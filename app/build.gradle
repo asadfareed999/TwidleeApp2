@@ -55,4 +55,6 @@ dependencies {
     implementation "android.arch.lifecycle:viewmodel:1.1.1"
     implementation 'com.github.joielechong:countrycodepicker:2.4.1'
     implementation 'com.mikhaellopez:circularimageview:4.2.0'
+    //http logging
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
 }
