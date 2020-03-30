@@ -289,6 +289,7 @@ class ViewModel : ViewModel() {
                 .build()
             chain.proceed(request)
         }
+        // added logging interceptor
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         httpClient.addInterceptor(httpLoggingInterceptor)
