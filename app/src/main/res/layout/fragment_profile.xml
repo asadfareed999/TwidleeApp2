@@ -48,6 +48,7 @@
                 app:hintTextAppearance="@style/TextAppearance.Text.XLarge.Bold">
 
                 <EditText
+                    android:id="@+id/et_name_editProfile"
                     style="@style/TextAppearance.Text.Medium.EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

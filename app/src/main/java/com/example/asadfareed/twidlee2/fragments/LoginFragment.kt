@@ -51,9 +51,7 @@ class LoginFragment : Fragment() {
         } else if (password.equals("")) {
             et_password_login.error = "Enter Password"
         } else {
-            val login: Login = Login(email, password, "", "", "", 0,
-                    "", false, "", false,
-                    false)
+            val login: Login = Login(email, password)
             viewModel.login(login, activity)
         }
     }

@@ -17,10 +17,10 @@ interface API {
     val deals: Call<ArrayList<Deal>>
 
     @POST("auth/login/")
-    fun createUser(@Body login: Login?): Call<Login>?
+    fun createUser(@Body login: Login?): Call<User>?
 
     @POST("auth/customer_registration/")
-    fun registerUser(@Body signUp: SignUp): Call<Login>?
+    fun registerUser(@Body signUp: SignUp): Call<User>?
 
     @POST("logout/")
     fun logout(): Call<ResponseBody>?
@@ -32,7 +32,10 @@ interface API {
     fun updatePassword(@Body updatePassword: UpdatePassword): Call<ResponseBody>?
 
     @POST("update_profile/")
-    fun updateProfile(@Body updateProfile: UpdateProfile): Call<ResponseBody>?
+    fun updateProfile(@Body updateProfile: UpdateProfile): Call<User>?
+
+    @POST("get_update_code/")
+    fun getCodeUpdatePhone(@Body getCode: GetCode): Call<ResponseBody>?
 
     companion object {
         val BASE_URL = "http://52.73.221.180/api/v1/"

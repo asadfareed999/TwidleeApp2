@@ -49,8 +49,8 @@ class SignUpFragment: Fragment() {
     }
 
     private fun validateData(name: String, email: String, password: String, phone: String) {
-        if (name.length<4) {
-            et_name_signUp.error = "Enter Name of at least 4 character"
+        if (name.length<3) {
+            et_name_signUp.error = "Enter Name of at least 3 character"
         } else if (email.isEmpty()) {
             et_email_signUp.error = "Enter Email"
         } else if (phone_number_edt.text.toString().isEmpty()) {
