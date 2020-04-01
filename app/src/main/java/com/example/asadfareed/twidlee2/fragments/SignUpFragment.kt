@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.model.SignUp
+import com.example.asadfareed.twidlee2.utils
 import com.example.asadfareed.twidlee2.viewModel.ViewModel
 import kotlinx.android.synthetic.main.fragment_signup.*
 import kotlinx.android.synthetic.main.fragment_signup.view.*
@@ -28,7 +29,7 @@ class SignUpFragment: Fragment() {
     private fun clickHandlers(view: View) {
         // go to login page
         view.fragment_textView_login.setOnClickListener {
-            loadFragment(LoginFragment())
+            utils.loadFragment(LoginFragment(),activity)
         }
         // create account button handler
         view.fragment_button_signUp.setOnClickListener {
@@ -58,16 +59,11 @@ class SignUpFragment: Fragment() {
         } else if (password.length<5) {
             et_password_signUp.error = "Enter at least 5 character password"
         } else {
-            Toast.makeText(activity, "" + name + email + phone + password, Toast.LENGTH_LONG).show()
+           // Toast.makeText(activity, "" + name + email + phone + password, Toast.LENGTH_LONG).show()
             val signUp: SignUp = SignUp(email, password, phone, name)
             viewModel.signUp(signUp, activity)
         }
     }
 
-    private fun loadFragment(fragment: Fragment) {
-        val transaction = activity!!.supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentContainer, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
+
 }

@@ -126,7 +126,8 @@
                 android:text="@string/hint_email_notification"
                 android:drawableStart="@drawable/ic_email_notification"
                 style="@style/Account_TextView_Style"
-                />
+
+                android:layout_marginBottom="@dimen/_30sdp"/>
 
         </LinearLayout>
     </ScrollView>

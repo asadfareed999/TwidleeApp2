@@ -9,11 +9,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private var selectedItemIdCustom: Int=123
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         loadFragment(DealsFragment())
-       // bottom_navigation_view.visibility=View.GONE
+        selectedItemIdCustom=R.id.navigation_home
         navItemsHandler()
     }
 
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
                 }*/
                 R.id.navigation_account -> {
                     loadFragment(AccountFragment())
+
                     return@setOnNavigationItemSelectedListener true
                 }
             }
@@ -55,12 +58,12 @@ class MainActivity : AppCompatActivity() {
 
     /*override fun onBackPressed() {
         when(selectedItemIdCustom){
-            R.id.account -> {
-                loadFragment(FavoritesFragment())
-                selectedItemIdCustom = R.id.favorites
-                navigation.selectedItemId=selectedItemIdCustom
+            R.id.navigation_account -> {
+                loadFragment(DealsFragment())
+                selectedItemIdCustom = R.id.navigation_account
+                bottom_navigation_view.selectedItemId=selectedItemIdCustom
             }
-            R.id.favorites -> {
+            *//*R.id.favorites -> {
                 loadFragment(HistoryFragment())
                 selectedItemIdCustom = R.id.history
                 navigation.selectedItemId=selectedItemIdCustom
@@ -74,9 +77,9 @@ class MainActivity : AppCompatActivity() {
                 loadFragment(HomeFragment())
                 selectedItemIdCustom = R.id.home
                 navigation.selectedItemId=selectedItemIdCustom
-            }
+            }*//*
             else -> {
-                *//*super.onBackPressed()*//*
+                super.onBackPressed()
                 finish()
             }
         }

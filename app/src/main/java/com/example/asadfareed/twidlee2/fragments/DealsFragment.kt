@@ -27,9 +27,12 @@ class DealsFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         val view:View= inflater.inflate(R.layout.fragment_deals, container, false)
-        recyclerView = view.findViewById(R.id.fragmentDealsRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-        viewModel = ViewModelProviders.of(this).get(ViewModel::class.java)
+        initData(view)
+        observeDeals()
+        return  view
+    }
+
+    private fun observeDeals() {
         viewModel.getDeals(activity)
             .observe(viewLifecycleOwner, Observer(function = fun(dealsList: ArrayList<Deal>?) {
                 dealsList?.let {
@@ -41,6 +44,11 @@ class DealsFragment: Fragment() {
                     adapter.notifyDataSetChanged()
                 }
             }))
-        return  view
+    }
+
+    private fun initData(view: View) {
+        recyclerView = view.findViewById(R.id.fragmentDealsRecyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+        viewModel = ViewModelProviders.of(this).get(ViewModel::class.java)
     }
 }

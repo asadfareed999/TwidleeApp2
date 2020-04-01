@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.asadfareed.twidlee2.model.Login
 import com.example.asadfareed.twidlee2.R
+import com.example.asadfareed.twidlee2.utils
 import com.example.asadfareed.twidlee2.viewModel.ViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
@@ -29,7 +30,7 @@ class LoginFragment : Fragment() {
     private fun clickHandlers(view: View) {
         // goto sign up page
         view.fragment_textView_signUp.setOnClickListener {
-            loadFragment(SignUpFragment())
+            utils.loadFragment(SignUpFragment(),activity)
         }
         // login button
         view.fragment_button_login.setOnClickListener {
@@ -40,7 +41,7 @@ class LoginFragment : Fragment() {
         }
         // load fragment forgot password
         view.fragment_textView_forgotPassword.setOnClickListener {
-            loadFragment(ForgotPasswordFragment())
+            utils.loadFragment(ForgotPasswordFragment(),activity)
         }
 
     }
@@ -61,10 +62,4 @@ class LoginFragment : Fragment() {
        /* progressBar= activity!!.user_mngt_progressBar*/
     }
 
-    private fun loadFragment(fragment: Fragment) {
-        val transaction = activity!!.supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentContainer, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
 }

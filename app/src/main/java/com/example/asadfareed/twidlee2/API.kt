@@ -22,6 +22,12 @@ interface API {
     @POST("auth/customer_registration/")
     fun registerUser(@Body signUp: SignUp): Call<User>?
 
+    @POST("auth/verify/")
+    fun registerCodeVerification(@Body verifyCode: VerifyCode): Call<ResponseBody>?
+
+    @POST("auth/resend_code/")
+    fun resendCode(): Call<ResponseBody>?
+
     @POST("logout/")
     fun logout(): Call<ResponseBody>?
 
@@ -36,6 +42,9 @@ interface API {
 
     @POST("get_update_code/")
     fun getCodeUpdatePhone(@Body getCode: GetCode): Call<ResponseBody>?
+
+    @POST("auth/change_password/")
+    fun changePassword(@Body changePassword: ChangePassword): Call<ResponseBody>?
 
     companion object {
         val BASE_URL = "http://52.73.221.180/api/v1/"

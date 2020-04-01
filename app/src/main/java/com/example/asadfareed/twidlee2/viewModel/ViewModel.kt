@@ -138,8 +138,10 @@ class ViewModel : ViewModel() {
                 Log.i("Response", "Response : " + response.code())
                 Log.i("Response", "Response : " + response.body())
                 if (response.isSuccessful && response.code() == 200) {
-                    Toast.makeText(activity, "Sign Up Successful :  ", Toast.LENGTH_LONG).show()
-                    loadFragment(CodeVerificationFragment(), activity)
+                    //Toast.makeText(activity, "Sign Up Successful  ", Toast.LENGTH_LONG).show()
+                    user.setValue(response.body())
+                    saveCredentials(activity)
+                    utils.loadFragment(CodeVerificationFragment(), activity)
                 } else if (response.code() == 400) {
                     Toast.makeText(
                         activity,
@@ -154,6 +156,59 @@ class ViewModel : ViewModel() {
 
             override fun onFailure(call: Call<User>, t: Throwable) {
                 Toast.makeText(activity, "Sign Up Failed. Try again ", Toast.LENGTH_LONG).show()
+            }
+        })
+
+    }
+
+    public fun verifyRegistration(
+        activity: FragmentActivity?,
+        verifyCode: VerifyCode
+    ) {
+        context = activity!!
+        getRetrofitInstance()
+        val api: API = retrofit.create(API::class.java)
+        val call: Call<ResponseBody>? = api.registerCodeVerification(verifyCode)
+        call!!.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                //finally we are setting the list to our MutableLiveData
+                Log.i("Response", "Response : " + response.code())
+                if (response.isSuccessful && response.code() == 200) {
+                    Toast.makeText(activity, "Phone number verified ", Toast.LENGTH_LONG).show()
+                    utils.loadFragment(LoginFragment(),activity)
+                } else {
+                    Toast.makeText(activity, "Something went wrong " + response.message(), Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Toast.makeText(activity, "Failed. Try again ", Toast.LENGTH_LONG).show()
+            }
+        })
+
+    }
+
+    public fun resendCode(
+        activity: FragmentActivity?
+    ) {
+        context = activity!!
+        getRetrofitInstance()
+        val api: API = retrofit.create(API::class.java)
+        val call: Call<ResponseBody>? = api.resendCode()
+        call!!.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                //finally we are setting the list to our MutableLiveData
+                Log.i("Response", "Response : " + response.code())
+                if (response.isSuccessful && response.code() == 200) {
+                    Toast.makeText(activity, "Code Sent ", Toast.LENGTH_LONG).show()
+                    utils.loadFragment(CodeVerificationFragment(), activity)
+                } else {
+                    Toast.makeText(activity, "Something went wrong " + response.message(), Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Toast.makeText(activity, "Failed. Try again ", Toast.LENGTH_LONG).show()
             }
         })
 
@@ -240,7 +295,7 @@ class ViewModel : ViewModel() {
                 //Log.i("Response","Response : "+response.body())
                 if (response.isSuccessful && response.code() == 200) {
                     Toast.makeText(activity, "Password Updated ", Toast.LENGTH_LONG).show()
-                    loadFragment(LoginFragment(), activity)
+                    utils.loadFragment(LoginFragment(), activity)
                 } else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
@@ -320,6 +375,32 @@ class ViewModel : ViewModel() {
         })
     }
 
+    public fun changePassword(
+        activity: FragmentActivity?,
+        changePassword: ChangePassword
+    ) {
+        context = activity!!
+        getRetrofitInstance()
+        val api: API = retrofit.create(API::class.java)
+        val call: Call<ResponseBody>? = api.changePassword(changePassword)
+        call!!.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                //finally we are setting the list to our MutableLiveData
+                Log.i("Response", "Response : " + response.code())
+                if (response.isSuccessful && response.code() == 200) {
+                    Toast.makeText(activity, "Password Changed ", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Toast.makeText(activity, "Failed. Try again ", Toast.LENGTH_LONG).show()
+            }
+        })
+
+    }
+
     private fun getRetrofitInstance() {
         sharedPref = context.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
         val token: String = sharedPref.getString("token_key", "")!!
@@ -344,12 +425,7 @@ class ViewModel : ViewModel() {
             .build()
     }
 
-    private fun loadFragment(fragment: Fragment, activity: FragmentActivity?) {
-        val transaction = activity!!.supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentContainer, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
+
 
     private fun loadFragment2(fragment: Fragment, activity: FragmentActivity?) {
         val transaction = activity!!.supportFragmentManager.beginTransaction()

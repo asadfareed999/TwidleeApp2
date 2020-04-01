@@ -15,7 +15,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.example.asadfareed.twidlee2.ChangePasswordFragment
 import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.model.UpdateProfile
 import com.example.asadfareed.twidlee2.viewModel.ViewModel
@@ -44,7 +43,11 @@ class AccountFragment : Fragment() {
             viewModel.logout(activity!!)
         }
         view.textViewChangePassword.setOnClickListener {
-            loadFragment(ChangePasswordFragment("Change Password"))
+            loadFragment(
+                ChangePasswordFragment(
+                    "Change Password"
+                )
+            )
         }
         view.textViewTerms.setOnClickListener {
             loadFragment(TermsServicesFragment(getString(R.string.text_terms_services),

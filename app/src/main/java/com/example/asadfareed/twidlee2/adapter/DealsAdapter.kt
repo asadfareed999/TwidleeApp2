@@ -36,28 +36,61 @@ class DealsAdapter(dealsList: ArrayList<Deal>) : RecyclerView.Adapter<DealsAdapt
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView:ImageView=itemView.restaurantCoverImage
         fun bindItems(dealsList1: ArrayList<Deal>, position: Int) {
-            GlideApp.with(itemView.context)
-                .load(dealsList1.get(position).cover_image)
-                .fitCenter()
-                .placeholder(R.drawable.ic_launcher_background)
-                .into(imageView)
+            loadImage(dealsList1, position)
+            val cuisines = getCuisines(dealsList1, position)
+            var (date, date2) = formatDates(dealsList1, position)
+            setViewsData(dealsList1, position, cuisines, date, date2)
+        }
+
+        private fun getCuisines(
+            dealsList1: ArrayList<Deal>,
+            position: Int
+        ): StringBuilder {
             val sb = StringBuilder()
             for (i in 1..dealsList1.get(position).cuisines.size) {
-                sb.append(dealsList1.get(position).cuisines[i - 1]+",")
+                sb.append(dealsList1.get(position).cuisines[i - 1] + ",")
             }
-            val cuisines=sb
+            val cuisines = sb
+            return cuisines
+        }
+
+        private fun formatDates(
+            dealsList1: ArrayList<Deal>,
+            position: Int
+        ): Pair<String, String> {
             var date = dealsList1.get(position).start_time
             var date2 = dealsList1.get(position).end_time
             // var spf = SimpleDateFormat("MMM dd, yyyy hh:mm:ss aaa")
             date = formateDate(date)
             date2 = formateDate(date2)
-            itemView.restaurantName.text=dealsList1.get(position).restaurant_name
-            itemView.restaurantAddress.text=dealsList1.get(position).address.display_address
-            itemView.restaurantCuisines.text=cuisines
-            itemView.dealOffer.text=dealsList1.get(position).title
-            itemView.dealTime.text=date+"-"+date2
-            itemView.counter.text=dealsList1.get(position).table_time_limit.toString()
-            itemView.dealRating.rating=dealsList1.get(position).rating.toFloat()
+            return Pair(date, date2)
+        }
+
+        private fun setViewsData(
+            dealsList1: ArrayList<Deal>,
+            position: Int,
+            cuisines: StringBuilder,
+            date: String,
+            date2: String
+        ) {
+            itemView.restaurantName.text = dealsList1.get(position).restaurant_name
+            itemView.restaurantAddress.text = dealsList1.get(position).address.display_address
+            itemView.restaurantCuisines.text = cuisines
+            itemView.dealOffer.text = dealsList1.get(position).title
+            itemView.dealTime.text = date + "-" + date2
+            itemView.counter.text = dealsList1.get(position).table_time_limit.toString()
+            itemView.dealRating.rating = dealsList1.get(position).rating.toFloat()
+        }
+
+        private fun loadImage(
+            dealsList1: ArrayList<Deal>,
+            position: Int
+        ) {
+            GlideApp.with(itemView.context)
+                .load(dealsList1.get(position).cover_image)
+                .fitCenter()
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(imageView)
         }
 
         private fun formateDate(date: String): String {
