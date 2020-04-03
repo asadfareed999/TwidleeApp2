@@ -1,7 +1,8 @@
-package com.example.asadfareed.twidlee2
+package com.example.asadfareed.twidlee2.utils
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.example.asadfareed.twidlee2.R
 
 class utils {
     companion object {

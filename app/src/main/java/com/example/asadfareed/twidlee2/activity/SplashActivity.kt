@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
-import com.example.asadfareed.twidlee2.GlideApp
 import com.example.asadfareed.twidlee2.R
+import com.example.asadfareed.twidlee2.glidemodule.GlideApp
 import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : AppCompatActivity() {

@@ -1,6 +1,7 @@
 package com.example.asadfareed.retrodealsdemo
 
 
+import com.example.asadfareed.twidlee2.database.entity.DealRoom
 import com.example.asadfareed.twidlee2.model.*
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -14,7 +15,10 @@ import retrofit2.http.POST
 interface API {
 
     @get:GET("deals")
-    val deals: Call<ArrayList<Deal>>
+    val deals1: Call<ArrayList<Deal>>
+
+    @get:GET("deals")
+    val deals: Call<ArrayList<DealRoom>>
 
     @POST("auth/login/")
     fun createUser(@Body login: Login?): Call<User>?

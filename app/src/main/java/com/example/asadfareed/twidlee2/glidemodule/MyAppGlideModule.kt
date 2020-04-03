@@ -1,4 +1,4 @@
-package com.example.asadfareed.twidlee2
+package com.example.asadfareed.twidlee2.glidemodule
 
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule

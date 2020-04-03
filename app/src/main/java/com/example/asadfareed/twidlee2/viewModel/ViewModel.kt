@@ -14,9 +14,15 @@ import androidx.lifecycle.ViewModel
 import com.example.asadfareed.retrodealsdemo.API
 import com.example.asadfareed.twidlee2.*
 import com.example.asadfareed.twidlee2.activity.UserManagementActivity
+import com.example.asadfareed.twidlee2.database.dao.DealDao
+import com.example.asadfareed.twidlee2.database.db.DealDatabase
+import com.example.asadfareed.twidlee2.database.entity.DealRoom
 import com.example.asadfareed.twidlee2.fragments.AccountFragment
+import com.example.asadfareed.twidlee2.fragments.CodeVerificationFragment
 import com.example.asadfareed.twidlee2.fragments.LoginFragment
 import com.example.asadfareed.twidlee2.model.*
+import com.example.asadfareed.twidlee2.repository.DealRepository
+import com.example.asadfareed.twidlee2.utils.utils
 import kotlinx.android.synthetic.main.fragment_forgot_password.view.*
 import kotlinx.android.synthetic.main.fragment_forgot_password.view.phone_number_profile
 import kotlinx.android.synthetic.main.fragment_profile.view.*
@@ -28,20 +34,26 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 
 class ViewModel : ViewModel() {
 
+    private lateinit var dealDao: DealDao
     private var dealsList: MutableLiveData<ArrayList<Deal>>
+    private var deals: ArrayList<DealRoom>
     private lateinit var retrofit: Retrofit
     private var user: MutableLiveData<User>
     private lateinit var userLog: Login
     private val sharedPrefFile = "kotlinsharedpreference"
     private lateinit var sharedPref: SharedPreferences
     private lateinit var context: Context
+    private lateinit var repository: DealRepository
 
     init {
         dealsList = MutableLiveData()
+        deals= ArrayList()
         user = MutableLiveData()
         Log.i("Deals View Model", " Deals View Model Created....")
     }
@@ -52,10 +64,24 @@ class ViewModel : ViewModel() {
         loadDeals()
         return dealsList
     }
+    fun getRepoDeals(activity: FragmentActivity?): ArrayList<DealRoom> {
+        context = activity!!
+        val database: DealDatabase? = DealDatabase.getInstance(context)
+        if (database != null) {
+            dealDao = database.dealDao()
+        }
+        val executorService: ExecutorService = Executors.newSingleThreadExecutor()
+        repository= DealRepository(
+            executor = executorService,
+            dealDao = dealDao
+        )
+        deals =repository.getDeal(context as FragmentActivity)
+        return deals
+    }
 
     private fun loadDeals() {
         val api: API = retrofit.create(API::class.java)
-        val call: Call<ArrayList<Deal>> = api.deals
+        val call: Call<ArrayList<Deal>> = api.deals1
         call.enqueue(object : Callback<ArrayList<Deal>> {
             override fun onResponse(
                 call: Call<ArrayList<Deal>>,
@@ -68,6 +94,7 @@ class ViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<ArrayList<Deal>>, t: Throwable) {
+
             }
         })
     }
@@ -326,7 +353,7 @@ class ViewModel : ViewModel() {
                     Toast.makeText(activity, "Profile Updated ", Toast.LENGTH_LONG).show()
                         user.setValue(response.body())
                         saveCredentials(activity)
-                    loadFragment2(AccountFragment(), activity)
+                   // loadFragment2(AccountFragment(), activity)
                 } else {
                     Toast.makeText(activity, "Error " + response.message(), Toast.LENGTH_LONG)
                         .show()

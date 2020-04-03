@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.model.GetCode
 import com.example.asadfareed.twidlee2.model.UpdatePassword
-import com.example.asadfareed.twidlee2.utils
+import com.example.asadfareed.twidlee2.utils.utils
 import com.example.asadfareed.twidlee2.viewModel.ViewModel
 import kotlinx.android.synthetic.main.fragment_forgot_password.view.*
 

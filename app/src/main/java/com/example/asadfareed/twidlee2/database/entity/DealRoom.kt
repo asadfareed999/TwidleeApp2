@@ -1,9 +1,12 @@
-package com.example.asadfareed.twidlee2.model
+package com.example.asadfareed.twidlee2.database.entity
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
-data class Deal (
+@Entity
+data class DealRoom (
+    @PrimaryKey
     var id:Int,
     var restaurant_name:String,
     var restaurant_id:Int,
@@ -43,13 +46,13 @@ data class Deal (
     var meal_types:List<String> = emptyList()
 ): Serializable
 
-   data class Address(
-        var display_address:String,
-        var area:String,
-        var longitude:Double,
-        var latitude:Double,
-        var business_contact:String,
-        var business_contact_1:String,
-        var business_email:String
-   ):Serializable
+data class Address(
+    var display_address:String,
+    var area:String,
+    var longitude:Double,
+    var latitude:Double,
+    var business_contact:String,
+    var business_contact_1:String,
+    var business_email:String
+):Serializable
 

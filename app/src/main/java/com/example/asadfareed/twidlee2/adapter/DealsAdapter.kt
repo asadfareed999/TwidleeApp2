@@ -5,15 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.asadfareed.twidlee2.GlideApp
+import com.example.asadfareed.twidlee2.database.entity.DealRoom
 import com.example.asadfareed.twidlee2.R
-import com.example.asadfareed.twidlee2.model.Deal
+import com.example.asadfareed.twidlee2.glidemodule.GlideApp
 import kotlinx.android.synthetic.main.item_list_deal.view.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
-class DealsAdapter(dealsList: ArrayList<Deal>) : RecyclerView.Adapter<DealsAdapter.ViewHolder>() {
+class DealsAdapter(dealsList: ArrayList<DealRoom>) : RecyclerView.Adapter<DealsAdapter.ViewHolder>() {
       var dealsList1= dealsList
 
     //this method is returning the view for each item in the list
@@ -35,7 +36,7 @@ class DealsAdapter(dealsList: ArrayList<Deal>) : RecyclerView.Adapter<DealsAdapt
     //the class is hodling the list view
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView:ImageView=itemView.restaurantCoverImage
-        fun bindItems(dealsList1: ArrayList<Deal>, position: Int) {
+        fun bindItems(dealsList1: ArrayList<DealRoom>, position: Int) {
             loadImage(dealsList1, position)
             val cuisines = getCuisines(dealsList1, position)
             var (date, date2) = formatDates(dealsList1, position)
@@ -43,19 +44,24 @@ class DealsAdapter(dealsList: ArrayList<Deal>) : RecyclerView.Adapter<DealsAdapt
         }
 
         private fun getCuisines(
-            dealsList1: ArrayList<Deal>,
+            dealsList1: ArrayList<DealRoom>,
             position: Int
         ): StringBuilder {
             val sb = StringBuilder()
-            for (i in 1..dealsList1.get(position).cuisines.size) {
-                sb.append(dealsList1.get(position).cuisines[i - 1] + ",")
+            val list:List<String> = dealsList1.get(position).cuisines
+            for (i in 0 until list.size) {
+                if (i<list.size-1){
+                    sb.append(list[i]+ ",")
+                }else {
+                    sb.append(list[i])
+                }
             }
             val cuisines = sb
             return cuisines
         }
 
         private fun formatDates(
-            dealsList1: ArrayList<Deal>,
+            dealsList1: ArrayList<DealRoom>,
             position: Int
         ): Pair<String, String> {
             var date = dealsList1.get(position).start_time
@@ -67,7 +73,7 @@ class DealsAdapter(dealsList: ArrayList<Deal>) : RecyclerView.Adapter<DealsAdapt
         }
 
         private fun setViewsData(
-            dealsList1: ArrayList<Deal>,
+            dealsList1: ArrayList<DealRoom>,
             position: Int,
             cuisines: StringBuilder,
             date: String,
@@ -83,7 +89,7 @@ class DealsAdapter(dealsList: ArrayList<Deal>) : RecyclerView.Adapter<DealsAdapt
         }
 
         private fun loadImage(
-            dealsList1: ArrayList<Deal>,
+            dealsList1: ArrayList<DealRoom>,
             position: Int
         ) {
             GlideApp.with(itemView.context)

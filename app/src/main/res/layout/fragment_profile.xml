@@ -186,7 +186,8 @@
                 android:layout_marginTop="@dimen/BaseLayout_rhythmHalf"
                 android:layout_marginEnd="@dimen/BaseLayout_rhythm"
                 android:layout_weight="1"
-                android:background="@drawable/button_background"
+                android:enabled="false"
+                android:background="@drawable/button_disable_background"
                 android:text="@string/hint_save"
                 android:layout_marginBottom="@dimen/_30sdp"/>
 

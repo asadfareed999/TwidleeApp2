@@ -1,4 +1,4 @@
-package com.example.asadfareed.twidlee2
+package com.example.asadfareed.twidlee2.fragments
 
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -11,9 +11,9 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.model.VerifyCode
 import com.example.asadfareed.twidlee2.viewModel.ViewModel
-import kotlinx.android.synthetic.main.fragment_verification.*
 import kotlinx.android.synthetic.main.fragment_verification.view.*
 import kotlinx.android.synthetic.main.fragment_verification.view.code_Field_2
 import java.text.SimpleDateFormat
