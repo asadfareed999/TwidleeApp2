@@ -15,6 +15,7 @@ import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.adapter.DealsAdapter
 import com.example.asadfareed.twidlee2.model.Deal
 import com.example.asadfareed.twidlee2.viewModel.ViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_deals.*
 import kotlinx.android.synthetic.main.fragment_deals.view.*
 import java.util.concurrent.ExecutorService
@@ -75,6 +76,7 @@ class DealsFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener{
     }
 
     private fun initData(view: View) {
+       // activity!!.bottom_navigation_view.visibility=View.VISIBLE
         recyclerView = view.findViewById(R.id.fragmentDealsRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         viewModel = ViewModelProviders.of(this).get(ViewModel::class.java)

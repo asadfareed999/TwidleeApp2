@@ -10,6 +10,14 @@
         android:name="com.example.asadfareed.twidlee2.fragments.DealsFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_deals">
+        <action
+            android:id="@+id/action_navigate_to_account"
+            app:destination="@+id/navigation_account"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/navigation_home" />
        <!-- <action
             android:id="@+id/action_navigate_to_restaurant_details"
             app:destination="@+id/navigation_restaurant"
@@ -47,7 +55,7 @@
             app:popUpTo="@+id/navigation_home" />-->
     </fragment>
 
-    <!--<fragment
+   <!-- <fragment
         android:id="@+id/navigation_reservations"
         android:name="com.twidlee.android.plugins.reservations.ReservationsFragment"
         android:label="@string/title_reservations"
@@ -83,11 +91,11 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@+id/navigation_home" />
-    </fragment>
+    </fragment>-->
 
     <fragment
         android:id="@+id/navigation_account"
-        android:name="com.twidlee.android.plugins.account.AccountFragment"
+        android:name="com.example.asadfareed.twidlee2.fragments.AccountFragment"
         android:label="@string/title_account"
         tools:layout="@layout/fragment_account">
         <action
@@ -114,9 +122,13 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@+id/navigation_account" />
+        <argument
+            android:name="restaurantName"
+            app:argType="string" />
+
     </fragment>
 
-    <fragment
+   <!-- <fragment
         android:id="@+id/navigation_restaurant"
         android:name="com.twidlee.android.plugins.restaurant.RestaurantFragment"
         android:label="@string/title_restaurant"
@@ -153,47 +165,50 @@
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@+id/navigation_deals_map" />
 
-    </fragment>
+    </fragment>-->
 
-    <fragment
+   <!-- <fragment
         android:id="@+id/navigation_rate_feedback"
         android:name="com.twidlee.android.plugins.ratefeedback.RateFeedbackFragment"
-        tools:layout="@layout/fragment_rate_feedback" />
+        tools:layout="@layout/fragment_rate_feedback" />-->
 
     <fragment
         android:id="@+id/navigation_terms_policy"
-        android:name="com.twidlee.android.plugins.account.termsprivacyaboutus.TermsPrivacyAboutUsFragment"
+        android:name="com.example.asadfareed.twidlee2.fragments.TermsServicesFragment"
         tools:layout="@layout/fragment_termservices_privacy" />
 
-    <fragment
+    <!--<fragment
         android:id="@+id/navigation_filters"
         android:name="com.twidlee.android.plugins.filters.FiltersFragment"
-        tools:layout="@layout/fragment_filters" />
+        tools:layout="@layout/fragment_filters" />-->
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.twidlee.android.plugins.account.profile.ProfileFragment"
-        tools:layout="@layout/fragment_account">
+        android:name="com.example.asadfareed.twidlee2.fragments.EditProfileFragment"
+        tools:layout="@layout/fragment_profile">
 
-        <action
+        <!--<action
             android:id="@+id/action_navigate_to_verification_screen"
             app:destination="@+id/navigation_verification"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@+id/navigation_profile" />
+            app:popUpTo="@+id/navigation_profile" />-->
 
     </fragment>
 
     <fragment
         android:id="@+id/navigation_change_password"
-        android:name="com.twidlee.android.plugins.account.changepassword.ChangePasswordFragment"
-        tools:layout="@layout/fragment_change_password" />
+        android:name="com.example.asadfareed.twidlee2.fragments.ChangePasswordFragment"
+        tools:layout="@layout/fragment_change_password" >
+
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_verification"
-        android:name="com.twidlee.android.plugins.user.verification.VerificationFragment"
-        tools:layout="@layout/fragment_verification" />-->
+        android:name="com.example.asadfareed.twidlee2.fragments.CodeVerificationFragment"
+        tools:layout="@layout/fragment_verification" />
+
 
 </navigation>

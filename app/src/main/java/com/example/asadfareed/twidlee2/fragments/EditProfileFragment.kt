@@ -16,6 +16,7 @@ import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.model.GetCode
 import com.example.asadfareed.twidlee2.model.UpdateProfile
 import com.example.asadfareed.twidlee2.viewModel.ViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import kotlinx.android.synthetic.main.toolbar_simple.view.*
 import kotlinx.android.synthetic.main.toolbar_simple.view.toolbar
@@ -26,6 +27,8 @@ class EditProfileFragment(s: String) : Fragment()  {
     private val title:String=s
     private val sharedPrefFile = "kotlinsharedpreference"
     private lateinit var sharedPref: SharedPreferences
+    private lateinit var Name: String
+    private lateinit var Phone: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -38,9 +41,10 @@ class EditProfileFragment(s: String) : Fragment()  {
     private fun setUpData(view: View): Pair<String, String> {
         view.toolbar.toolbar_title.text = title
         view.toolbar.toolbar_title.visibility = View.VISIBLE
+        //activity!!.bottom_navigation_view.visibility=View.GONE
         sharedPref = activity!!.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
-        val Name: String = sharedPref.getString("name_key", "Name")!!
-        val Phone: String = sharedPref.getString("phone_key", "").toString()
+        Name = sharedPref.getString("name_key", "Name")!!
+        Phone= sharedPref.getString("phone_key", "").toString()
         view.et_name_editProfile.setText(Name)
         view.fragment_textInputLayout_mobileNumber_profile.editText!!.setText(Phone.substring(3))
         enableButton(view.et_name_editProfile,Name,view)
@@ -51,7 +55,7 @@ class EditProfileFragment(s: String) : Fragment()  {
 
     private fun clickHandlers(view: View, Name: String, Phone: String) {
         view.buttonEditSaveProfile.setOnClickListener {
-            var nameOk: Boolean
+           var nameOk: Boolean
             var phoneOk: Boolean
             val name: String = view.textInputLayoutNameProfile.editText!!.text.toString()
             val phone: String =
@@ -102,24 +106,22 @@ class EditProfileFragment(s: String) : Fragment()  {
                 before: Int,
                 count: Int
             ) {
-                val dat=data
-                if (!s.equals(data)) //size as per your requirement
-                {
+                if (!codeField.text.toString().equals(data)){
                     view.buttonEditSaveProfile.setBackgroundResource(R.drawable.button_background)
                     view.buttonEditSaveProfile.isEnabled=true
-                }else if (s.equals(data)){
+                }else if (codeField.text.toString().equals(data)){
                     view.buttonEditSaveProfile.setBackgroundResource(R.drawable.button_disable_background)
                     view.buttonEditSaveProfile.isEnabled=false
                 }
+
             }
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-                // TODO Auto-generated method stub
-            }
+                        }
 
             override fun afterTextChanged(s: Editable) {
 
-                          }
+            }
         })
     }
 }

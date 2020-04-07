@@ -19,6 +19,7 @@ import com.example.asadfareed.twidlee2.database.db.DealDatabase
 import com.example.asadfareed.twidlee2.database.entity.DealRoom
 import com.example.asadfareed.twidlee2.fragments.AccountFragment
 import com.example.asadfareed.twidlee2.fragments.CodeVerificationFragment
+import com.example.asadfareed.twidlee2.fragments.EditProfileFragment
 import com.example.asadfareed.twidlee2.fragments.LoginFragment
 import com.example.asadfareed.twidlee2.model.*
 import com.example.asadfareed.twidlee2.repository.DealRepository
@@ -353,7 +354,10 @@ class ViewModel : ViewModel() {
                     Toast.makeText(activity, "Profile Updated ", Toast.LENGTH_LONG).show()
                         user.setValue(response.body())
                         saveCredentials(activity)
-                   // loadFragment2(AccountFragment(), activity)
+                    if (updateProfile.is_email_notification==null && updateProfile.is_push_notification==null) {
+                        loadFragment2(EditProfileFragment("Profile"), context as FragmentActivity)
+                        // loadFragment2(AccountFragment(), activity)
+                    }
                 } else {
                     Toast.makeText(activity, "Error " + response.message(), Toast.LENGTH_LONG)
                         .show()

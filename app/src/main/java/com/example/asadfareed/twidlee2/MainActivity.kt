@@ -3,6 +3,7 @@ package com.example.asadfareed.twidlee2
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import com.example.asadfareed.twidlee2.fragments.AccountFragment
 import com.example.asadfareed.twidlee2.fragments.DealsFragment
 import kotlinx.android.synthetic.main.activity_main.*

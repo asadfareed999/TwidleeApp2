@@ -15,9 +15,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.model.UpdateProfile
 import com.example.asadfareed.twidlee2.viewModel.ViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_account.view.*
 
 
@@ -43,6 +47,11 @@ class AccountFragment : Fragment() {
             viewModel.logout(activity!!)
         }
         view.textViewChangePassword.setOnClickListener {
+           /* val action =AccountFragmentDirections.actionNavigationChangePassword()
+           action.set(name)
+           NavHostFragment.findNavController(this).navigate(action)
+            if (findNavController().currentDestination?.id == R.id.navigation_account) {
+                findNavController().navigate(action)}*/
             loadFragment(
                 ChangePasswordFragment(
                     "Change Password"
