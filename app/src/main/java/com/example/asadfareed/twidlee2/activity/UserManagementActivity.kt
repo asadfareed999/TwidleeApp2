@@ -37,7 +37,7 @@ class UserManagementActivity : AppCompatActivity() {
         sharedPhoneStatusValue: Boolean
     ) {
         if (sharedEmailValue.equals("none") || sharednameValue.equals("none")
-            || sharedPhoneStatusValue.equals(false)
+            //|| sharedPhoneStatusValue.equals(false)
         ) {
             utils.loadFragment(LoginFragment(), this)
         } else {

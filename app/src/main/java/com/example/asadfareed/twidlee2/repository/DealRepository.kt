@@ -4,11 +4,15 @@ import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import com.example.asadfareed.retrodealsdemo.API
 import com.example.asadfareed.twidlee2.database.dao.DealDao
 import com.example.asadfareed.twidlee2.database.entity.DealRoom
 import com.example.asadfareed.twidlee2.model.Deal
+import com.example.asadfareed.twidlee2.model.Error
+import com.example.asadfareed.twidlee2.model.InvalidToken
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -20,6 +24,7 @@ import java.util.concurrent.Executor
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
+
 
 @Singleton
 class DealRepository @Inject constructor(
@@ -77,6 +82,24 @@ class DealRepository @Inject constructor(
                       dealDao.clear()
                         dealDao.save(response.body()!!)
                    }
+                }else if (response.code()==400){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(), Error::class.java)
+                    Toast.makeText(context1, mError.message, Toast.LENGTH_LONG).show()
+                }else if (response.code()==403){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(), InvalidToken::class.java)
+                    Toast.makeText(
+                        context1,
+                        mError.detail,
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                }else {
+                    Toast.makeText(context1, "Error  " + response.message(), Toast.LENGTH_LONG)
+                        .show()
                 }
             }
             override fun onFailure(call: Call<ArrayList<DealRoom>>, t: Throwable) {

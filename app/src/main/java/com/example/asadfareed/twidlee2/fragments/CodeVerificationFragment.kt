@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.asadfareed.twidlee2.R
+import com.example.asadfareed.twidlee2.model.User
 import com.example.asadfareed.twidlee2.model.VerifyCode
 import com.example.asadfareed.twidlee2.viewModel.ViewModel
 import kotlinx.android.synthetic.main.fragment_verification.view.*
@@ -20,10 +21,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class CodeVerificationFragment : Fragment() {
+class CodeVerificationFragment(body: User?) : Fragment() {
 
     private lateinit var viewModel: ViewModel
-
+    private var user: User= body!!
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         val view: View = inflater.inflate(R.layout.fragment_verification, container, false)
@@ -44,7 +45,7 @@ class CodeVerificationFragment : Fragment() {
             dataValidation(code)
         }
         view.fragment_button_resend.setOnClickListener {
-            viewModel.resendCode(activity)
+            viewModel.resendCode(activity,user)
         }
     }
 
@@ -71,7 +72,7 @@ class CodeVerificationFragment : Fragment() {
             Toast.makeText(activity, "Invalid code", Toast.LENGTH_LONG).show()
         } else {
             val verifyCode: VerifyCode = VerifyCode(code)
-            viewModel.verifyRegistration(activity, verifyCode)
+            viewModel.verifyRegistration(activity, verifyCode,user)
         }
     }
 

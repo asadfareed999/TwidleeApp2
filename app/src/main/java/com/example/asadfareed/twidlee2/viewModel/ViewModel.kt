@@ -17,13 +17,13 @@ import com.example.asadfareed.twidlee2.activity.UserManagementActivity
 import com.example.asadfareed.twidlee2.database.dao.DealDao
 import com.example.asadfareed.twidlee2.database.db.DealDatabase
 import com.example.asadfareed.twidlee2.database.entity.DealRoom
-import com.example.asadfareed.twidlee2.fragments.AccountFragment
 import com.example.asadfareed.twidlee2.fragments.CodeVerificationFragment
 import com.example.asadfareed.twidlee2.fragments.EditProfileFragment
 import com.example.asadfareed.twidlee2.fragments.LoginFragment
 import com.example.asadfareed.twidlee2.model.*
 import com.example.asadfareed.twidlee2.repository.DealRepository
 import com.example.asadfareed.twidlee2.utils.utils
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_forgot_password.view.*
 import kotlinx.android.synthetic.main.fragment_forgot_password.view.phone_number_profile
 import kotlinx.android.synthetic.main.fragment_profile.view.*
@@ -115,13 +115,22 @@ class ViewModel : ViewModel() {
                     saveCredentials(activity)
                     activity.startActivity(Intent(activity, MainActivity::class.java))
                     activity.finish()
-                } else if (response.code() == 400) {
+                } else if (response.code()==400){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),Error::class.java)
+                    Toast.makeText(activity, mError.message, Toast.LENGTH_LONG).show()
+                }else if (response.code()==403){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),InvalidToken::class.java)
                     Toast.makeText(
                         activity,
-                        "Invalid Credentials " + response.message(),
+                        mError.detail,
                         Toast.LENGTH_LONG
                     ).show()
-                } else {
+
+                }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
                 }
@@ -167,16 +176,30 @@ class ViewModel : ViewModel() {
                 Log.i("Response", "Response : " + response.body())
                 if (response.isSuccessful && response.code() == 200) {
                     //Toast.makeText(activity, "Sign Up Successful  ", Toast.LENGTH_LONG).show()
-                    user.setValue(response.body())
-                    saveCredentials(activity)
-                    utils.loadFragment(CodeVerificationFragment(), activity)
-                } else if (response.code() == 400) {
+                   //user.setValue(response.body())
+                    //saveCredentials(activity)
+                    utils.loadFragment(CodeVerificationFragment(response.body()), activity)
+                } else if (response.code()==400){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),Error::class.java)
+                    Toast.makeText(activity, mError.message, Toast.LENGTH_LONG).show()
+                }else if (response.code()==500){
+                   /* val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),InvalidToken::class.java)*/
+                    Toast.makeText(activity, "Email/Phone already exists", Toast.LENGTH_LONG).show()
+                }else if (response.code()==403){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),InvalidToken::class.java)
                     Toast.makeText(
                         activity,
-                        "Invalid Credentials " + response.message(),
+                        mError.detail,
                         Toast.LENGTH_LONG
                     ).show()
-                } else {
+
+                }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
                 }
@@ -191,10 +214,14 @@ class ViewModel : ViewModel() {
 
     public fun verifyRegistration(
         activity: FragmentActivity?,
-        verifyCode: VerifyCode
+        verifyCode: VerifyCode,
+        user1: User
     ) {
         context = activity!!
+        user.value=user1
+        saveCredentials(activity)
         getRetrofitInstance()
+        sharedPref = activity.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
         val api: API = retrofit.create(API::class.java)
         val call: Call<ResponseBody>? = api.registerCodeVerification(verifyCode)
         call!!.enqueue(object : Callback<ResponseBody> {
@@ -203,21 +230,42 @@ class ViewModel : ViewModel() {
                 Log.i("Response", "Response : " + response.code())
                 if (response.isSuccessful && response.code() == 200) {
                     Toast.makeText(activity, "Phone number verified ", Toast.LENGTH_LONG).show()
-                    utils.loadFragment(LoginFragment(),activity)
-                } else {
-                    Toast.makeText(activity, "Something went wrong " + response.message(), Toast.LENGTH_LONG)
+                    //utils.loadFragment(LoginFragment(),activity)
+                    activity.startActivity(Intent(activity,MainActivity::class.java))
+                    activity.finish()
+                } else if (response.code()==400){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),Error::class.java)
+                    Toast.makeText(activity, mError.message, Toast.LENGTH_LONG).show()
+                    sharedPref.edit().clear().apply()
+                }else if (response.code()==403){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),InvalidToken::class.java)
+                    Toast.makeText(
+                        activity,
+                        mError.detail,
+                        Toast.LENGTH_LONG
+                    ).show()
+                    sharedPref.edit().clear().apply()
+                }else {
+                    Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
+                    sharedPref.edit().clear().apply()
                 }
             }
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Toast.makeText(activity, "Failed. Try again ", Toast.LENGTH_LONG).show()
+                sharedPref.edit().clear().apply()
             }
         })
 
     }
 
     public fun resendCode(
-        activity: FragmentActivity?
+        activity: FragmentActivity?,
+        user: User
     ) {
         context = activity!!
         getRetrofitInstance()
@@ -229,9 +277,24 @@ class ViewModel : ViewModel() {
                 Log.i("Response", "Response : " + response.code())
                 if (response.isSuccessful && response.code() == 200) {
                     Toast.makeText(activity, "Code Sent ", Toast.LENGTH_LONG).show()
-                    utils.loadFragment(CodeVerificationFragment(), activity)
-                } else {
-                    Toast.makeText(activity, "Something went wrong " + response.message(), Toast.LENGTH_LONG)
+                    utils.loadFragment(CodeVerificationFragment(user), activity)
+                } else if (response.code()==400){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),Error::class.java)
+                    Toast.makeText(activity, mError.message, Toast.LENGTH_LONG).show()
+                }else if (response.code()==403){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),InvalidToken::class.java)
+                    Toast.makeText(
+                        activity,
+                        mError.detail,
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                }else {
+                    Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
                 }
             }
@@ -258,7 +321,22 @@ class ViewModel : ViewModel() {
                     sharedPref.edit().clear().apply()
                     activity.startActivity(Intent(activity, UserManagementActivity::class.java))
                     activity.finish()
-                } else {
+                } else if (response.code()==400){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),Error::class.java)
+                    Toast.makeText(activity, mError.message, Toast.LENGTH_LONG).show()
+                }else if (response.code()==403){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),InvalidToken::class.java)
+                    Toast.makeText(
+                        activity,
+                        mError.detail,
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
                 }
@@ -294,7 +372,22 @@ class ViewModel : ViewModel() {
                     view.phone_number_profile.isEnabled = false
                     view.phone_number_profile.isFocusable = false
                     view.viewVerificationCodeForgotPassword.visibility = View.VISIBLE
-                } else {
+                } else if (response.code()==400){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),Error::class.java)
+                    Toast.makeText(activity, mError.message, Toast.LENGTH_LONG).show()
+                }else if (response.code()==403){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),InvalidToken::class.java)
+                    Toast.makeText(
+                        activity,
+                        mError.detail,
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
                 }
@@ -324,7 +417,22 @@ class ViewModel : ViewModel() {
                 if (response.isSuccessful && response.code() == 200) {
                     Toast.makeText(activity, "Password Updated ", Toast.LENGTH_LONG).show()
                     utils.loadFragment(LoginFragment(), activity)
-                } else {
+                } else if (response.code()==400){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),Error::class.java)
+                    Toast.makeText(activity, mError.message, Toast.LENGTH_LONG).show()
+                }else if (response.code()==403){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),InvalidToken::class.java)
+                    Toast.makeText(
+                        activity,
+                        mError.detail,
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
                 }
@@ -358,8 +466,23 @@ class ViewModel : ViewModel() {
                         loadFragment2(EditProfileFragment("Profile"), context as FragmentActivity)
                         // loadFragment2(AccountFragment(), activity)
                     }
-                } else {
-                    Toast.makeText(activity, "Error " + response.message(), Toast.LENGTH_LONG)
+                } else if (response.code()==400){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),Error::class.java)
+                    Toast.makeText(activity, mError.message, Toast.LENGTH_LONG).show()
+                }else if (response.code()==403){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),InvalidToken::class.java)
+                    Toast.makeText(
+                        activity,
+                        mError.detail,
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                }else {
+                    Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
                 }
             }
@@ -393,9 +516,22 @@ class ViewModel : ViewModel() {
                     view.viewVerificationCode.visibility = View.VISIBLE
                     view.buttonEditSaveProfile.text = "Update Profile"
                 }else if (response.code()==400){
-                    Toast.makeText(activity, "Phone number already in use...try new one", Toast.LENGTH_LONG)
-                } else {
-                    Toast.makeText(activity, "Error " + response.message(), Toast.LENGTH_LONG)
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),Error::class.java)
+                    Toast.makeText(activity, mError.message, Toast.LENGTH_LONG).show()
+                }else if (response.code()==403){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),InvalidToken::class.java)
+                    Toast.makeText(
+                        activity,
+                        mError.detail,
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                }else {
+                    Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
                 }
             }
@@ -420,7 +556,22 @@ class ViewModel : ViewModel() {
                 Log.i("Response", "Response : " + response.code())
                 if (response.isSuccessful && response.code() == 200) {
                     Toast.makeText(activity, "Password Changed ", Toast.LENGTH_LONG).show()
-                } else {
+                } else if (response.code()==400){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),Error::class.java)
+                    Toast.makeText(activity, mError.message, Toast.LENGTH_LONG).show()
+                }else if (response.code()==403){
+                    val gson = GsonBuilder().create()
+                    var mError =
+                        gson.fromJson(response.errorBody()!!.string(),InvalidToken::class.java)
+                    Toast.makeText(
+                        activity,
+                        mError.detail,
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
                 }
