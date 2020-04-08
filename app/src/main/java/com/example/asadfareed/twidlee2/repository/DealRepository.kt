@@ -86,20 +86,20 @@ class DealRepository @Inject constructor(
                     val gson = GsonBuilder().create()
                     var mError =
                         gson.fromJson(response.errorBody()!!.string(), Error::class.java)
-                    Toast.makeText(context1, mError.message, Toast.LENGTH_LONG).show()
+                    //Toast.makeText(context1, mError.message, Toast.LENGTH_LONG).show()
                 }else if (response.code()==403){
                     val gson = GsonBuilder().create()
                     var mError =
                         gson.fromJson(response.errorBody()!!.string(), InvalidToken::class.java)
-                    Toast.makeText(
+                    /*Toast.makeText(
                         context1,
                         mError.detail,
                         Toast.LENGTH_LONG
-                    ).show()
+                    ).show()*/
 
                 }else {
-                    Toast.makeText(context1, "Error  " + response.message(), Toast.LENGTH_LONG)
-                        .show()
+                    /*Toast.makeText(context1, "Error  " + response.message(), Toast.LENGTH_LONG)
+                        .show()*/
                 }
             }
             override fun onFailure(call: Call<ArrayList<DealRoom>>, t: Throwable) {

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/restaurantHeaderThumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/restaurant_home_cover_height_new"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/restaurant_header_placeholder" />
+
+        <View
+            android:id="@+id/scrimView"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/gradient_height_new"
+            android:background="@drawable/scrim_reverse"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/restaurantHeaderThumbnail"
+            app:layout_constraintEnd_toEndOf="@+id/restaurantHeaderThumbnail"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/restaurantHeaderThumbnail"
+            app:layout_constraintTop_toTopOf="@+id/restaurantHeaderThumbnail"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <RatingBar
+            android:id="@+id/restaurantRating"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/_32sdp"
+            android:layout_marginEnd="@dimen/_32sdp"
+            android:numStars="5"
+            android:scaleX="2"
+            android:scaleY="2"
+            android:rating="2.5"
+            android:isIndicator="true"
+            android:progressBackgroundTint="@color/color_black"
+            android:secondaryProgressTint="@color/color_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:rating="3" />
+
+        <TextView
+            android:id="@+id/restaurantName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/BaseLayout_rhythmTwoThirds"
+            android:layout_marginTop="@dimen/_47sdp"
+            android:textAppearance="@style/TextAppearance.Text.Roboto_Medium.XXLarge.New"
+            app:layout_constraintEnd_toEndOf="@+id/scrimView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/scrimView"
+            app:layout_constraintTop_toTopOf="@+id/scrimView"
+            tools:text="X2 Cafe"
+            />
+
+        <ImageButton
+            android:id="@+id/markFavoriteRestaurantHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/rating_item_progressbar_height"
+            android:layout_marginBottom="@dimen/BaseLayout_rhythmTwelfth"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_favorite_selector"
+            app:layout_constraintBottom_toTopOf="@+id/restaurantCuisine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/restaurantName"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/restaurantCuisine"
+            style="@style/TextAppearance.Text.RedColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/BaseLayout_rhythmTwoThirds"
+            android:layout_marginTop="@dimen/rating_item_progressbar_height"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="@+id/scrimView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/scrimView"
+            app:layout_constraintTop_toBottomOf="@+id/restaurantName"
+            tools:text="Asian Fusion" />
+
+        <TextView
+            android:id="@+id/restaurantAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="19dp"
+            android:drawableStart="@drawable/ic_location_pin"
+            android:drawablePadding="@dimen/margin_narrow"
+            android:layout_marginTop="@dimen/rating_item_progressbar_height"
+            android:textAppearance="@style/TextAppearance.Text.Medium.New"
+            android:textColor="@color/color_text_gray_medium"
+            app:layout_constraintEnd_toEndOf="@+id/scrimView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/scrimView"
+            app:layout_constraintTop_toBottomOf="@+id/restaurantCuisine"
+            tools:text="Gulberg|Lahore" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/restaurantHeaderThumbnail">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/restaurantTabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_white"
+                android:paddingLeft="@dimen/BaseLayout_rhythmTwoThirds"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:tabIndicatorColor="@color/colorAccent"
+                app:tabIndicatorFullWidth="true"
+                app:tabIndicatorHeight="3dp"
+                app:tabInlineLabel="true"
+                app:tabMode="scrollable"
+                app:tabPaddingEnd="12dp"
+                app:tabPaddingStart="12dp"
+                app:tabSelectedTextColor="@color/color_black"
+                app:tabTextAppearance="@style/Tab_Style"
+                app:tabUnboundedRipple="true" />
+
+        </androidx.viewpager.widget.ViewPager>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_simple"
+        android:fitsSystemWindows="true" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

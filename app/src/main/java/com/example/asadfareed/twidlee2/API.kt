@@ -8,8 +8,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-
-
+import retrofit2.http.Path
 
 
 interface API {
@@ -19,6 +18,9 @@ interface API {
 
     @get:GET("deals")
     val deals: Call<ArrayList<DealRoom>>
+
+    @GET("restaurants/{id}/deals_home/")
+    fun restaurantDetails(@Path("id") id:Int): Call<ArrayList<Restaurant>>
 
     @POST("auth/login/")
     fun createUser(@Body login: Login?): Call<User>?
