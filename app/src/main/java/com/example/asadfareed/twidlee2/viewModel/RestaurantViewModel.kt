@@ -23,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RestaurantViewModel : ViewModel() {
 
-    private  var restaurantDetails: MutableLiveData<ArrayList<Restaurant>>
+    private  var restaurantDetails: MutableLiveData<Restaurant>
     private lateinit var retrofit: Retrofit
     private val sharedPrefFile = "kotlinsharedpreference"
     private lateinit var sharedPref: SharedPreferences
@@ -38,7 +38,7 @@ class RestaurantViewModel : ViewModel() {
     fun getRestaurantDetails(
         activity: FragmentActivity?,
         adapterPosition: Int
-    ): MutableLiveData<ArrayList<Restaurant>> {
+    ): MutableLiveData<Restaurant> {
         context = activity!!
         getRetrofitInstance()
         loadRestaurantDetails(activity,adapterPosition)
@@ -50,16 +50,16 @@ class RestaurantViewModel : ViewModel() {
         adapterPosition: Int
     ) {
         val api: API = retrofit.create(API::class.java)
-        val call: Call<ArrayList<Restaurant>> = api.restaurantDetails(adapterPosition)
-        call.enqueue(object : Callback<ArrayList<Restaurant>> {
+        val call: Call<Restaurant> = api.restaurantDetails(adapterPosition)
+        call.enqueue(object : Callback<Restaurant> {
             override fun onResponse(
-                call: Call<ArrayList<Restaurant>>,
-                response: Response<ArrayList<Restaurant>>
+                call: Call<Restaurant>,
+                response: Response<Restaurant>
             ) {
                 if (response.code()==200) {
                     Log.i("Response", "Response  " + response.code())
                     //  Log.i("Response","Response : "+response.body())
-                    restaurantDetails.setValue(response.body())
+                    restaurantDetails.value=response.body()
                     /*restaurantDetails.observeForever(Observer(function = fun(details: ArrayList<Restaurant>?) {
                         details?.let {
                             Log.i("ResponseSize", "ResponseSize  " + details.size)
@@ -86,7 +86,7 @@ class RestaurantViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<ArrayList<Restaurant>>, t: Throwable) {
+            override fun onFailure(call: Call<Restaurant>, t: Throwable) {
 
             }
         })

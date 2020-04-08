@@ -20,7 +20,7 @@ interface API {
     val deals: Call<ArrayList<DealRoom>>
 
     @GET("restaurants/{id}/deals_home/")
-    fun restaurantDetails(@Path("id") id:Int): Call<ArrayList<Restaurant>>
+    fun restaurantDetails(@Path("id") id:Int): Call<Restaurant>
 
     @POST("auth/login/")
     fun createUser(@Body login: Login?): Call<User>?

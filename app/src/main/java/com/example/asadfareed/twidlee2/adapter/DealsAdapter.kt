@@ -45,7 +45,7 @@ class DealsAdapter(dealsList: ArrayList<DealRoom>) : RecyclerView.Adapter<DealsA
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
 
         private lateinit var deals:ArrayList<DealRoom>
-        private lateinit var restaurantdetails:ArrayList<Restaurant>
+        private lateinit var restaurantdetails:Restaurant
         val imageView:ImageView=itemView.restaurantCoverImage
 
         fun bindItems(dealsList1: ArrayList<DealRoom>, position: Int) {
@@ -126,14 +126,13 @@ class DealsAdapter(dealsList: ArrayList<DealRoom>) : RecyclerView.Adapter<DealsA
             val viewModel = ViewModelProviders.of(itemView.context as FragmentActivity).get(RestaurantViewModel::class.java)
             viewModel
                 .getRestaurantDetails(itemView.context as FragmentActivity,deals.get(adapterPosition).restaurant_id)
-                .observeForever( androidx.lifecycle.Observer (function = fun(restaurant: ArrayList<Restaurant>?) {
+                .observeForever( androidx.lifecycle.Observer (function = fun(restaurant: Restaurant?) {
                     restaurant?.let {
                         restaurantdetails=restaurant
-                        if (restaurant.size>0){
-                           val name:String= restaurant.get(adapterPosition).rating_summary.ratings.get(0).user_name
+                           val name:String= restaurant.rating_summary.ratings.get(0).user_name
                            Toast.makeText(itemView.context,name,Toast.LENGTH_LONG).show()
                             loadFragment(RestaurantFragment(), itemView.context as FragmentActivity?)
-                        }
+
                     }
                 }))
            // Toast.makeText(itemView.context,restaurantdetails.get(26).rating_summary.ratings.get(0).user_name,Toast.LENGTH_LONG).show()
