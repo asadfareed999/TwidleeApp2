@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/text"
+    style="@style/TextAppearance.Text.Medium.New"
+    android:singleLine="true"
+    android:paddingLeft="@dimen/BaseLayout_rhythmThird_new"
+    android:paddingRight="@dimen/BaseLayout_rhythmSixth"
+    android:paddingTop="@dimen/BaseLayout_rhythmTwelfth"
+    android:paddingBottom="@dimen/BaseLayout_rhythmTwelfth"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ellipsize="marquee"
+    android:textAlignment="inherit"/>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="guests">
+        <item>Guests</item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="cuisines">
+        <item>Bakery</item>
+        <item>BBQ</item>
+        <item>Burgers</item>
+        <item>Cafe</item>
+        <item>Chinese</item>
+        <item>Coffee Shop</item>
+        <item>Desserts</item>
+        <item>Fast Food</item>
+        <item>Fried Chicken</item>
+        <item>Ice cream</item>
+        <item>Italian</item>
+        <item>Japanese</item>
+        <item>Lebanese</item>
+        <item>Mediterranean</item>
+        <item>Other</item>
+        <item>Pakistani</item>
+        <item>Pan Asian</item>
+        <item>Pizza</item>
+        <item>Seafood</item>
+        <item>Steak House</item>
+        <item>Sushi</item>
+        <item>Thai</item>
+        <item>Turkish</item>
+    </string-array>
+
+    <string-array name="food_type">
+        <item>Breakfast</item>
+        <item>Brunch</item>
+        <item>Buffet</item>
+        <item>Dinner</item>
+        <item>Halal</item>
+        <item>High-Tea</item>
+        <item>Lunch</item>
+        <item>Vegan</item>
+        <item>Vegetarian</item>
+    </string-array>
+
+    <!-- language selection -->
+    <string-array name="language">
+        <item>English</item>
+        <item>Turkish</item>
+    </string-array>
+
+</resources>

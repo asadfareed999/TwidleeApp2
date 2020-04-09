@@ -7,12 +7,11 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asadfareed.twidlee2.database.entity.DealRoom
 import com.example.asadfareed.twidlee2.R
-import com.example.asadfareed.twidlee2.fragments.RestaurantFragment
+import com.example.asadfareed.twidlee2.fragments.restaurant.RestaurantFragment
 import com.example.asadfareed.twidlee2.glidemodule.GlideApp
 import com.example.asadfareed.twidlee2.model.Restaurant
 import com.example.asadfareed.twidlee2.viewModel.RestaurantViewModel
@@ -45,7 +44,6 @@ class DealsAdapter(dealsList: ArrayList<DealRoom>) : RecyclerView.Adapter<DealsA
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
 
         private lateinit var deals:ArrayList<DealRoom>
-        private lateinit var restaurantdetails:Restaurant
         val imageView:ImageView=itemView.restaurantCoverImage
 
         fun bindItems(dealsList1: ArrayList<DealRoom>, position: Int) {
@@ -124,19 +122,7 @@ class DealsAdapter(dealsList: ArrayList<DealRoom>) : RecyclerView.Adapter<DealsA
 
         override fun onClick(v: View?) {
             val viewModel = ViewModelProviders.of(itemView.context as FragmentActivity).get(RestaurantViewModel::class.java)
-            viewModel
-                .getRestaurantDetails(itemView.context as FragmentActivity,deals.get(adapterPosition).restaurant_id)
-                .observeForever( androidx.lifecycle.Observer (function = fun(restaurant: Restaurant?) {
-                    restaurant?.let {
-                        restaurantdetails=restaurant
-                           val name:String= restaurant.rating_summary.ratings.get(0).user_name
-                           Toast.makeText(itemView.context,name,Toast.LENGTH_LONG).show()
-                            loadFragment(RestaurantFragment(), itemView.context as FragmentActivity?)
-
-                    }
-                }))
-           // Toast.makeText(itemView.context,restaurantdetails.get(26).rating_summary.ratings.get(0).user_name,Toast.LENGTH_LONG).show()
-
+            viewModel.getRestaurantDetails(itemView.context as FragmentActivity, deals.get(adapterPosition).restaurant_id)
         }
 
         private fun loadFragment(fragment: Fragment, activity: FragmentActivity?) {

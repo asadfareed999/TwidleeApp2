@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/default_margin"
+    android:layout_marginRight="@dimen/default_margin"
+    android:background="@color/color_white"
+    card_view:cardCornerRadius="@dimen/card_corner_radius">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textViewLatestRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/BaseLayout_rhythmTwoThirds"
+            android:text="@string/hint_restaurant_review_latest_rating"
+            style="@style/TextAppearance.Text.Bold.Red"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <RatingBar
+            android:id="@+id/ratingBarRestaurantReviewLatestRating"
+            style="@style/CustomRatingBarStyle"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:layout_marginTop="@dimen/BaseLayout_rhythmSixth"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/textViewLatestRating"
+            card_view:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textViewLastRateDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/BaseLayout_rhythmSixth"
+            android:textSize="@dimen/_11sdp"
+            android:textColor="@color/color_text_gray"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/ratingBarRestaurantReviewLatestRating"
+            tools:text="Added on 26th July, 2018" />
+
+        <TextView
+            android:id="@+id/textViewCustomerReviewTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/BaseLayout_rhythmTwoThirds"
+            style="@style/TextAppearance.Text.Bold.Red"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.483"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/textViewLastRateDate"
+            tools:text="206 Customer Reviews" />
+
+        <RatingBar
+            android:id="@+id/ratingBarRestaurantReviewCustomerRating"
+            style="@style/CustomRatingBarStyle"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:layout_marginTop="@dimen/BaseLayout_rhythmSixth"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.488"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/textViewCustomerReviewTotal" />
+
+        <TextView
+            android:id="@+id/textViewCustomerRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/BaseLayout_rhythmSixth"
+            android:layout_marginBottom="@dimen/BaseLayout_rhythmTwoThirds"
+            android:textSize="@dimen/_11sdp"
+            android:textColor="@color/color_text_gray"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.485"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/ratingBarRestaurantReviewCustomerRating"
+            tools:text="4.9 out of 5 stars" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

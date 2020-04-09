@@ -14,7 +14,7 @@ data class Restaurant(
     val rating_summary : Rating_summary,
     val business_hours : List<Business_hours>,
     val menu : Menu,
-    val rating : Int,
+    val rating : Double,
     val deals : List<Deals>
     ):Serializable
 
@@ -24,7 +24,7 @@ data class Address2 (
     val area : String,
     val longitude : Double,
     val latitude : Double,
-    val business_contact : Int,
+    val business_contact : String,
     val business_contact_1 : String,
     val business_email : String
 ):Serializable
@@ -38,14 +38,14 @@ data class Image_galeries (
 
 data class Rating_summary (
 
-    val your_last_rating : Int,
+    val your_last_rating : Double,
     val last_ratting_date : String,
-    val total_ratings : Int,
-    val overall : Int,
-    val service : Int,
-    val food_quality : Int,
-    val cleanliness : Int,
-    val price : Int,
+    val total_ratings : Double,
+    val overall : Double,
+    val service : Double,
+    val food_quality : Double,
+    val cleanliness : Double,
+    val price : Double,
     val ratings : List<Ratings>
 ):Serializable
 
@@ -54,7 +54,7 @@ data class Ratings (
     val id : Int,
     val user_name : String,
     val user_picture : String,
-    val overall : Int,
+    val overall : Double,
     val comments : String
 ):Serializable
 
@@ -92,7 +92,7 @@ data class Menu_items (
     val id : Int,
     val title : String,
     val description : String,
-    val price : Int
+    val price : Double
 ):Serializable
 
 data class Deals (

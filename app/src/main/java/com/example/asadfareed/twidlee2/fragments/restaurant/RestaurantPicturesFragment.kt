@@ -1,4 +1,4 @@
-package com.example.asadfareed.twidlee2.fragments
+package com.example.asadfareed.twidlee2.fragments.restaurant
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,13 +14,13 @@ import kotlinx.android.synthetic.main.fragment_change_password.view.*
 import kotlinx.android.synthetic.main.toolbar_simple.view.*
 import kotlinx.android.synthetic.main.toolbar_simple.view.toolbar
 
-class RestaurantFragment() : Fragment() {
+class RestaurantPicturesFragment() : Fragment() {
 
     private lateinit var viewModel: ViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        val view: View = inflater.inflate(R.layout.fragment_restaurant, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_restaurant_gallery, container, false)
         viewModel = ViewModelProviders.of(this).get(ViewModel::class.java)
         return view
     }

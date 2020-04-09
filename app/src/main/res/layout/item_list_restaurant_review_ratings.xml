@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/default_margin"
+    android:layout_marginRight="@dimen/default_margin"
+    android:background="@color/color_white"
+    card_view:cardCornerRadius="@dimen/card_corner_radius">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/default_margin"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/BaseLayout_rhythmSixth"
+            android:orientation="horizontal"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/rating_item_width"
+                android:paddingStart="@dimen/BaseLayout_rhythmHalf"
+                android:paddingEnd="@dimen/BaseLayout_rhythmHalf"
+                android:text="@string/hint_restaurant_rating_overall"
+                android:textAlignment="textEnd"
+                android:textAppearance="@style/TextAppearance.Text.Large.New"
+                android:textColor="@color/color_text_gray" />
+
+            <ProgressBar
+                android:id="@+id/progressBarOverall"
+                style="@style/CustomProgressBarStyle" />
+
+            <TextView
+                android:id="@+id/textViewRatingOverall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/BaseLayout_rhythmSixth"
+                android:textAppearance="@style/TextAppearance.Text.Large.New"
+                android:textColor="@color/color_text_gray"
+                tools:text="4.1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/BaseLayout_rhythmSixth"
+            android:orientation="horizontal"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/rating_item_width"
+                android:paddingStart="@dimen/BaseLayout_rhythmHalf"
+                android:paddingEnd="@dimen/BaseLayout_rhythmHalf"
+                android:text="@string/hint_restaurant_rating_service"
+                android:textAlignment="textEnd"
+                android:textAppearance="@style/TextAppearance.Text.Large.New"
+                android:textColor="@color/color_text_gray" />
+
+            <ProgressBar
+                android:id="@+id/progressBarService"
+                style="@style/CustomProgressBarStyle" />
+
+            <TextView
+                android:id="@+id/textViewRatingService"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/BaseLayout_rhythmSixth"
+                android:textAppearance="@style/TextAppearance.Text.Large.New"
+                android:textColor="@color/color_text_gray"
+                tools:text="4.1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/BaseLayout_rhythmSixth"
+            android:orientation="horizontal"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:minWidth="@dimen/rating_item_width"
+                android:text="@string/hint_restaurant_rating_food_quality"
+                android:textAppearance="@style/TextAppearance.Text.Large.New"
+                android:textColor="@color/color_text_gray" />
+
+            <ProgressBar
+                android:id="@+id/progressBarFoodQuality"
+                style="@style/CustomProgressBarStyle" />
+
+            <TextView
+                android:id="@+id/textViewRatingFoodQuality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/BaseLayout_rhythmSixth"
+                android:textAppearance="@style/TextAppearance.Text.Large.New"
+                android:textColor="@color/color_text_gray"
+                tools:text="4.1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/BaseLayout_rhythmSixth"
+            android:orientation="horizontal"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/rating_item_width"
+                android:paddingEnd="@dimen/BaseLayout_rhythmHalf"
+                android:text="@string/hint_restaurant_rating_cleanliness"
+                android:textAlignment="textEnd"
+                android:textAppearance="@style/TextAppearance.Text.Large.New"
+                android:textColor="@color/color_text_gray" />
+
+            <ProgressBar
+                android:id="@+id/progressBarCleanliness"
+                style="@style/CustomProgressBarStyle" />
+
+            <TextView
+                android:id="@+id/textViewRatingCleanliness"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/BaseLayout_rhythmSixth"
+                android:textAppearance="@style/TextAppearance.Text.Large.New"
+                android:textColor="@color/color_text_gray"
+                tools:text="4.1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/BaseLayout_rhythmSixth"
+            android:orientation="horizontal"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/rating_item_width"
+                android:paddingStart="@dimen/BaseLayout_rhythmHalf"
+                android:paddingEnd="@dimen/BaseLayout_rhythmHalf"
+                android:text="@string/hint_restaurant_rating_price"
+                android:textAlignment="textEnd"
+                android:textAppearance="@style/TextAppearance.Text.Large.New"
+                android:textColor="@color/color_text_gray" />
+
+            <ProgressBar
+                android:id="@+id/progressBarPrice"
+                style="@style/CustomProgressBarStyle" />
+
+            <TextView
+                android:id="@+id/textViewRatingPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/BaseLayout_rhythmSixth"
+                android:textAppearance="@style/TextAppearance.Text.Large.New"
+                android:textColor="@color/color_text_gray"
+                tools:text="4.1" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

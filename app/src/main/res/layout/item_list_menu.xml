@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/businessDayHour"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/BaseLayout_rhythmThird">
+
+    <TextView
+        android:id="@+id/restaurantDishName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/BaseLayout_rhythmThird"
+        android:layout_marginEnd="@dimen/BaseLayout_rhythmThird"
+        app:layout_constraintEnd_toStartOf="@+id/restaurantDishPrice"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Biryani\nSpicy birayni by cafe" />
+
+    <TextView
+        android:id="@+id/restaurantDishPrice"
+        style="@style/TextAppearance.Text.XLarge.Bold.Accent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/BaseLayout_rhythmThird"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="500" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

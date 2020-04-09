@@ -5,12 +5,13 @@ import android.content.SharedPreferences
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.example.asadfareed.retrodealsdemo.API
+import com.example.asadfareed.twidlee2.fragments.restaurant.RestaurantFragment
 import com.example.asadfareed.twidlee2.model.*
+import com.example.asadfareed.twidlee2.utils.utils
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -60,11 +61,11 @@ class RestaurantViewModel : ViewModel() {
                     Log.i("Response", "Response  " + response.code())
                     //  Log.i("Response","Response : "+response.body())
                     restaurantDetails.value=response.body()
-                    /*restaurantDetails.observeForever(Observer(function = fun(details: ArrayList<Restaurant>?) {
-                        details?.let {
-                            Log.i("ResponseSize", "ResponseSize  " + details.size)
-                        }
-                    }))*/
+                    restaurantDetails.observeForever(Observer (function = fun(restaurant: Restaurant?) {
+                            restaurant?.let {
+                                utils.loadFragment2(RestaurantFragment(restaurant), activity)
+                            }
+                        }))
                 }else if (response.code()==400){
                     val gson = GsonBuilder().create()
                     val mError =
@@ -87,7 +88,8 @@ class RestaurantViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<Restaurant>, t: Throwable) {
-
+                Toast.makeText(activity, "Failed "+t.message, Toast.LENGTH_LONG)
+                    .show()
             }
         })
     }

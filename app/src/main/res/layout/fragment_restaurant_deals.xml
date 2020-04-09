@@ -18,6 +18,6 @@
             android:layout_marginTop="@dimen/BaseLayout_rhythmHalf"
             android:paddingBottom="@dimen/BaseLayout_rhythmOneAndAThird"
             tools:itemCount="5"
-            tools:listitem="@layout/item_list_restaurant_reserved_deal" />
+            tools:listitem="@layout/item_list_restaurant_deal" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

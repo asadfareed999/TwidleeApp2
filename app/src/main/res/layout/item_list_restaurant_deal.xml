@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/default_margin"
+    android:layout_marginRight="@dimen/default_margin"
+    android:layout_marginBottom="@dimen/_7sdp"
+    android:background="@color/color_white"
+    card_view:cardCornerRadius="@dimen/card_corner_radius"
+    card_view:cardElevation="@dimen/BaseLayout_rhythmSixth">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/dealName"
+            android:layout_width="@dimen/item_deal_custom_two_lines_width"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/BaseLayout_rhythmThird"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:maxLines="2"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:text="X2 Cafe"
+            android:textAppearance="@style/TextAppearance.Text.Roboto_Medium.XXLarge.New"
+            />
+
+        <TextView
+            android:id="@+id/dealTimeDuration"
+            style="@style/TextAppearance.Text.ExtraSmall.White"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/BaseLayout_rhythmThird"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@drawable/background_round_corner_narrow_gray"
+            android:paddingLeft="@dimen/BaseLayout_rhythmSixth"
+            android:paddingRight="@dimen/BaseLayout_rhythmSixth"
+            android:text="Today 7Pm - 11pm"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@id/dealName"
+            tools:text="Today 7Pm - 11pm" />
+
+        <RadioGroup
+            android:id="@+id/redeemType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:orientation="horizontal"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/dealTimeDuration">
+
+            <RadioButton
+                android:id="@+id/redeemTypeDineIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dine_in"
+                android:textSize="@dimen/_13sdp"/>
+
+            <RadioButton
+                android:id="@+id/redeemTypeTakeaway"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/BaseLayout_rhythmHalf"
+                android:text="@string/take_away"
+                android:textSize="@dimen/_13sdp"/>
+
+        </RadioGroup>
+
+        <Spinner
+            android:id="@+id/numberOfGuests"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:minWidth="@dimen/BaseLayout_rhythmDouble"
+            android:minHeight="@dimen/BaseLayout_rhythmHalf"
+            card_view:layout_constraintEnd_toStartOf="@+id/arrivalTime"
+            card_view:layout_constraintHorizontal_bias="0.5"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@id/redeemType" />
+
+        <Spinner
+            android:id="@+id/arrivalTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:minWidth="@dimen/BaseLayout_rhythmDouble"
+            android:minHeight="@dimen/BaseLayout_rhythmHalf"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.5"
+            card_view:layout_constraintStart_toEndOf="@+id/numberOfGuests"
+            card_view:layout_constraintTop_toBottomOf="@id/redeemType" />
+
+        <Button
+            android:id="@+id/reserveButton"
+            style="@style/Button.Action.Primary.New"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/BaseLayout_rhythmTwoThirds_new"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="@dimen/BaseLayout_rhythmHalf"
+            android:minWidth="@dimen/BaseLayout_rhythmThree_new"
+            android:text="@string/hint_reserve"
+            android:textAppearance="@style/TextAppearance.Text.Small"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@id/numberOfGuests" />
+
+        <TextView
+            android:id="@+id/dealDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/BaseLayout_rhythmHalf"
+            android:background="@color/color_gray_light"
+            android:padding="@dimen/default_padding"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@id/reserveButton"
+            tools:text="Meal Type: High Tea\nExclusion: Lamb\nThis mean you are not able to take items based on Lamb meet." />
+
+        <include layout="@layout/view_timer" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
