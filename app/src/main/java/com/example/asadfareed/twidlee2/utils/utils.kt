@@ -1,10 +1,18 @@
 package com.example.asadfareed.twidlee2.utils
 
+import android.graphics.Color
+import android.graphics.Typeface
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.text.style.RelativeSizeSpan
+import android.text.style.StyleSpan
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.glidemodule.GlideApp
+import java.text.SimpleDateFormat
+import java.util.*
 
 class utils {
     companion object {
@@ -31,6 +39,37 @@ class utils {
                 .fitCenter()
                 .placeholder(restaurantHeaderPlaceholder)
                 .into(restaurantHeaderThumbnail)
+        }
+        fun spannableStringColor(string: String): SpannableString {
+            val ss1 = SpannableString(string)
+            ss1.setSpan(ForegroundColorSpan(Color.RED), 0, ss1.length, 0) // set color
+            return ss1
+        }
+        fun spannableStringBold(string: String): SpannableString {
+            val ss1 = SpannableString(string)
+            ss1.setSpan(StyleSpan(Typeface.BOLD), 0, ss1.length, 0) // set style
+            return ss1
+        }
+        fun spannableStringSize(string: String,p:Float): SpannableString {
+            val ss1 = SpannableString(string)
+            ss1.setSpan(RelativeSizeSpan(p), 0, ss1.length, 0) // set size
+            return ss1
+        }
+        fun spannableString(string: String,p:Float): SpannableString {
+            val ss1 = SpannableString(string)
+            ss1.setSpan(ForegroundColorSpan(Color.RED), 0, ss1.length, 0) // set color
+            ss1.setSpan(StyleSpan(Typeface.BOLD), 0, ss1.length, 0) // set style
+            ss1.setSpan(RelativeSizeSpan(p), 0, ss1.length, 0) // set size
+            return ss1
+        }
+
+        fun formateDate(date: String): String {
+            var date1 = date
+            var spf = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss")
+            val newDate: Date = spf.parse(date1)
+            spf = SimpleDateFormat("hh:mm aaa")
+            date1 = spf.format(newDate)
+            return date1
         }
     }
 }

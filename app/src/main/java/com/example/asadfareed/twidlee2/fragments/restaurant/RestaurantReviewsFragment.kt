@@ -4,24 +4,32 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.asadfareed.twidlee2.R
-import com.example.asadfareed.twidlee2.model.ChangePassword
-import com.example.asadfareed.twidlee2.viewModel.ViewModel
-import kotlinx.android.synthetic.main.fragment_change_password.view.*
-import kotlinx.android.synthetic.main.toolbar_simple.view.*
-import kotlinx.android.synthetic.main.toolbar_simple.view.toolbar
+import com.example.asadfareed.twidlee2.adapter.ReviewsAdapter
+import com.example.asadfareed.twidlee2.model.Rating_summary
+import kotlinx.android.synthetic.main.fragment_restaurant_reviews.view.*
 
-class RestaurantReviewsFragment() : Fragment() {
+class RestaurantReviewsFragment(restaurantDetails: Rating_summary) : Fragment() {
 
-    private lateinit var viewModel: ViewModel
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: ReviewsAdapter
+    private val ratingSummary=restaurantDetails
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         val view: View = inflater.inflate(R.layout.fragment_restaurant_reviews, container, false)
-        viewModel = ViewModelProviders.of(this).get(ViewModel::class.java)
+        setUpRecyclerview(view)
         return view
+    }
+
+    private fun setUpRecyclerview(view: View) {
+        recyclerView = view.recyclerViewRestaurantReviews
+        recyclerView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+        adapter = ReviewsAdapter(ratingSummary)
+        recyclerView.adapter = adapter
+        adapter.notifyDataSetChanged()
     }
 }

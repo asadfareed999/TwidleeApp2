@@ -32,9 +32,9 @@ class RestaurantFragment(restaurant: Restaurant) : Fragment() {
         val tabs = view.restaurantTabs
         val adapter = TabAdapter(activity!!.supportFragmentManager)
         adapter.addFragment(RestaurantDealsFragment(restaurantDetails.deals), getString(R.string.deals))
-        adapter.addFragment(RestaurantContactFragment(), getString(R.string.contact))
-        adapter.addFragment(RestaurantReviewsFragment(), getString(R.string.reviews))
-        adapter.addFragment(RestaurantPicturesFragment(), getString(R.string.pictures))
+        adapter.addFragment(RestaurantContactFragment(restaurantDetails), getString(R.string.contact))
+        adapter.addFragment(RestaurantReviewsFragment(restaurantDetails.rating_summary), getString(R.string.reviews))
+        adapter.addFragment(RestaurantPicturesFragment(restaurantDetails.image_galeries), getString(R.string.pictures))
         adapter.addFragment(RestaurantMenuFragment(), getString(R.string.menu))
         viewPager.adapter = adapter
         tabs.setupWithViewPager(viewPager)

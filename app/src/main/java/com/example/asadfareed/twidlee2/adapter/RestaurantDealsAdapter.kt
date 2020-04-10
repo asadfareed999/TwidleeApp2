@@ -1,5 +1,6 @@
 package com.example.asadfareed.twidlee2.adapter
 
+import android.content.Context
 import android.graphics.Typeface
 import android.text.SpannableString
 import android.text.TextUtils
@@ -9,13 +10,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.RadioButton
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.model.Deals
 import kotlinx.android.synthetic.main.item_list_restaurant_deal.view.*
 import kotlinx.android.synthetic.main.item_list_restaurant_reserved_deal.view.dealDetails
 import kotlinx.android.synthetic.main.item_list_restaurant_reserved_deal.view.dealName
+import kotlinx.android.synthetic.main.view_timer.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,6 +34,27 @@ class RestaurantDealsAdapter(dealsRestaurant: List<Deals>) : RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems(deals,position)
+        holder.radioButtonTakeAway.setOnClickListener {
+            if (holder.radioButtonTakeAway.isChecked) {
+                holder.spinnerGuests.isEnabled = false
+                val items = arrayOf(
+                    holder.context.getString(R.string.take_away_time),
+                    holder.deals.get(position).takeaway_slots.get(0).slot
+                )
+               holder.setSpinner(items, holder.spinnerArrival)
+            }
+        }
+
+        holder.radioButtonDineIn.setOnClickListener {
+            if (holder.radioButtonDineIn.isChecked) {
+                holder.spinnerGuests.isEnabled = true
+                val items = arrayOf(
+                    holder.context.getString(R.string.arrival_time),
+                    holder.deals.get(position).dine_in_slots.get(0).slot
+                )
+                holder.setSpinner(items, holder.spinnerArrival)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -39,29 +64,70 @@ class RestaurantDealsAdapter(dealsRestaurant: List<Deals>) : RecyclerView.Adapte
     //the class is hodling the list view
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
-        private lateinit var deals: List<Deals>
+        lateinit var deals: List<Deals>
+        lateinit var radioButtonTakeAway: RadioButton
+        lateinit var radioButtonDineIn: RadioButton
+        lateinit var spinnerArrival: Spinner
+        lateinit var spinnerGuests: Spinner
+        lateinit var context: Context
 
         fun bindItems(dealsList: List<Deals>, position: Int) {
-            deals=dealsList
-            var ss1 = spannableString(itemView.context.getString(R.string.meal_type))
-            val mealType = TextUtils.concat(ss1, ": " + getListData(dealsList.get(position).meal_types))
-            ss1 = spannableString(itemView.context.getString(R.string.exclusions))
-            val Exclusions = TextUtils.concat(ss1, ": " + getListData(dealsList.get(position).exclusions))
-            val text=TextUtils.concat(mealType,"\n"+Exclusions)
+            initViews(dealsList)
+            val text = fetchData(dealsList, position)
             var (date, date2) = formatDates(dealsList, position)
-            itemView.dealName.text=dealsList.get(position).title
-            itemView.dealTimeDuration.text=date+" - "+date2
-            itemView.dealDetails.text=text
-            val items =
-                arrayOf(itemView.context.getString(R.string.arrival_time), dealsList.get(position).dine_in_slots.get(0).slot)
-            setSpinner(itemView.context.resources.getStringArray(R.array.guests),itemView.numberOfGuests)
-            setSpinner(items,itemView.arrivalTime)
+            setViewsData(dealsList, position, date, date2, text)
         }
 
-        private fun setSpinner(intArray: Array<String>, numberOfGuests: Spinner) {
+        private fun fetchData(
+            dealsList: List<Deals>,
+            position: Int
+        ): CharSequence? {
+            var ss1 = spannableString(itemView.context.getString(R.string.meal_type))
+            val mealType =
+                TextUtils.concat(ss1, ": " + getListData(dealsList.get(position).meal_types))
+            ss1 = spannableString(itemView.context.getString(R.string.exclusions))
+            val Exclusions =
+                TextUtils.concat(ss1, ": " + getListData(dealsList.get(position).exclusions))
+            val text = TextUtils.concat(mealType, "\n" + Exclusions)
+            return text
+        }
+
+        private fun setViewsData(
+            dealsList: List<Deals>,
+            position: Int,
+            date: String,
+            date2: String,
+            text: CharSequence?
+        ) {
+            itemView.dealName.text = dealsList.get(position).title
+            itemView.dealTimeDuration.text = date + " - " + date2
+            itemView.dealDetails.text = text
+            itemView.counter.text=itemView.context.getString(R.string.deal_expired)
+            val items =
+                arrayOf(
+                    itemView.context.getString(R.string.arrival_time),
+                    dealsList.get(position).dine_in_slots.get(0).slot
+                )
+            setSpinner(
+                itemView.context.resources.getStringArray(R.array.guests),
+                itemView.numberOfGuests
+            )
+            setSpinner(items, itemView.arrivalTime)
+        }
+
+        private fun initViews(dealsList: List<Deals>) {
+            deals = dealsList
+            radioButtonTakeAway = itemView.redeemType.redeemTypeTakeaway
+            radioButtonDineIn = itemView.redeemType.redeemTypeDineIn
+            spinnerGuests = itemView.numberOfGuests
+            spinnerArrival = itemView.arrivalTime
+            context = itemView.context
+        }
+
+        fun setSpinner(intArray: Array<String>, numberOfGuests: Spinner) {
             val spinner = numberOfGuests
             val spinnerArrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
-                itemView.context, android.R.layout.simple_spinner_item, intArray)
+                itemView.context, R.layout.list_item_simple_spinner, intArray)
             //selected item will look like a spinner set from XML
             spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = spinnerArrayAdapter
