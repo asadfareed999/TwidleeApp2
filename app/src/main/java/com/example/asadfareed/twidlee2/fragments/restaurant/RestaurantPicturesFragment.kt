@@ -1,6 +1,8 @@
 package com.example.asadfareed.twidlee2.fragments.restaurant
 
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,6 +45,9 @@ class RestaurantPicturesFragment(imageGaleries: List<Image_galeries>) : Fragment
             OnItemClickListener { parent, view, position, id ->
                 val settingsDialog = Dialog(activity!!)
                 settingsDialog.getWindow()!!.requestFeature(Window.FEATURE_NO_TITLE)
+                settingsDialog.getWindow()!!.setBackgroundDrawable(
+                     ColorDrawable(Color.TRANSPARENT)
+                )
                 val image: View = activity!!.layoutInflater.inflate(
                     R.layout.dialog_gallery_image
                     , null

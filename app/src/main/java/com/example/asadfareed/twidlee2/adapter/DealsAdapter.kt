@@ -122,7 +122,11 @@ class DealsAdapter(dealsList: ArrayList<DealRoom>) : RecyclerView.Adapter<DealsA
 
         override fun onClick(v: View?) {
             val viewModel = ViewModelProviders.of(itemView.context as FragmentActivity).get(RestaurantViewModel::class.java)
+/*
             viewModel.getRestaurantDetails(itemView.context as FragmentActivity, deals.get(adapterPosition).restaurant_id)
+*/
+            viewModel.getRestaurantDetails(itemView.context as FragmentActivity, 9)
+
         }
 
         private fun loadFragment(fragment: Fragment, activity: FragmentActivity?) {

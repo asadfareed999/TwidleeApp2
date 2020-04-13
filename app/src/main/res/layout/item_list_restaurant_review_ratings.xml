@@ -45,6 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:maxLength="3"
                 android:layout_marginStart="@dimen/BaseLayout_rhythmSixth"
                 android:textAppearance="@style/TextAppearance.Text.Large.New"
                 android:textColor="@color/color_text_gray"
@@ -80,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/BaseLayout_rhythmSixth"
+                android:maxLength="3"
                 android:textAppearance="@style/TextAppearance.Text.Large.New"
                 android:textColor="@color/color_text_gray"
                 tools:text="4.1" />
@@ -112,6 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/BaseLayout_rhythmSixth"
+                android:maxLength="3"
                 android:textAppearance="@style/TextAppearance.Text.Large.New"
                 android:textColor="@color/color_text_gray"
                 tools:text="4.1" />
@@ -145,6 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/BaseLayout_rhythmSixth"
+                android:maxLength="3"
                 android:textAppearance="@style/TextAppearance.Text.Large.New"
                 android:textColor="@color/color_text_gray"
                 tools:text="4.1" />
@@ -179,6 +183,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/BaseLayout_rhythmSixth"
+                android:maxLength="3"
                 android:textAppearance="@style/TextAppearance.Text.Large.New"
                 android:textColor="@color/color_text_gray"
                 tools:text="4.1" />

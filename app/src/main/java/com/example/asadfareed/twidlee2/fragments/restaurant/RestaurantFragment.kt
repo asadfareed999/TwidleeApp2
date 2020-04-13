@@ -35,7 +35,7 @@ class RestaurantFragment(restaurant: Restaurant) : Fragment() {
         adapter.addFragment(RestaurantContactFragment(restaurantDetails), getString(R.string.contact))
         adapter.addFragment(RestaurantReviewsFragment(restaurantDetails.rating_summary), getString(R.string.reviews))
         adapter.addFragment(RestaurantPicturesFragment(restaurantDetails.image_galeries), getString(R.string.pictures))
-        adapter.addFragment(RestaurantMenuFragment(), getString(R.string.menu))
+        adapter.addFragment(RestaurantMenuFragment(restaurantDetails.menu), getString(R.string.menu))
         viewPager.adapter = adapter
         tabs.setupWithViewPager(viewPager)
         setupTabIcons(tabs)

@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.model.Deals
+import com.example.asadfareed.twidlee2.utils.utils
 import kotlinx.android.synthetic.main.item_list_restaurant_deal.view.*
 import kotlinx.android.synthetic.main.item_list_restaurant_reserved_deal.view.dealDetails
 import kotlinx.android.synthetic.main.item_list_restaurant_reserved_deal.view.dealName
@@ -37,6 +38,7 @@ class RestaurantDealsAdapter(dealsRestaurant: List<Deals>) : RecyclerView.Adapte
         holder.radioButtonTakeAway.setOnClickListener {
             if (holder.radioButtonTakeAway.isChecked) {
                 holder.spinnerGuests.isEnabled = false
+                holder.spinnerArrival.isEnabled=true
                 val items = arrayOf(
                     holder.context.getString(R.string.take_away_time),
                     holder.deals.get(position).takeaway_slots.get(0).slot
@@ -84,12 +86,15 @@ class RestaurantDealsAdapter(dealsRestaurant: List<Deals>) : RecyclerView.Adapte
         ): CharSequence? {
             var ss1 = spannableString(itemView.context.getString(R.string.meal_type))
             val mealType =
-                TextUtils.concat(ss1, ": " + getListData(dealsList.get(position).meal_types))
+                TextUtils.concat(ss1, " " + getListData(dealsList.get(position).meal_types))
             ss1 = spannableString(itemView.context.getString(R.string.exclusions))
             val Exclusions =
-                TextUtils.concat(ss1, ": " + getListData(dealsList.get(position).exclusions))
-            val text = TextUtils.concat(mealType, "\n" + Exclusions)
-            return text
+                TextUtils.concat(ss1, " " + getListData(dealsList.get(position).exclusions))
+            val text = TextUtils.concat(mealType, "\n")
+            val text2 = TextUtils.concat(text,Exclusions)
+           var text3=TextUtils.concat(utils.spannableStringBold(dealsList.get(position).description),"\n")
+             text3 = TextUtils.concat(text3,text2)
+            return text3
         }
 
         private fun setViewsData(
@@ -103,16 +108,24 @@ class RestaurantDealsAdapter(dealsRestaurant: List<Deals>) : RecyclerView.Adapte
             itemView.dealTimeDuration.text = date + " - " + date2
             itemView.dealDetails.text = text
             itemView.counter.text=itemView.context.getString(R.string.deal_expired)
-            val items =
-                arrayOf(
-                    itemView.context.getString(R.string.arrival_time),
-                    dealsList.get(position).dine_in_slots.get(0).slot
+            if (dealsList.get(position).dine_in_slots.isEmpty()){
+                spinnerGuests.visibility=View.GONE
+                spinnerArrival.visibility=View.GONE
+                radioButtonDineIn.visibility=View.GONE
+                radioButtonTakeAway.visibility=View.GONE
+                itemView.reserveButton.visibility=View.GONE
+            }else {
+                setSpinner(
+                    itemView.context.resources.getStringArray(R.array.guests),
+                    itemView.numberOfGuests
                 )
-            setSpinner(
-                itemView.context.resources.getStringArray(R.array.guests),
-                itemView.numberOfGuests
-            )
-            setSpinner(items, itemView.arrivalTime)
+                val items =
+                    arrayOf(
+                        itemView.context.getString(R.string.arrival_time),
+                        dealsList.get(position).dine_in_slots.get(0).slot
+                    )
+                setSpinner(items, itemView.arrivalTime)
+            }
         }
 
         private fun initViews(dealsList: List<Deals>) {

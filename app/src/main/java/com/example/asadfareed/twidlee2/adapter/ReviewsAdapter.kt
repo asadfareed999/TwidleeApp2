@@ -55,7 +55,8 @@ class ReviewsAdapter(ratingSummary: Rating_summary) : RecyclerView.Adapter<Revie
     }
 
     override fun getItemCount(): Int {
-        return 3
+        val length:Int=ratings.ratings.size + 2
+        return length
     }
 
     //the class is hodling the list view
@@ -74,12 +75,12 @@ class ReviewsAdapter(ratingSummary: Rating_summary) : RecyclerView.Adapter<Revie
         }
 
         private fun setUserComment(ratingSummary: Rating_summary) {
-            itemView.reviewUserName.text = ratingSummary.ratings.get(0).user_name
-            itemView.reviewUserComment.text = ratingSummary.ratings.get(0).comments
-            itemView.reviewUserRating.rating = ratingSummary.ratings.get(0).overall.toFloat()
+            itemView.reviewUserName.text = ratingSummary.ratings.get(adapterPosition-2).user_name
+            itemView.reviewUserComment.text = ratingSummary.ratings.get(adapterPosition-2).comments
+            itemView.reviewUserRating.rating = ratingSummary.ratings.get(adapterPosition-2).overall.toFloat()
             utils.loadImage(
                 itemView.context as FragmentActivity, itemView.reviewUserImage,
-                R.drawable.ic_placeholder_avatar, ratingSummary.ratings.get(0).user_picture
+                R.drawable.ic_placeholder_avatar, ratingSummary.ratings.get(adapterPosition-2).user_picture
             )
         }
 
