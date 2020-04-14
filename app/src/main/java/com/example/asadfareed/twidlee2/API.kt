@@ -52,6 +52,9 @@ interface API {
     @POST("auth/change_password/")
     fun changePassword(@Body changePassword: ChangePassword): Call<ResponseBody>?
 
+    @GET("favorites/")
+    fun getFavorites(): Call<ArrayList<Deal>>
+
     companion object {
         val BASE_URL = "http://52.73.221.180/api/v1/"
     }

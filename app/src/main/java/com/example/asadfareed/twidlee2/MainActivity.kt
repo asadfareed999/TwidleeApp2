@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.example.asadfareed.twidlee2.fragments.AccountFragment
 import com.example.asadfareed.twidlee2.fragments.DealsFragment
+import com.example.asadfareed.twidlee2.fragments.favorites.FavoritesFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -28,18 +29,18 @@ class MainActivity : AppCompatActivity() {
                    loadFragment(DealsFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
-               /* R.id.reservations -> {
+              /*  R.id.reservations -> {
                     loadFragment(ReservationsFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.history -> {
                     loadFragment(HistoryFragment())
                     return@setOnNavigationItemSelectedListener true
-                }
-                R.id.favorites -> {
+                }*/
+                R.id.navigation_favorites -> {
                     loadFragment(FavoritesFragment())
                     return@setOnNavigationItemSelectedListener true
-                }*/
+                }
                 R.id.navigation_account -> {
                     loadFragment(AccountFragment())
 

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/default_margin"
+    android:layout_marginRight="@dimen/default_margin"
+    android:background="?android:selectableItemBackground"
+    card_view:cardCornerRadius="@dimen/BaseLayout_rhythmThird"
+    card_view:cardElevation="@dimen/BaseLayout_rhythmSixth">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/list_item_deal_thumbnail_height"
+            android:background="@color/color_gray"
+            android:scaleType="fitXY"
+            android:src="@drawable/deal_placeholder"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dealRatingFav"
+            style="@style/TextView_default_padding_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/BaseLayout_rhythmThird"
+            android:background="@drawable/background_round_corner_narrow"
+            card_view:layout_constraintBottom_toTopOf="@+id/restaurantNameFav"
+            card_view:layout_constraintStart_toStartOf="parent"
+            tools:text="  * * * * *  " />
+
+        <TextView
+            android:id="@+id/restaurantNameFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/BaseLayout_rhythmThird"
+            android:layout_marginTop="@dimen/default_margin"
+            android:paddingLeft="@dimen/default_padding"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@id/thumbnail"
+            tools:text="X2 Cafe" />
+
+        <TextView
+            android:id="@+id/restaurantAddressFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/BaseLayout_rhythmThird"
+            android:drawableLeft="@drawable/ic_location_pin"
+            android:drawablePadding="@dimen/BaseLayout_rhythmSixth"
+            android:maxWidth="@dimen/_200sdp"
+            android:maxLines="2"
+            android:paddingLeft="@dimen/default_padding"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@id/restaurantNameFav"
+            tools:text="Gulberg|Lahore" />
+
+        <TextView
+            android:id="@+id/restaurantCuisinesFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/list_item_padding_left_cuisines"
+            android:paddingBottom="@dimen/BaseLayout_rhythmFourth"
+            android:maxLines="3"
+            android:maxWidth="@dimen/_200sdp"
+            android:singleLine="false"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@id/restaurantAddressFav"
+            tools:text="Thai, Chinese" />
+
+        <TextView
+            android:id="@+id/dealOfferFav"
+            style="@style/list_item_deal_offer_text_New"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_package"
+            android:drawablePadding="@dimen/BaseLayout_rhythmSixth"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:text=" 50 % off " />
+
+        <ImageButton
+            android:id="@+id/markFavoriteFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_heart_empty"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/counterProgressFav"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="@dimen/BaseLayout_rhythmOneAndAThird"
+            android:layout_height="@dimen/BaseLayout_rhythmOneAndAThird"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:background="@drawable/circle_shape"
+            android:indeterminate="false"
+            android:max="100"
+            android:progressDrawable="@drawable/circular_progressbar"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/thumbnail" />
+
+        <TextView
+            android:id="@+id/counterFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            card_view:layout_constraintBottom_toBottomOf="@+id/counterProgressFav"
+            card_view:layout_constraintEnd_toEndOf="@+id/counterProgressFav"
+            card_view:layout_constraintStart_toStartOf="@+id/counterProgressFav"
+            card_view:layout_constraintTop_toTopOf="@+id/counterProgressFav"
+            tools:text="03\n11:03" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
