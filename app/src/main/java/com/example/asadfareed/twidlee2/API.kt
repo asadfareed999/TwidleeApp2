@@ -55,6 +55,9 @@ interface API {
     @GET("favorites/")
     fun getFavorites(): Call<ArrayList<Deal>>
 
+    @POST("favorites/")
+    fun makeFavoriteUnfavorite(@Body favoritesParameter: FavoritesParameter): Call<Favorites>
+
     companion object {
         val BASE_URL = "http://52.73.221.180/api/v1/"
     }

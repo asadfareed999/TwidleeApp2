@@ -17,4 +17,7 @@ interface DealDao {
 
     @Query("DELETE FROM DealRoom")
     fun clear()
+
+    @Query("UPDATE DealRoom SET  is_favorite=:success WHERE restaurant_id=:Rid")
+    fun update(Rid:Int,success:Boolean)
 }

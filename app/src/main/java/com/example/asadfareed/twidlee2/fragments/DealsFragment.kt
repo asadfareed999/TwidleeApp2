@@ -41,7 +41,7 @@ class DealsFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener{
         return  view
     }
 
-    private fun observeDeals() {
+     private fun observeDeals() {
         /*viewModel.getDeals(activity)
             .observe(viewLifecycleOwner, Observer(function = fun(dealsList: ArrayList<Deal>?) {
                 dealsList?.let {
@@ -87,4 +87,5 @@ class DealsFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener{
             swipeRefreshLayout.isRefreshing=true
         observeDeals()
     }
+
 }

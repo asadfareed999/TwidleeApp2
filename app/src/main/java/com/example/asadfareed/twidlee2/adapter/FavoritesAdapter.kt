@@ -3,31 +3,17 @@ package com.example.asadfareed.twidlee2.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
-import com.example.asadfareed.twidlee2.database.entity.DealRoom
 import com.example.asadfareed.twidlee2.R
-import com.example.asadfareed.twidlee2.fragments.restaurant.RestaurantFragment
-import com.example.asadfareed.twidlee2.glidemodule.GlideApp
 import com.example.asadfareed.twidlee2.model.Deal
-import com.example.asadfareed.twidlee2.model.Restaurant
+import com.example.asadfareed.twidlee2.model.FavoritesParameter
 import com.example.asadfareed.twidlee2.utils.utils
-import com.example.asadfareed.twidlee2.viewModel.RestaurantViewModel
-import kotlinx.android.synthetic.main.fragment_signup.view.*
-import kotlinx.android.synthetic.main.item_list_deal.view.*
-import kotlinx.android.synthetic.main.item_list_deal.view.counter
-import kotlinx.android.synthetic.main.item_list_deal.view.dealOffer
-import kotlinx.android.synthetic.main.item_list_deal.view.dealRating
-import kotlinx.android.synthetic.main.item_list_deal.view.restaurantAddress
-import kotlinx.android.synthetic.main.item_list_deal.view.restaurantCuisines
-import kotlinx.android.synthetic.main.item_list_deal.view.restaurantName
+import com.example.asadfareed.twidlee2.viewModel.FavoritesViewModel
+import kotlinx.android.synthetic.main.fragment_deals.view.*
+import kotlinx.android.synthetic.main.fragment_favorites.view.*
 import kotlinx.android.synthetic.main.item_list_favorites.view.*
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -71,10 +57,14 @@ class FavoritesAdapter(dealsList: ArrayList<Deal>) : RecyclerView.Adapter<Favori
             itemView.dealOfferFav.text = dealsList1.get(position).title
            // itemView.dealTime.text = date + "-" + date2
             itemView.counterFav.text = dealsList1.get(position).table_time_limit.toString()
-            itemView.markFavoriteFav.setImageResource(R.drawable.ic_heart_filled)
+            itemView.markFavoriteFav.isSelected=true
            // itemView.dealRating.rating = dealsList1.get(position).rating.toFloat()
             itemView.markFavoriteFav.setOnClickListener {
-
+                val viewModel=ViewModelProviders.of(itemView.context as FragmentActivity)
+                    .get(FavoritesViewModel::class.java)
+                val favorite=dealsList1.get(position).is_favorite
+                val favoritesParameter= FavoritesParameter(dealsList1.get(position).restaurant_id,!favorite)
+                viewModel.makeFavorite(itemView.context as FragmentActivity,favoritesParameter,itemView.markFavoriteFav)
             }
         }
 

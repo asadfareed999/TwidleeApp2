@@ -4,16 +4,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asadfareed.twidlee2.database.entity.DealRoom
 import com.example.asadfareed.twidlee2.R
-import com.example.asadfareed.twidlee2.fragments.restaurant.RestaurantFragment
 import com.example.asadfareed.twidlee2.glidemodule.GlideApp
-import com.example.asadfareed.twidlee2.model.Restaurant
+import com.example.asadfareed.twidlee2.model.FavoritesParameter
+import com.example.asadfareed.twidlee2.viewModel.FavoritesViewModel
 import com.example.asadfareed.twidlee2.viewModel.RestaurantViewModel
 import kotlinx.android.synthetic.main.item_list_deal.view.*
 import java.text.SimpleDateFormat
@@ -98,6 +97,16 @@ class DealsAdapter(dealsList: ArrayList<DealRoom>) : RecyclerView.Adapter<DealsA
             itemView.dealTime.text = date + "-" + date2
             itemView.counter.text = dealsList1.get(position).table_time_limit.toString()
             itemView.dealRating.rating = dealsList1.get(position).rating.toFloat()
+            if (dealsList1.get(position).is_favorite) {
+                itemView.markFavorite.isSelected=true
+            }
+            itemView.markFavorite.setOnClickListener {
+                val viewModel=ViewModelProviders.of(itemView.context as FragmentActivity)
+                    .get(FavoritesViewModel::class.java)
+                val favorite=dealsList1.get(position).is_favorite
+                val favoritesParameter=FavoritesParameter(dealsList1.get(position).restaurant_id,!favorite)
+               viewModel.makeFavorite(itemView.context as FragmentActivity,favoritesParameter,itemView.markFavorite)
+            }
         }
 
         private fun loadImage(

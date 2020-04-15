@@ -93,7 +93,7 @@
             android:layout_marginTop="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_heart_empty"
+            android:src="@drawable/ic_favorite_selector"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />
 
