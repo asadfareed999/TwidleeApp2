@@ -1,4 +1,4 @@
-Twidlee build 0.1
+Twidlee build 0.2
 
 Tasks completed........
 
@@ -20,12 +20,14 @@ Tasks completed........
 
 -> Notifications Settings
 
+-> Restaurant Deatails (Deals, Contact, Reviews, Gallery, Menu)
+
+-> Favorites
+
 
 Incompleted Tasks........
 
 -> Reservations 
-
--> Favorites
 
 -> History
 
