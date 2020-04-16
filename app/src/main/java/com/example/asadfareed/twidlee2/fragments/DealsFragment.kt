@@ -10,16 +10,15 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.asadfareed.twidlee2.database.entity.DealRoom
 import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.adapter.DealsAdapter
+import com.example.asadfareed.twidlee2.database.entity.DealRoom
 import com.example.asadfareed.twidlee2.model.Deal
 import com.example.asadfareed.twidlee2.viewModel.ViewModel
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_deals.*
 import kotlinx.android.synthetic.main.fragment_deals.view.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+
 
 class DealsFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener{
 
@@ -41,7 +40,7 @@ class DealsFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener{
         return  view
     }
 
-     private fun observeDeals() {
+      fun observeDeals() {
         /*viewModel.getDeals(activity)
             .observe(viewLifecycleOwner, Observer(function = fun(dealsList: ArrayList<Deal>?) {
                 dealsList?.let {
@@ -58,17 +57,22 @@ class DealsFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener{
             deals = viewModel.getRepoDeals(activity)
             activity!!.runOnUiThread {
                 if (deals.size>0) {
+                    view!!.reloadViewDeals.visibility=View.GONE
                     if (swipeRefreshLayout.isRefreshing){
                         swipeRefreshLayout.isRefreshing=false
                     }
                     adapter =
                         DealsAdapter(
-                            deals
+                            deals,this
                         )
                     recyclerView.adapter = adapter
                     adapter.notifyDataSetChanged()
                 }else{
-                   observeDeals()
+                  // observeDeals()
+                    view!!.reloadViewDeals.visibility=View.VISIBLE
+                    view!!.reloadViewDeals.setOnClickListener {
+                        observeDeals()
+                    }
                 }
             }
 
@@ -87,5 +91,7 @@ class DealsFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener{
             swipeRefreshLayout.isRefreshing=true
         observeDeals()
     }
+
+
 
 }

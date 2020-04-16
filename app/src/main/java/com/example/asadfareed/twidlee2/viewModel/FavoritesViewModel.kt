@@ -9,8 +9,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.asadfareed.retrodealsdemo.API
 import com.example.asadfareed.twidlee2.R
+import com.example.asadfareed.twidlee2.adapter.FavoritesAdapter
 import com.example.asadfareed.twidlee2.database.dao.DealDao
 import com.example.asadfareed.twidlee2.database.db.DealDatabase
+import com.example.asadfareed.twidlee2.fragments.DealsFragment
 import com.example.asadfareed.twidlee2.model.*
 import com.example.asadfareed.twidlee2.utils.retrofitInstance
 import com.google.gson.GsonBuilder
@@ -100,7 +102,8 @@ class FavoritesViewModel : ViewModel() {
     fun makeFavorite(
         activity: FragmentActivity?,
         favoritesParameter: FavoritesParameter,
-        markFavorite: ImageButton
+        markFavorite: ImageButton,
+        contextFragment: DealsFragment
     ){
         retrofit=retrofitInstance.getRetrofitInstance(activity)
         val api: API = retrofit.create(API::class.java)
@@ -122,8 +125,72 @@ class FavoritesViewModel : ViewModel() {
                     val executorService: ExecutorService = Executors.newSingleThreadExecutor()
                     executorService.execute{
                         dealDao.update(favoritesParameter.restaurant,favoritesParameter.is_favorite)
+                        activity.runOnUiThread {
+                            contextFragment.observeDeals()
+                        }
                     }
                     }else if (response.code()==400){
+                    val gson = GsonBuilder().create()
+                    val mError =
+                        gson.fromJson(response.errorBody()!!.string(),Error::class.java)
+                    Toast.makeText(activity, mError.message, Toast.LENGTH_LONG).show()
+                }else if (response.code()==403){
+                    val gson = GsonBuilder().create()
+                    val mError =
+                        gson.fromJson(response.errorBody()!!.string(),InvalidToken::class.java)
+                    Toast.makeText(
+                        activity,
+                        mError.detail,
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                }else {
+                    Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+
+            override fun onFailure(call: Call<Favorites> , t: Throwable) {
+                Toast.makeText(activity, "Failed "+t.message, Toast.LENGTH_LONG)
+                    .show()
+            }
+        })
+    }
+
+    fun makeFavoriteFragment(
+        activity: FragmentActivity?,
+        favoritesParameter: FavoritesParameter,
+        markFavorite: ImageButton,
+        dealsList1: ArrayList<Deal>,
+        favoritesAdapter: FavoritesAdapter,
+        position: Int
+    ){
+        retrofit=retrofitInstance.getRetrofitInstance(activity)
+        val api: API = retrofit.create(API::class.java)
+        val call:Call<Favorites> = api.makeFavoriteUnfavorite(favoritesParameter)
+        var success=favoritesParameter.is_favorite
+        call.enqueue(object : Callback<Favorites> {
+            override fun onResponse(
+                call: Call<Favorites> ,
+                response: Response<Favorites>
+            ) {
+                if (response.code()==200) {
+                    Log.i("Response", "Response  " + response.code())
+                    favoriteResponse.value=response.body()
+                    markFavorite.isSelected=success
+                    val database: DealDatabase? = DealDatabase.getInstance(activity!!)
+                    if (database != null) {
+                        dealDao = database.dealDao()
+                    }
+                    val executorService: ExecutorService = Executors.newSingleThreadExecutor()
+                    executorService.execute{
+                        dealDao.update(favoritesParameter.restaurant,favoritesParameter.is_favorite)
+                        activity.runOnUiThread {
+                            dealsList1.removeAt(position)
+                            favoritesAdapter.notifyDataSetChanged()
+                        }
+                    }
+                }else if (response.code()==400){
                     val gson = GsonBuilder().create()
                     val mError =
                         gson.fromJson(response.errorBody()!!.string(),Error::class.java)

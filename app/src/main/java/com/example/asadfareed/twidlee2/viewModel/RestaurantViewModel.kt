@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import com.example.asadfareed.retrodealsdemo.API
 import com.example.asadfareed.twidlee2.fragments.restaurant.RestaurantFragment
 import com.example.asadfareed.twidlee2.model.*
+import com.example.asadfareed.twidlee2.utils.retrofitInstance
 import com.example.asadfareed.twidlee2.utils.utils
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -41,7 +42,7 @@ class RestaurantViewModel : ViewModel() {
         adapterPosition: Int
     ): MutableLiveData<Restaurant> {
         context = activity!!
-        getRetrofitInstance()
+        retrofit=retrofitInstance.getRetrofitInstance(activity)
         loadRestaurantDetails(activity,adapterPosition)
         return restaurantDetails
     }
@@ -94,7 +95,7 @@ class RestaurantViewModel : ViewModel() {
         })
     }
 
-    private fun getRetrofitInstance() {
+    /*private fun getRetrofitInstance() {
         sharedPref = context.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
         val token: String = sharedPref.getString("token_key", "")!!
         val httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
@@ -116,6 +117,6 @@ class RestaurantViewModel : ViewModel() {
             .baseUrl(API.BASE_URL)
             .client(httpClient.build())
             .build()
-    }
+    }*/
 
 }

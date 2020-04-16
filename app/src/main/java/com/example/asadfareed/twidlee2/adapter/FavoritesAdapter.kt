@@ -9,10 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.model.Deal
 import com.example.asadfareed.twidlee2.model.FavoritesParameter
+import com.example.asadfareed.twidlee2.utils.counter
 import com.example.asadfareed.twidlee2.utils.utils
 import com.example.asadfareed.twidlee2.viewModel.FavoritesViewModel
-import kotlinx.android.synthetic.main.fragment_deals.view.*
-import kotlinx.android.synthetic.main.fragment_favorites.view.*
 import kotlinx.android.synthetic.main.item_list_favorites.view.*
 import kotlin.collections.ArrayList
 
@@ -28,7 +27,7 @@ class FavoritesAdapter(dealsList: ArrayList<Deal>) : RecyclerView.Adapter<Favori
 
     //this method is binding the data on the list
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-       holder.bindItems(dealsList1,position)
+       holder.bindItems(dealsList1,position,this)
     }
 
     //this method is giving the size of the list
@@ -39,24 +38,30 @@ class FavoritesAdapter(dealsList: ArrayList<Deal>) : RecyclerView.Adapter<Favori
     //the class is hodling the list view
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindItems(dealsList1: ArrayList<Deal>, position: Int) {
+        fun bindItems(
+            dealsList1: ArrayList<Deal>,
+            position: Int,
+            favoritesAdapter: FavoritesAdapter
+        ) {
             utils.loadImage(itemView.context as FragmentActivity,itemView.thumbnail,
                 R.drawable.restaurant_header_placeholder,dealsList1.get(position).cover_image)
             val cuisines = getCuisines(dealsList1, position)
-            setViewsData(dealsList1, position, cuisines)
+            setViewsData(dealsList1, position, cuisines,favoritesAdapter)
         }
 
         private fun setViewsData(
             dealsList1: ArrayList<Deal>,
             position: Int,
-            cuisines: StringBuilder
+            cuisines: StringBuilder,
+            favoritesAdapter: FavoritesAdapter
         ) {
             itemView.restaurantNameFav.text = dealsList1.get(position).restaurant_name
             itemView.restaurantAddressFav.text = dealsList1.get(position).address.display_address
             itemView.restaurantCuisinesFav.text = cuisines
             itemView.dealOfferFav.text = dealsList1.get(position).title
-           // itemView.dealTime.text = date + "-" + date2
-            itemView.counterFav.text = dealsList1.get(position).table_time_limit.toString()
+            counter.startTimer(itemView.counterFav,dealsList1.get(position).end_time,dealsList1.get(position).start_time)
+            // itemView.dealTime.text = date + "-" + date2
+            //itemView.counterFav.text = dealsList1.get(position).table_time_limit.toString()
             itemView.markFavoriteFav.isSelected=true
            // itemView.dealRating.rating = dealsList1.get(position).rating.toFloat()
             itemView.markFavoriteFav.setOnClickListener {
@@ -64,7 +69,8 @@ class FavoritesAdapter(dealsList: ArrayList<Deal>) : RecyclerView.Adapter<Favori
                     .get(FavoritesViewModel::class.java)
                 val favorite=dealsList1.get(position).is_favorite
                 val favoritesParameter= FavoritesParameter(dealsList1.get(position).restaurant_id,!favorite)
-                viewModel.makeFavorite(itemView.context as FragmentActivity,favoritesParameter,itemView.markFavoriteFav)
+                viewModel.makeFavoriteFragment(itemView.context as FragmentActivity,favoritesParameter,
+                    itemView.markFavoriteFav,dealsList1,favoritesAdapter,position)
             }
         }
 
@@ -84,6 +90,6 @@ class FavoritesAdapter(dealsList: ArrayList<Deal>) : RecyclerView.Adapter<Favori
             val cuisines = sb
             return cuisines
         }
-    }
 
+    }
 }

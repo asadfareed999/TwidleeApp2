@@ -8,20 +8,25 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
-import com.example.asadfareed.twidlee2.database.entity.DealRoom
 import com.example.asadfareed.twidlee2.R
+import com.example.asadfareed.twidlee2.database.entity.DealRoom
+import com.example.asadfareed.twidlee2.fragments.DealsFragment
 import com.example.asadfareed.twidlee2.glidemodule.GlideApp
 import com.example.asadfareed.twidlee2.model.FavoritesParameter
+import com.example.asadfareed.twidlee2.utils.counter
 import com.example.asadfareed.twidlee2.viewModel.FavoritesViewModel
 import com.example.asadfareed.twidlee2.viewModel.RestaurantViewModel
 import kotlinx.android.synthetic.main.item_list_deal.view.*
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
-class DealsAdapter(dealsList: ArrayList<DealRoom>) : RecyclerView.Adapter<DealsAdapter.ViewHolder>() {
+class DealsAdapter(
+    dealsList: ArrayList<DealRoom>,
+    dealsFragment: DealsFragment
+) : RecyclerView.Adapter<DealsAdapter.ViewHolder>() {
       var dealsList1= dealsList
+    val contextFragment=dealsFragment
 
     //this method is returning the view for each item in the list
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,7 +36,7 @@ class DealsAdapter(dealsList: ArrayList<DealRoom>) : RecyclerView.Adapter<DealsA
 
     //this method is binding the data on the list
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItems(dealsList1,position)
+        holder.bindItems(dealsList1,position,contextFragment)
     }
 
     //this method is giving the size of the list
@@ -45,12 +50,16 @@ class DealsAdapter(dealsList: ArrayList<DealRoom>) : RecyclerView.Adapter<DealsA
         private lateinit var deals:ArrayList<DealRoom>
         val imageView:ImageView=itemView.restaurantCoverImage
 
-        fun bindItems(dealsList1: ArrayList<DealRoom>, position: Int) {
+        fun bindItems(
+            dealsList1: ArrayList<DealRoom>,
+            position: Int,
+            contextFragment: DealsFragment
+        ) {
             deals=dealsList1
             loadImage(dealsList1, position)
             val cuisines = getCuisines(dealsList1, position)
             var (date, date2) = formatDates(dealsList1, position)
-            setViewsData(dealsList1, position, cuisines, date, date2)
+            setViewsData(dealsList1, position, cuisines, date, date2,contextFragment)
             itemView.setOnClickListener(this)
         }
 
@@ -88,15 +97,17 @@ class DealsAdapter(dealsList: ArrayList<DealRoom>) : RecyclerView.Adapter<DealsA
             position: Int,
             cuisines: StringBuilder,
             date: String,
-            date2: String
+            date2: String,
+            contextFragment: DealsFragment
         ) {
             itemView.restaurantName.text = dealsList1.get(position).restaurant_name
             itemView.restaurantAddress.text = dealsList1.get(position).address.display_address
             itemView.restaurantCuisines.text = cuisines
             itemView.dealOffer.text = dealsList1.get(position).title
             itemView.dealTime.text = date + "-" + date2
-            itemView.counter.text = dealsList1.get(position).table_time_limit.toString()
+           // itemView.counter.text = dealsList1.get(position).table_time_limit.toString()
             itemView.dealRating.rating = dealsList1.get(position).rating.toFloat()
+            counter.startTimer(itemView.counterDeals,dealsList1.get(position).end_time,dealsList1.get(position).start_time)
             if (dealsList1.get(position).is_favorite) {
                 itemView.markFavorite.isSelected=true
             }
@@ -105,7 +116,8 @@ class DealsAdapter(dealsList: ArrayList<DealRoom>) : RecyclerView.Adapter<DealsA
                     .get(FavoritesViewModel::class.java)
                 val favorite=dealsList1.get(position).is_favorite
                 val favoritesParameter=FavoritesParameter(dealsList1.get(position).restaurant_id,!favorite)
-               viewModel.makeFavorite(itemView.context as FragmentActivity,favoritesParameter,itemView.markFavorite)
+               viewModel.makeFavorite(itemView.context as FragmentActivity,favoritesParameter,
+                   itemView.markFavorite,contextFragment)
             }
         }
 

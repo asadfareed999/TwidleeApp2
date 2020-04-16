@@ -107,7 +107,7 @@ class CodeVerificationFragment(body: User?) : Fragment() {
     }
 
     private fun startTimer(view: View) {
-        object : CountDownTimer(1 * 60000, 1000) {
+        object : CountDownTimer(3 * 60000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 view.fragment_textView_countDownTimer.setText(
                     "Resend code in " +

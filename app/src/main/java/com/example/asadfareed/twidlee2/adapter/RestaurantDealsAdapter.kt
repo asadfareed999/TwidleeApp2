@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.model.Deals
+import com.example.asadfareed.twidlee2.utils.counter
 import com.example.asadfareed.twidlee2.utils.utils
 import kotlinx.android.synthetic.main.item_list_restaurant_deal.view.*
 import kotlinx.android.synthetic.main.item_list_restaurant_reserved_deal.view.dealDetails
@@ -107,7 +108,7 @@ class RestaurantDealsAdapter(dealsRestaurant: List<Deals>) : RecyclerView.Adapte
             itemView.dealName.text = dealsList.get(position).title
             itemView.dealTimeDuration.text = date + " - " + date2
             itemView.dealDetails.text = text
-            itemView.counter.text=itemView.context.getString(R.string.deal_expired)
+            counter.startTimer(itemView.counterRestaurantDeals,dealsList.get(position).end_time,dealsList.get(position).start_time)
             if (dealsList.get(position).dine_in_slots.isEmpty()){
                 spinnerGuests.visibility=View.GONE
                 spinnerArrival.visibility=View.GONE
