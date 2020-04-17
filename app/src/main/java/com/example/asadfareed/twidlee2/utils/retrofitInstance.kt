@@ -23,7 +23,17 @@ class retrofitInstance {
             sharedPref = context.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
             val token: String = sharedPref.getString("token_key", "")!!
             val httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
-            if (token.isEmpty()) {
+            httpClient.addInterceptor { chain ->
+                val request = chain.request()
+                    .newBuilder()
+                    .addHeader("x-api-key", "5f7af37cb35f5cd8")
+                if (!token.isEmpty()){
+                    request.addHeader("Authorization", "Bearer " + token)
+                }
+
+                chain.proceed(request.build())
+            }
+            /*if (token.isEmpty()) {
                 httpClient.addInterceptor { chain ->
                     val request = chain.request()
                         .newBuilder()
@@ -42,7 +52,7 @@ class retrofitInstance {
 
                     chain.proceed(request)
                 }
-            }
+            }*/
             // added logging interceptor
             val httpLoggingInterceptor = HttpLoggingInterceptor()
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
