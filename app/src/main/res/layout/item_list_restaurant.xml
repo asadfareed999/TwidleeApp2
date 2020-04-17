@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_8sdp"
+    android:layout_marginLeft="@dimen/default_margin"
+    android:layout_marginRight="@dimen/default_margin"
+    android:layout_marginTop="@dimen/_7sdp"
+    android:background="?android:selectableItemBackground"
+    card_view:cardCornerRadius="@dimen/card_corner_radius"
+    card_view:cardElevation="@dimen/BaseLayout_rhythmSixth">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/restaurantListImage"
+            android:layout_width="@dimen/_110sdp"
+            android:layout_height="@dimen/BaseLayout_rhythmThree_new"
+            android:background="@color/color_gray"
+            android:scaleType="centerCrop"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/deal_placeholder" />
+
+
+
+        <RatingBar
+            android:id="@+id/dealRatingrestaurantList"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="@dimen/rating_bar_width_deals"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/background_round_corner_narrow"
+            android:numStars="5"
+            android:padding="@dimen/margin_narrow"
+            android:scaleX="1.1"
+            android:scaleY="1.1"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintStart_toEndOf="@id/restaurantListImage"
+            card_view:layout_constraintTop_toBottomOf="@id/dealOfferrestaurantList"
+            tools:rating="3" />
+
+        <TextView
+            android:id="@+id/restaurantListName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/margin_narrow"
+            android:maxLines="2"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintStart_toEndOf="@id/restaurantListImage"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintEnd_toStartOf="@id/markFavoriterestaurantList"
+            tools:text="X2 Cafe" />
+
+
+        <TextView
+            android:id="@+id/restaurantListCuisines"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:maxLines="2"
+            android:paddingBottom="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            card_view:layout_constraintEnd_toStartOf="@+id/markFavoriterestaurantList"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintStart_toEndOf="@id/restaurantListImage"
+            card_view:layout_constraintTop_toBottomOf="@id/restaurantListName"
+            tools:text="Thai, Chinese, Desi, Italian" />
+
+        <TextView
+            android:id="@+id/dealOfferrestaurantList"
+            style="@style/list_item_deal_offer_text_New"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_package"
+            android:drawablePadding="@dimen/BaseLayout_rhythmSixth"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintStart_toEndOf="@id/restaurantListImage"
+            card_view:layout_constraintTop_toBottomOf="@id/restaurantListCuisines"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_4sdp"
+            tools:text=" 50 % off " />
+
+
+        <ImageButton
+            android:id="@+id/markFavoriterestaurantList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_favorite_selector"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/reserveButtonRestaurantList"
+            style="@style/Button.Action.Primary.New"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/BaseLayout_rhythmTwoThirds_new"
+            android:layout_marginBottom="@dimen/_9sdp"
+            android:minWidth="@dimen/BaseLayout_rhythmThree_new"
+            android:text="@string/hint_reserve"
+            android:textAppearance="@style/TextAppearance.Text.Small"
+            card_view:layout_constraintStart_toEndOf="@id/dealRatingrestaurantList"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

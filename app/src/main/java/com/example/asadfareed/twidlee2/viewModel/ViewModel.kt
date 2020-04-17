@@ -22,6 +22,7 @@ import com.example.asadfareed.twidlee2.fragments.EditProfileFragment
 import com.example.asadfareed.twidlee2.fragments.LoginFragment
 import com.example.asadfareed.twidlee2.model.*
 import com.example.asadfareed.twidlee2.repository.DealRepository
+import com.example.asadfareed.twidlee2.utils.retrofitInstance
 import com.example.asadfareed.twidlee2.utils.utils
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_forgot_password.view.*
@@ -60,7 +61,7 @@ class ViewModel : ViewModel() {
 
     fun getDeals(activity: FragmentActivity?): MutableLiveData<ArrayList<Deal>> {
         context = activity!!
-        getRetrofitInstance()
+        retrofit=retrofitInstance.getRetrofitInstance(activity)
         loadDeals()
         return dealsList
     }
@@ -102,7 +103,7 @@ class ViewModel : ViewModel() {
 
     public fun login(login: Login, activity: FragmentActivity?) {
         context = activity!!
-        getRetrofitInstance()
+        retrofit=retrofitInstance.getRetrofitInstance(activity)
         val api: API = retrofit.create(API::class.java)
         val call: Call<User>? = api.createUser(login)
         call!!.enqueue(object : Callback<User> {
@@ -166,7 +167,7 @@ class ViewModel : ViewModel() {
 
     public fun signUp(signUp: SignUp, activity: FragmentActivity?) {
         context = activity!!
-        getRetrofitInstance()
+        retrofit=retrofitInstance.getRetrofitInstance(activity)
         val api: API = retrofit.create(API::class.java)
         val call: Call<User>? = api.registerUser(signUp)
         call!!.enqueue(object : Callback<User> {
@@ -220,7 +221,7 @@ class ViewModel : ViewModel() {
         context = activity!!
         user.value=user1
         saveCredentials(activity)
-        getRetrofitInstance()
+        retrofit=retrofitInstance.getRetrofitInstance(activity)
         sharedPref = activity.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
         val api: API = retrofit.create(API::class.java)
         val call: Call<ResponseBody>? = api.registerCodeVerification(verifyCode)
@@ -268,7 +269,7 @@ class ViewModel : ViewModel() {
         user: User
     ) {
         context = activity!!
-        getRetrofitInstance()
+        retrofit=retrofitInstance.getRetrofitInstance(activity)
         val api: API = retrofit.create(API::class.java)
         val call: Call<ResponseBody>? = api.resendCode()
         call!!.enqueue(object : Callback<ResponseBody> {
@@ -307,7 +308,7 @@ class ViewModel : ViewModel() {
 
     public fun logout(activity: FragmentActivity) {
         context = activity
-        getRetrofitInstance()
+        retrofit=retrofitInstance.getRetrofitInstance(activity)
         sharedPref = activity.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
         val api: API = retrofit.create(API::class.java)
         val call: Call<ResponseBody>? = api.logout()
@@ -355,7 +356,7 @@ class ViewModel : ViewModel() {
     ) {
         context = activity
         //val view1: View = view
-        getRetrofitInstance()
+        retrofit=retrofitInstance.getRetrofitInstance(activity)
         //val code: String = ""
         sharedPref = activity.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
         val api: API = retrofit.create(API::class.java)
@@ -406,7 +407,7 @@ class ViewModel : ViewModel() {
         updatePassword: UpdatePassword
     ) {
         context = activity!!
-        getRetrofitInstance()
+        retrofit=retrofitInstance.getRetrofitInstance(activity)
         val api: API = retrofit.create(API::class.java)
         val call: Call<ResponseBody>? = api.updatePassword(updatePassword)
         call!!.enqueue(object : Callback<ResponseBody> {
@@ -450,7 +451,7 @@ class ViewModel : ViewModel() {
         updateProfile: UpdateProfile
     ) {
         context = activity!!
-        getRetrofitInstance()
+        retrofit=retrofitInstance.getRetrofitInstance(activity)
         val api: API = retrofit.create(API::class.java)
         val call: Call<User>? = api.updateProfile(updateProfile)
         call!!.enqueue(object : Callback<User> {
@@ -463,7 +464,7 @@ class ViewModel : ViewModel() {
                         user.setValue(response.body())
                         saveCredentials(activity)
                     if (updateProfile.is_email_notification==null && updateProfile.is_push_notification==null) {
-                        loadFragment2(EditProfileFragment("Profile"), context as FragmentActivity)
+                        utils.loadFragment2(EditProfileFragment("Profile"), context as FragmentActivity)
                         // loadFragment2(AccountFragment(), activity)
                     }
                 } else if (response.code()==400){
@@ -500,7 +501,7 @@ class ViewModel : ViewModel() {
         view: View
     ) {
         context = activity
-        getRetrofitInstance()
+        retrofit=retrofitInstance.getRetrofitInstance(activity)
         sharedPref = activity.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
         val api: API = retrofit.create(API::class.java)
         val call: Call<ResponseBody>? = api.getCodeUpdatePhone(getCode)
@@ -547,7 +548,7 @@ class ViewModel : ViewModel() {
         changePassword: ChangePassword
     ) {
         context = activity!!
-        getRetrofitInstance()
+        retrofit=retrofitInstance.getRetrofitInstance(activity)
         val api: API = retrofit.create(API::class.java)
         val call: Call<ResponseBody>? = api.changePassword(changePassword)
         call!!.enqueue(object : Callback<ResponseBody> {
@@ -583,36 +584,9 @@ class ViewModel : ViewModel() {
 
     }
 
-    private fun getRetrofitInstance() {
-        sharedPref = context.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
-        val token: String = sharedPref.getString("token_key", "")!!
-        val httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
-        httpClient.addInterceptor { chain ->
-            val request = chain.request()
-                .newBuilder()
-                .addHeader("x-api-key", "5f7af37cb35f5cd8")
-                .addHeader("Authorization", "Bearer " + token)
-                .build()
-            chain.proceed(request)
-        }
-        // added logging interceptor
-        val httpLoggingInterceptor = HttpLoggingInterceptor()
-        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        httpClient.addInterceptor(httpLoggingInterceptor)
-
-        retrofit = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(API.BASE_URL)
-            .client(httpClient.build())
-            .build()
-    }
 
 
 
-    private fun loadFragment2(fragment: Fragment, activity: FragmentActivity?) {
-        val transaction = activity!!.supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.nav_host_fragment, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
+
+
 }

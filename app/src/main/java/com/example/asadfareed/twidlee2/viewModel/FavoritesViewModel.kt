@@ -126,7 +126,7 @@ class FavoritesViewModel : ViewModel() {
                     executorService.execute{
                         dealDao.update(favoritesParameter.restaurant,favoritesParameter.is_favorite)
                         activity.runOnUiThread {
-                            contextFragment.observeDeals()
+                           // contextFragment.observeDeals()
                         }
                     }
                     }else if (response.code()==400){

@@ -9,7 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="com.example.asadfareed.twidlee2.fragments.DealsFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_deals">
+        tools:layout="@layout/deals_view">
         <action
             android:id="@+id/action_navigate_to_account"
             app:destination="@+id/navigation_account"

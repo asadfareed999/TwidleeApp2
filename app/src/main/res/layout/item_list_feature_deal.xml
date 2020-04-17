@@ -4,12 +4,11 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/_140sdp"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/_5sdp"
     android:layout_marginBottom="@dimen/_8sdp"
-    android:layout_marginLeft="@dimen/default_margin"
-    android:layout_marginRight="@dimen/default_margin"
+    android:layout_marginLeft="@dimen/_8sdp"
+    android:layout_marginRight="@dimen/_6sdp"
     android:background="?android:selectableItemBackground"
     card_view:cardCornerRadius="@dimen/card_corner_radius"
     card_view:cardElevation="@dimen/BaseLayout_rhythmSixth">
@@ -19,7 +18,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/restaurantCoverImage"
+            android:id="@+id/restaurantCoverImageFeatureDeal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/list_item_deal_thumbnail_height_new"
             android:background="@color/color_gray"
@@ -29,16 +28,9 @@
             card_view:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/deal_placeholder" />
 
-        <ImageView
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/ic_feature_deal"
-            android:rotation="270"/>
 
         <RatingBar
-            android:id="@+id/dealRating"
+            android:id="@+id/dealRatingFeatureDeal"
             style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="@dimen/rating_bar_width_deals"
             android:layout_height="wrap_content"
@@ -48,110 +40,88 @@
             android:padding="@dimen/margin_narrow"
             android:scaleX="1.1"
             android:scaleY="1.1"
-            card_view:layout_constraintBottom_toTopOf="@+id/restaurantName"
+            card_view:layout_constraintBottom_toTopOf="@+id/restaurantNameFeatureDeal"
+            card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             tools:rating="3" />
 
         <TextView
-            android:id="@+id/restaurantName"
+            android:id="@+id/restaurantNameFeatureDeal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/BaseLayout_rhythmThird"
+            android:layout_marginEnd="@dimen/BaseLayout_rhythmThird"
+            android:textAlignment="center"
             android:layout_marginTop="@dimen/default_margin"
-            android:maxLines="2"
+            android:maxLines="1"
+            android:maxWidth="@dimen/_15sdp"
             android:paddingLeft="@dimen/default_padding"
-            card_view:layout_constraintEnd_toStartOf="@+id/counterProgress"
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@id/restaurantCoverImage"
+            card_view:layout_constraintTop_toBottomOf="@id/restaurantCoverImageFeatureDeal"
+            card_view:layout_constraintEnd_toEndOf="parent"
             tools:text="X2 Cafe" />
 
         <TextView
-            android:id="@+id/restaurantAddress"
+            android:id="@+id/restaurantAddressFeatureDeal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_location_pin"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:drawablePadding="@dimen/BaseLayout_rhythmSixth"
-            android:maxLines="2"
+            android:maxLines="1"
+            android:maxWidth="@dimen/_15sdp"
             android:paddingLeft="@dimen/default_padding"
-            card_view:layout_constraintEnd_toStartOf="@+id/counterProgress"
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@id/restaurantName"
+            card_view:layout_constraintTop_toBottomOf="@id/restaurantNameFeatureDeal"
+            card_view:layout_constraintEnd_toEndOf="parent"
             tools:text="Gulberg|Lahore" />
 
         <TextView
-            android:id="@+id/restaurantCuisines"
+            android:id="@+id/restaurantCuisinesFeatureDeal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/list_item_padding_left_cuisines_new"
+            android:layout_marginEnd="@dimen/list_item_padding_left_cuisines_new"
             android:maxLines="2"
+            android:textAlignment="center"
             android:paddingBottom="@dimen/BaseLayout_rhythmFourth"
-            card_view:layout_constraintEnd_toStartOf="@+id/counterProgress"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            android:maxWidth="@dimen/_15sdp"
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@id/restaurantAddress"
+            card_view:layout_constraintTop_toBottomOf="@id/restaurantAddressFeatureDeal"
             tools:text="Thai, Chinese, Desi, Italian" />
 
         <TextView
-            android:id="@+id/dealOffer"
+            android:id="@+id/dealOfferFeatureDeal"
             style="@style/list_item_deal_offer_text_New"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_package"
             android:drawablePadding="@dimen/BaseLayout_rhythmSixth"
+            android:layout_marginTop="@dimen/_8sdp"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
             tools:text=" 50 % off " />
 
         <TextView
-            android:id="@+id/dealTime"
-            style="@style/list_item_deal_offer_text_New"
+            android:id="@+id/dealTimeFeatureDeal"
+            style="@style/list_item_deal_offer_text_New2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_access_time_black_24dp"
             android:drawablePadding="@dimen/BaseLayout_rhythmSixth"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@id/dealOffer"
-            tools:text="11:30 AM - 02:30PM"
-            android:layout_marginTop="@dimen/_8sdp"/>
-
-        <ImageButton
-            android:id="@+id/markFavorite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_favorite_selector"
+            card_view:layout_constraintTop_toBottomOf="@id/dealOfferFeatureDeal"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            tools:text="11:30:30"
+            android:layout_marginTop="@dimen/_23sdp"/>
 
-        <ProgressBar
-            android:id="@+id/counterProgress"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="@dimen/BaseLayout_rhythmOneAndAThird_New"
-            android:layout_height="@dimen/BaseLayout_rhythmOneAndAThird_New"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:background="@drawable/circle_shape_new"
-            android:indeterminate="false"
-            android:max="100"
-            android:progressDrawable="@drawable/circular_progressbar_new"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/restaurantCoverImage" />
 
-        <TextView
-            android:id="@+id/counterDeals"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            card_view:layout_constraintBottom_toBottomOf="@+id/counterProgress"
-            card_view:layout_constraintEnd_toEndOf="@+id/counterProgress"
-            card_view:layout_constraintStart_toStartOf="@+id/counterProgress"
-            card_view:layout_constraintTop_toTopOf="@+id/counterProgress"
-            tools:text="03\n11:03"
-            android:layout_marginBottom="@dimen/_3sdp"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

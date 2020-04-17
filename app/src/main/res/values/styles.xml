@@ -323,6 +323,15 @@
         <item name="android:fontFamily">@font/font_roboto_bold</item>
     </style>
 
+    <style name="list_item_deal_offer_text_New2" parent="TextView_default_padding_style">
+        <item name="android:textSize">@dimen/_10sdp</item>
+        <item name="android:background">@drawable/background_timer</item>
+        <item name="android:layout_marginStart">@dimen/BaseLayout_rhythmThird</item>
+        <item name="android:layout_marginTop">@dimen/_24sdp</item>
+        <item name="android:paddingLeft">@dimen/BaseLayout_rhythmSixth</item>
+        <item name="android:fontFamily">@font/font_roboto_bold</item>
+    </style>
+
     <style name="TextAppearance.Text.Roboto_Medium.XXLarge.New">
         <item name="android:textSize">@dimen/_18sdp</item>
     </style>

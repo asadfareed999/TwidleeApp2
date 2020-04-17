@@ -33,26 +33,7 @@ class retrofitInstance {
 
                 chain.proceed(request.build())
             }
-            /*if (token.isEmpty()) {
-                httpClient.addInterceptor { chain ->
-                    val request = chain.request()
-                        .newBuilder()
-                        .addHeader("x-api-key", "5f7af37cb35f5cd8")
-                        .build()
 
-                    chain.proceed(request)
-                }
-            }else{
-                httpClient.addInterceptor { chain ->
-                    val request = chain.request()
-                        .newBuilder()
-                        .addHeader("x-api-key", "5f7af37cb35f5cd8")
-                        .addHeader("Authorization", "Bearer " + token)
-                        .build()
-
-                    chain.proceed(request)
-                }
-            }*/
             // added logging interceptor
             val httpLoggingInterceptor = HttpLoggingInterceptor()
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY

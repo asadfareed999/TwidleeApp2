@@ -8,18 +8,6 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar_main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_margin="@dimen/BaseLayout_rhythmThird" />
-
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeToRefresh"
             android:layout_width="match_parent"
@@ -32,20 +20,9 @@
                 android:layout_height="match_parent"
                 android:layout_below="@id/toolbar"
                 android:paddingBottom="@dimen/BaseLayout_rhythmOneAndAThird"
-                android:visibility="visible"
-                />
+                tools:listitem="@layout/item_list_deal"
+                android:visibility="visible" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-        <TextView
-            android:id="@+id/reloadViewDeals"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:drawableTop="@drawable/ic_reload"
-            android:gravity="center"
-            android:text="@string/reload"
-            android:visibility="gone" />
-    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

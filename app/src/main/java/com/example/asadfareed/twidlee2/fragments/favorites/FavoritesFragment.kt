@@ -16,7 +16,7 @@ import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.adapter.FavoritesAdapter
 import com.example.asadfareed.twidlee2.model.Deal
 import com.example.asadfareed.twidlee2.viewModel.FavoritesViewModel
-import kotlinx.android.synthetic.main.fragment_deals.view.*
+import kotlinx.android.synthetic.main.deals_view.view.*
 import kotlinx.android.synthetic.main.fragment_favorites.view.*
 import kotlinx.android.synthetic.main.fragment_termservices_privacy.view.toolbar
 import kotlinx.android.synthetic.main.toolbar_simple.view.*
@@ -65,7 +65,7 @@ class FavoritesFragment() : Fragment() , SwipeRefreshLayout.OnRefreshListener{
         viewModel.getFavoritesRestaurant(activity!!,view)
             .observe(viewLifecycleOwner, Observer(function = fun(dealsList: ArrayList<Deal>?) {
                 dealsList?.let {
-                    val size=dealsList.size
+                   // val size=dealsList.size
                         if (swipeRefreshLayout.isRefreshing) {
                             swipeRefreshLayout.isRefreshing = false
                         }

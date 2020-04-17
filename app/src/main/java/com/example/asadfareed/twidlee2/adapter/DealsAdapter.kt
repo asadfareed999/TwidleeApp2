@@ -135,7 +135,7 @@ class DealsAdapter(
         private fun formateDate(date: String): String {
             var date1 = date
             var spf = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss")
-            val newDate: Date = spf.parse(date1)
+            val newDate: Date = spf.parse(date1)!!
             spf = SimpleDateFormat("hh:mm aaa")
             date1 = spf.format(newDate)
             return date1
@@ -146,13 +146,6 @@ class DealsAdapter(
             viewModel.getRestaurantDetails(itemView.context as FragmentActivity, deals.get(adapterPosition).restaurant_id)
           //  viewModel.getRestaurantDetails(itemView.context as FragmentActivity, 9)
 
-        }
-
-        private fun loadFragment(fragment: Fragment, activity: FragmentActivity?) {
-            val transaction = activity!!.supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.nav_host_fragment, fragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
         }
 
     }
