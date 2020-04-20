@@ -112,7 +112,7 @@ class RestaurantsAdapter(
             GlideApp.with(itemView.context)
                 .load(restaurantsList1.get(position).cover_image)
                 .fitCenter()
-                .placeholder(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.deal_placeholder)
                 .into(imageView)
         }
 
