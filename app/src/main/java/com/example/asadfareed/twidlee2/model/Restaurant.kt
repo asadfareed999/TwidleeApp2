@@ -8,7 +8,7 @@ data class Restaurant(
     val cover_image : String,
     val is_favorite : Boolean,
     val image_galeries : List<Image_galeries>,
-    val address : Address2,
+    val address : Address,
     val cuisines : List<String>,
     val food_types : List<String>,
     val rating_summary : Rating_summary,
@@ -18,7 +18,7 @@ data class Restaurant(
     val deals : List<Deals>
     ):Serializable
 
-data class Address2 (
+/*data class Address2 (
 
     val display_address : String,
     val area : String,
@@ -27,7 +27,7 @@ data class Address2 (
     val business_contact : String,
     val business_contact_1 : String,
     val business_email : String
-):Serializable
+):Serializable*/
 
 data class Image_galeries (
 
@@ -125,7 +125,7 @@ data class Deals (
     val take_away_limit : Int,
     val table_time_limit : Int,
     val phone : String,
-    val status : Int,
+    val status : String,
     val deal_scheduling : Int,
     val posted_by : Int
 ):Serializable

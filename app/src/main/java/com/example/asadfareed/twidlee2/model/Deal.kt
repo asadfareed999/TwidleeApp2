@@ -6,6 +6,7 @@ import java.io.Serializable
 data class Deal (
     var id:Int,
     var restaurant_name:String,
+    var restaurant_is_featured:Boolean,
     var restaurant_id:Int,
     var address: Address,
     var cuisines:List<String> = emptyList(),

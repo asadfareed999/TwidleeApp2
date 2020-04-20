@@ -6,28 +6,33 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
 import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.adapter.DealsAdapter
 import com.example.asadfareed.twidlee2.adapter.ViewPagerAdapter
 import com.example.asadfareed.twidlee2.database.entity.DealRoom
+import com.example.asadfareed.twidlee2.model.CompleteRestaurant
 import com.example.asadfareed.twidlee2.model.Deal
+import com.example.asadfareed.twidlee2.viewModel.RestaurantViewModel
 import com.example.asadfareed.twidlee2.viewModel.ViewModel
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.view_tabs_deal.view.*
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 
-class DealsFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener{
+class DealsFragment: Fragment(){
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: DealsAdapter
     private lateinit var viewModel: ViewModel
+    private lateinit var viewModelRestaurant: RestaurantViewModel
     private lateinit var dealsList:MutableLiveData< ArrayList<Deal>>
     private lateinit var deals: ArrayList<DealRoom>
-    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-
-
+    private lateinit var restaurants: ArrayList<CompleteRestaurant>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -37,8 +42,8 @@ class DealsFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener{
         return  view
     }
 
-     /* fun observeDeals() {
-        *//*viewModel.getDeals(activity)
+      fun observeDeals() {
+       /* viewModel.getDeals(activity)
             .observe(viewLifecycleOwner, Observer(function = fun(dealsList: ArrayList<Deal>?) {
                 dealsList?.let {
                     adapter =
@@ -48,52 +53,52 @@ class DealsFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener{
                     recyclerView.adapter = adapter
                     adapter.notifyDataSetChanged()
                 }
-            }))*//*
+            }))*/
         val executorService: ExecutorService = Executors.newSingleThreadExecutor()
         executorService.execute {
             deals = viewModel.getRepoDeals(activity)
+            viewModelRestaurant.getAllRestaurants(activity!!)
             activity!!.runOnUiThread {
-                if (deals.size>0) {
-                    view!!.reloadViewDeals.visibility=View.GONE
-                    if (swipeRefreshLayout.isRefreshing){
-                        swipeRefreshLayout.isRefreshing=false
-                    }
-                    adapter =
-                        DealsAdapter(
-                            deals,this
-                        )
-                    recyclerView.adapter = adapter
-                    adapter.notifyDataSetChanged()
-                }else{
-                  // observeDeals()
-                    view!!.reloadViewDeals.visibility=View.VISIBLE
-                    view!!.reloadViewDeals.setOnClickListener {
-                        observeDeals()
-                    }
-                }
+                viewModelRestaurant.restaurantsAll
+                    .observe(viewLifecycleOwner, Observer(function = fun(list: ArrayList<CompleteRestaurant>?) {
+                        list?.let {
+                            restaurants=list
+                            if (deals.size>0 && restaurants.size>0) {
+                                view!!.reloadViewDeals.visibility=View.GONE
+                                loadTab(view!!)
+                            }else{
+                                view!!.reloadViewDeals.visibility=View.VISIBLE
+                                view!!.reloadViewDeals.setOnClickListener {
+                                    observeDeals()
+                                }
+                            }
+                        }
+                    }))
+
             }
 
         }
-    }*/
+    }
 
     private fun initData(view: View) {
-        /*recyclerView = view.findViewById(R.id.fragmentDealsRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         viewModel = ViewModelProviders.of(this).get(ViewModel::class.java)
-        swipeRefreshLayout=view.swipeToRefresh
-        swipeRefreshLayout.setOnRefreshListener(this)*/
-        val list: MutableList<String> = ArrayList()
-        list.add("Deals")
-        list.add("Restaurants")
+        viewModelRestaurant = ViewModelProviders.of(this).get(RestaurantViewModel::class.java)
+        observeDeals()
+    }
+
+    private fun loadTab(view: View) {
+        val tabs = view.Tabs
         val viewPager: ViewPager = view.view_pagerDealsRestaurant
-        viewPager.adapter = ViewPagerAdapter(list)
+        viewPager.adapter = ViewPagerAdapter(deals,restaurants,this)
+        tabs.tabGravity = TabLayout.GRAVITY_FILL
+        tabs.setupWithViewPager(viewPager)
+        setupTabIcons(tabs)
     }
 
-    override fun onRefresh() {
-            swipeRefreshLayout.isRefreshing=true
-       // observeDeals()
+    private fun setupTabIcons(tabs: TabLayout) {
+        tabs.getTabAt(0)!!.text = "Deals"
+        tabs.getTabAt(1)!!.text= "Restaurants"
+
     }
-
-
 
 }

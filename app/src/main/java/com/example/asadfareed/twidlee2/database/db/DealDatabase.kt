@@ -10,7 +10,7 @@ import com.example.asadfareed.twidlee2.database.dao.DealDao
 import com.example.asadfareed.twidlee2.database.typeConverters.AddressConverter
 import com.example.asadfareed.twidlee2.database.typeConverters.CuisineConverter
 
-@Database(entities = [DealRoom::class], version = 1, exportSchema = false)
+@Database(entities = [DealRoom::class], version = 2, exportSchema = false)
 @TypeConverters(
     AddressConverter::class,
     CuisineConverter::class)

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_7sdp"
-        tools:text="Fetured Deals"
+        android:text="Fetured Deals"
         android:textStyle="bold"
         android:textSize="@dimen/_14ssp"
         app:layout_constraintStart_toStartOf="parent"

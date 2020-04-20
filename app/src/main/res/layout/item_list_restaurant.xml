@@ -10,7 +10,7 @@
     android:layout_marginLeft="@dimen/default_margin"
     android:layout_marginRight="@dimen/default_margin"
     android:layout_marginTop="@dimen/_7sdp"
-    android:background="?android:selectableItemBackground"
+    android:background="?android:attr/colorBackground"
     card_view:cardCornerRadius="@dimen/card_corner_radius"
     card_view:cardElevation="@dimen/BaseLayout_rhythmSixth">
 
@@ -57,7 +57,7 @@
             card_view:layout_constraintStart_toEndOf="@id/restaurantListImage"
             card_view:layout_constraintTop_toTopOf="parent"
             card_view:layout_constraintEnd_toStartOf="@id/markFavoriterestaurantList"
-            tools:text="X2 Cafe" />
+            android:text="X2 Cafe" />
 
 
         <TextView
@@ -72,7 +72,7 @@
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintStart_toEndOf="@id/restaurantListImage"
             card_view:layout_constraintTop_toBottomOf="@id/restaurantListName"
-            tools:text="Thai, Chinese, Desi, Italian" />
+            android:text="Thai, Chinese, Desi, Italian" />
 
         <TextView
             android:id="@+id/dealOfferrestaurantList"
@@ -86,7 +86,7 @@
             card_view:layout_constraintTop_toBottomOf="@id/restaurantListCuisines"
             card_view:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_4sdp"
-            tools:text=" 50 % off " />
+            android:text=" 50 % off " />
 
 
         <ImageButton

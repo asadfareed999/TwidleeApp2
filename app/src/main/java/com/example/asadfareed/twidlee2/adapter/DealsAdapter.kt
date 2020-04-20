@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.database.entity.DealRoom
@@ -17,50 +17,88 @@ import com.example.asadfareed.twidlee2.utils.counter
 import com.example.asadfareed.twidlee2.viewModel.FavoritesViewModel
 import com.example.asadfareed.twidlee2.viewModel.RestaurantViewModel
 import kotlinx.android.synthetic.main.item_list_deal.view.*
+import kotlinx.android.synthetic.main.item_list_feature_deal_recycler.view.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class DealsAdapter(
-    dealsList: ArrayList<DealRoom>,
-    dealsFragment: DealsFragment
-) : RecyclerView.Adapter<DealsAdapter.ViewHolder>() {
-      var dealsList1= dealsList
-    val contextFragment=dealsFragment
+    featureDeals:ArrayList<DealRoom>,
+    Deals:ArrayList<DealRoom>,
+    contextFragment: DealsFragment
+    ) : RecyclerView.Adapter<DealsAdapter.ViewHolder>() {
+
+     var dealList2=Deals
+    val contextFragment=contextFragment
+     var featureDeals=featureDeals
 
     //this method is returning the view for each item in the list
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_list_deal, parent, false)
-        return ViewHolder(v)
+
+        if (viewType==0){
+            val v =
+                LayoutInflater.from(parent.context).inflate(R.layout.item_list_feature_deal_recycler
+                    , parent, false)
+            return ViewHolder(v)
+        }else {
+            val v =
+                LayoutInflater.from(parent.context).inflate(R.layout.item_list_deal, parent, false)
+            return ViewHolder(v)
+        }
     }
 
     //this method is binding the data on the list
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItems(dealsList1,position,contextFragment)
+        if (position==0) {
+            holder.bindItems(featureDeals, position, contextFragment)
+        }else{
+            holder.bindItems(dealList2, position-1, contextFragment)
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        if (position==0){
+            return 0
+        }else{
+            return 1
+        }
     }
 
     //this method is giving the size of the list
     override fun getItemCount(): Int {
-        return dealsList1.size
+        return dealList2.size+1
     }
 
     //the class is hodling the list view
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
 
         private lateinit var deals:ArrayList<DealRoom>
-        val imageView:ImageView=itemView.restaurantCoverImage
+        private lateinit var imageView:ImageView
+        private lateinit var recyclerView: RecyclerView
+        private lateinit var adapter: DealNestedAdapter
 
         fun bindItems(
             dealsList1: ArrayList<DealRoom>,
             position: Int,
             contextFragment: DealsFragment
         ) {
-            deals=dealsList1
-            loadImage(dealsList1, position)
-            val cuisines = getCuisines(dealsList1, position)
-            var (date, date2) = formatDates(dealsList1, position)
-            setViewsData(dealsList1, position, cuisines, date, date2,contextFragment)
-            itemView.setOnClickListener(this)
+            if (adapterPosition==0){
+                recyclerView = itemView.nestedRecyclerViewFeatureRecycler
+                recyclerView.layoutManager = LinearLayoutManager(itemView.context, RecyclerView.HORIZONTAL, false)
+                adapter = DealNestedAdapter(dealsList1,contextFragment)
+                recyclerView.adapter = adapter
+                adapter.notifyDataSetChanged()
+
+            }else {
+                imageView=itemView.restaurantCoverImage
+                deals = dealsList1
+                loadImage(dealsList1, position)
+                val cuisines = getCuisines(dealsList1, position)
+                var (date, date2) = formatDates(dealsList1, position)
+                setViewsData(dealsList1, position, cuisines, date, date2, contextFragment)
+                itemView.setOnClickListener(this)
+            }
         }
 
         private fun getCuisines(

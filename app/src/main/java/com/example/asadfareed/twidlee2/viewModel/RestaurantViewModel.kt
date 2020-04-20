@@ -26,6 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RestaurantViewModel : ViewModel() {
 
     private  var restaurantDetails: MutableLiveData<Restaurant>
+    var restaurantsAll: MutableLiveData<ArrayList<CompleteRestaurant>>
     private lateinit var retrofit: Retrofit
     private val sharedPrefFile = "kotlinsharedpreference"
     private lateinit var sharedPref: SharedPreferences
@@ -34,6 +35,7 @@ class RestaurantViewModel : ViewModel() {
 
     init {
         restaurantDetails = MutableLiveData()
+        restaurantsAll= MutableLiveData()
         Log.i("Restaurant View Model", " Restaurant View Model Created....")
     }
 
@@ -95,28 +97,49 @@ class RestaurantViewModel : ViewModel() {
         })
     }
 
-    /*private fun getRetrofitInstance() {
-        sharedPref = context.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
-        val token: String = sharedPref.getString("token_key", "")!!
-        val httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
-        httpClient.addInterceptor { chain ->
-            val request = chain.request()
-                .newBuilder()
-                .addHeader("x-api-key", "5f7af37cb35f5cd8")
-                .addHeader("Authorization", "Bearer " + token)
-                .build()
-            chain.proceed(request)
-        }
-        // added logging interceptor
-        val httpLoggingInterceptor = HttpLoggingInterceptor()
-        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        httpClient.addInterceptor(httpLoggingInterceptor)
+     fun getAllRestaurants(
+        activity: FragmentActivity
+    ){
+        context = activity
+        retrofit=retrofitInstance.getRetrofitInstance(activity)
+        val api: API = retrofit.create(API::class.java)
+        val call: Call<ArrayList<CompleteRestaurant>> = api.getAllRestaurants()
+        call.enqueue(object : Callback<ArrayList<CompleteRestaurant>> {
+            override fun onResponse(
+                call: Call<ArrayList<CompleteRestaurant>>,
+                response: Response<ArrayList<CompleteRestaurant>>
+            ) {
+                if (response.code()==200) {
+                    Log.i("Response", "Response  " + response.code())
+                    //  Log.i("Response","Response : "+response.body())
+                    restaurantsAll.value=response.body()
+                }else if (response.code()==400){
+                    val gson = GsonBuilder().create()
+                    val mError =
+                        gson.fromJson(response.errorBody()!!.string(),Error::class.java)
+                    Toast.makeText(activity, mError.message, Toast.LENGTH_LONG).show()
+                }else if (response.code()==403){
+                    val gson = GsonBuilder().create()
+                    val mError =
+                        gson.fromJson(response.errorBody()!!.string(),InvalidToken::class.java)
+                    Toast.makeText(
+                        activity,
+                        mError.detail,
+                        Toast.LENGTH_LONG
+                    ).show()
 
-        retrofit = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(API.BASE_URL)
-            .client(httpClient.build())
-            .build()
-    }*/
+                }else {
+                    Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+
+            override fun onFailure(call: Call<ArrayList<CompleteRestaurant>>, t: Throwable) {
+                Toast.makeText(activity, "Failed "+t.message, Toast.LENGTH_LONG)
+                    .show()
+            }
+        })
+    }
+
 
 }
