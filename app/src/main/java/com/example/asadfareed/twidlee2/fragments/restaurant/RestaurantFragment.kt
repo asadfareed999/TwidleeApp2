@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.TabAdapter
+import com.example.asadfareed.twidlee2.model.FavoritesParameter
 import com.example.asadfareed.twidlee2.model.Restaurant
 import com.example.asadfareed.twidlee2.utils.utils
+import com.example.asadfareed.twidlee2.viewModel.FavoritesViewModel
 import com.example.asadfareed.twidlee2.viewModel.ViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_restaurant.view.*
@@ -63,6 +66,21 @@ class RestaurantFragment(restaurant: Restaurant) : Fragment() {
             getListItems(restaurantDetails.cuisines) + "\n" + getListItems(restaurantDetails.food_types)
         view.restaurantAddress.text = restaurantDetails.address.display_address
         viewModel = ViewModelProviders.of(this).get(ViewModel::class.java)
+        favoriteClick(view)
+    }
+
+    private fun favoriteClick(view: View) {
+        view.markFavoriteRestaurantHome.setOnClickListener {
+            val viewModel = ViewModelProviders.of(this)
+                .get(FavoritesViewModel::class.java)
+            val favorite = restaurantDetails.is_favorite
+            val favoritesParameter =
+                FavoritesParameter(restaurantDetails.id, !favorite)
+            viewModel.makeFavorite(
+                view.context as FragmentActivity, favoritesParameter,
+                view.markFavoriteRestaurantHome, this
+            )
+        }
     }
 
     private fun getListItems(cuisines: List<String>): String {

@@ -103,7 +103,7 @@ class FavoritesViewModel : ViewModel() {
         activity: FragmentActivity?,
         favoritesParameter: FavoritesParameter,
         markFavorite: ImageButton,
-        contextFragment: DealsFragment
+        contextFragment: Any
     ){
         retrofit=retrofitInstance.getRetrofitInstance(activity)
         val api: API = retrofit.create(API::class.java)
@@ -126,7 +126,7 @@ class FavoritesViewModel : ViewModel() {
                     executorService.execute{
                         dealDao.update(favoritesParameter.restaurant,favoritesParameter.is_favorite)
                         activity.runOnUiThread {
-                           // contextFragment.observeDeals()
+                           //contextFragment.i
                         }
                     }
                     }else if (response.code()==400){

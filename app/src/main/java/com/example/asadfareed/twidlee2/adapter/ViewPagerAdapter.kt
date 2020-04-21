@@ -30,37 +30,50 @@ class ViewPagerAdapter(
     lateinit var dealList2:ArrayList<DealRoom>
     lateinit var featureDeals:ArrayList<DealRoom>
 
-
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val inflater = LayoutInflater.from(container.context)
         val view = inflater.inflate(R.layout.deals_view, container, false) as ViewGroup
-        swipeRefreshLayout=view.swipeToRefresh
+        initData(view)
+        swipeRefreshHandler(view)
+        if (position==0){
+            loadDeals()
+        }else{
+            loadRestaurants()
+        }
+        container.addView(view)
+        return view
+    }
+
+    private fun loadRestaurants() {
+        adapter2 =
+            RestaurantsAdapter(
+                restaurantList, context
+            )
+        recyclerView.adapter = adapter2
+        adapter2.notifyDataSetChanged()
+    }
+
+    private fun loadDeals() {
+        getLists(dealList)
+        adapter =
+            DealsAdapter(
+                featureDeals, dealList2, context
+            )
+        recyclerView.adapter = adapter
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun initData(view: ViewGroup) {
+        recyclerView = view.findViewById(R.id.fragmentDealsRecyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
+    }
+
+    private fun swipeRefreshHandler(view: ViewGroup) {
+        swipeRefreshLayout = view.swipeToRefresh
         swipeRefreshLayout.setOnRefreshListener(this)
         if (swipeRefreshLayout.isRefreshing) {
             swipeRefreshLayout.isRefreshing = false
         }
-        if (position==0){
-            recyclerView = view.findViewById(R.id.fragmentDealsRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
-            getLists(dealList)
-            adapter =
-                DealsAdapter(
-                    featureDeals,dealList2,context
-                )
-            recyclerView.adapter = adapter
-            adapter.notifyDataSetChanged()
-        }else{
-            recyclerView = view.findViewById(R.id.fragmentDealsRecyclerView)
-            recyclerView.layoutManager = LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
-            adapter2 =
-                RestaurantsAdapter(
-                    restaurantList,context
-                )
-            recyclerView.adapter = adapter2
-            adapter2.notifyDataSetChanged()
-        }
-        container.addView(view)
-        return view
     }
 
     private fun getLists(dealList: ArrayList<DealRoom>) {
@@ -91,6 +104,5 @@ class ViewPagerAdapter(
     override fun onRefresh() {
         context.observeDeals()
     }
-
 
 }

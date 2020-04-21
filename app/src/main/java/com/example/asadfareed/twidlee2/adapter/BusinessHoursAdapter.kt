@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.model.Business_hours
-import com.example.asadfareed.twidlee2.model.Deals
 import com.example.asadfareed.twidlee2.utils.utils
 import kotlinx.android.synthetic.main.item_list_businesshours.view.*
 import java.text.SimpleDateFormat
@@ -23,7 +22,7 @@ class BusinessHoursAdapter(businessHours: List<Business_hours>) : RecyclerView.A
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItems(hours,position)
+        holder.bindItems(hours.get(position))
     }
 
     override fun getItemCount(): Int {
@@ -33,18 +32,18 @@ class BusinessHoursAdapter(businessHours: List<Business_hours>) : RecyclerView.A
     //the class is hodling the list view
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
-        fun bindItems(hours: List<Business_hours>, position: Int) {
-            var day=utils.spannableStringColor(hours.get(position).day)
-            var (date, date2) = formatDates(hours, position)
+        fun bindItems(hours: Business_hours) {
+            var day=utils.spannableStringColor(hours.day)
+            var (date, date2) = formatDates(hours)
             val textHours=TextUtils.concat(day,"\n"+date+"  -  "+date2+"\n")
             itemView.businessDayHour.text=textHours
         }
         private fun formatDates(
-            hours: List<Business_hours>,
-            position: Int
-        ): Pair<String, String> {
-            var date = hours.get(position).slots.get(0).time_start
-            var date2 = hours.get(position).slots.get(0).time_end
+            hours: Business_hours
+        )
+                : Pair<String, String> {
+            var date = hours.slots.get(0).time_start
+            var date2 = hours.slots.get(0).time_end
             // var spf = SimpleDateFormat("MMM dd, yyyy hh:mm:ss aaa")
             date = formateTime(date)
             date2 = formateTime(date2)

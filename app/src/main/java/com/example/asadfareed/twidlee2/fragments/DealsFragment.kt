@@ -33,57 +33,51 @@ class DealsFragment: Fragment(){
     private lateinit var dealsList:MutableLiveData< ArrayList<Deal>>
     private lateinit var deals: ArrayList<DealRoom>
     private lateinit var restaurants: ArrayList<CompleteRestaurant>
+    private lateinit var view2:View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         val view:View= inflater.inflate(R.layout.view_tabs_deal, container, false)
         initData(view)
-        //observeDeals()
+        clickHandler(view)
         return  view
     }
 
       fun observeDeals() {
-       /* viewModel.getDeals(activity)
-            .observe(viewLifecycleOwner, Observer(function = fun(dealsList: ArrayList<Deal>?) {
-                dealsList?.let {
-                    adapter =
-                        DealsAdapter(
-                            dealsList
-                        )
-                    recyclerView.adapter = adapter
-                    adapter.notifyDataSetChanged()
-                }
-            }))*/
         val executorService: ExecutorService = Executors.newSingleThreadExecutor()
         executorService.execute {
             deals = viewModel.getRepoDeals(activity)
-            viewModelRestaurant.getAllRestaurants(activity!!)
             activity!!.runOnUiThread {
+            viewModelRestaurant.getAllRestaurants(activity!!)
                 viewModelRestaurant.restaurantsAll
                     .observe(viewLifecycleOwner, Observer(function = fun(list: ArrayList<CompleteRestaurant>?) {
                         list?.let {
                             restaurants=list
                             if (deals.size>0 && restaurants.size>0) {
-                                view!!.reloadViewDeals.visibility=View.GONE
+                                view2.reloadViewDeals.visibility=View.GONE
                                 loadTab(view!!)
                             }else{
-                                view!!.reloadViewDeals.visibility=View.VISIBLE
-                                view!!.reloadViewDeals.setOnClickListener {
-                                    observeDeals()
-                                }
+                                view2.reloadViewDeals.visibility=View.VISIBLE
                             }
                         }
                     }))
-
             }
-
         }
     }
 
     private fun initData(view: View) {
         viewModel = ViewModelProviders.of(this).get(ViewModel::class.java)
         viewModelRestaurant = ViewModelProviders.of(this).get(RestaurantViewModel::class.java)
+        view2=view
         observeDeals()
+    }
+
+
+
+    private fun clickHandler(view: View) {
+        view.reloadViewDeals.setOnClickListener {
+            observeDeals()
+        }
     }
 
     private fun loadTab(view: View) {
@@ -92,10 +86,10 @@ class DealsFragment: Fragment(){
         viewPager.adapter = ViewPagerAdapter(deals,restaurants,this)
         tabs.tabGravity = TabLayout.GRAVITY_FILL
         tabs.setupWithViewPager(viewPager)
-        setupTabIcons(tabs)
+        setupTabTitle(tabs)
     }
 
-    private fun setupTabIcons(tabs: TabLayout) {
+    private fun setupTabTitle(tabs: TabLayout) {
         tabs.getTabAt(0)!!.text = "Deals"
         tabs.getTabAt(1)!!.text= "Restaurants"
 
