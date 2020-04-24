@@ -9,8 +9,11 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.fragments.DealsFragment
+import com.example.asadfareed.twidlee2.fragments.restaurant.RestaurantFragment
 import com.example.asadfareed.twidlee2.model.CompleteRestaurant
+import com.example.asadfareed.twidlee2.model.FavoritesParameter
 import com.example.asadfareed.twidlee2.utils.utils
+import com.example.asadfareed.twidlee2.viewModel.FavoritesViewModel
 import com.example.asadfareed.twidlee2.viewModel.RestaurantViewModel
 import kotlinx.android.synthetic.main.item_list_restaurant.view.*
 import java.util.*
@@ -86,21 +89,27 @@ class RestaurantsAdapter(
             if (restaurant.is_favorite) {
                 itemView.markFavoriterestaurantList.isSelected=true
             }
-           /* itemView.markFavoriterestaurantList.setOnClickListener {
+            itemView.markFavoriterestaurantList.setOnClickListener {
                 val viewModel=ViewModelProviders.of(itemView.context as FragmentActivity)
                     .get(FavoritesViewModel::class.java)
-                val favorite=dealsList1.get(position).is_favorite
-                val favoritesParameter=FavoritesParameter(dealsList1.get(position).restaurant_id,!favorite)
-               viewModel.makeFavorite(itemView.context as FragmentActivity,favoritesParameter,
-                   itemView.markFavorite,contextFragment)
-            }*/
+                val favorite=itemView.markFavoriterestaurantList.isSelected
+                val favoritesParameter= FavoritesParameter(restaurant.id,!favorite)
+               viewModel.makeFavoriteRestaurants(
+                   itemView.context as FragmentActivity, favoritesParameter,
+                   itemView.markFavoriterestaurantList
+               )
+            }
         }
 
         override fun onClick(v: View?) {
-            val viewModel = ViewModelProviders.of(itemView.context as FragmentActivity).get(RestaurantViewModel::class.java)
-            viewModel.getRestaurantDetails(itemView.context as FragmentActivity, restaurants.id)
+            /*val viewModel = ViewModelProviders.of(itemView.context as FragmentActivity).get(RestaurantViewModel::class.java)
+            viewModel.getRestaurantDetails(itemView.context as FragmentActivity, restaurants.id)*/
+            utils.loadFragment2(RestaurantFragment(restaurants.id), itemView.context as FragmentActivity)
+        }
+
+        fun updateImage(value:Boolean){
+            restaurants.is_favorite= value
         }
 
     }
-
 }

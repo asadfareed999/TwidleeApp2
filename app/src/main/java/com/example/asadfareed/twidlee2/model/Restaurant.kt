@@ -6,7 +6,7 @@ data class Restaurant(
     val id : Int,
     val name : String,
     val cover_image : String,
-    val is_favorite : Boolean,
+    var is_favorite : Boolean,
     val image_galeries : List<Image_galeries>,
     val address : Address,
     val cuisines : List<String>,

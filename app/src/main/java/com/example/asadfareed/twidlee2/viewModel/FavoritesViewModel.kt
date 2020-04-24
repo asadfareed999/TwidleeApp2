@@ -98,13 +98,12 @@ class FavoritesViewModel : ViewModel() {
             }
         })
     }
+    
 
-    fun makeFavorite(
+    fun makeFavoriteRestaurants(
         activity: FragmentActivity?,
         favoritesParameter: FavoritesParameter,
-        markFavorite: ImageButton,
-        contextFragment: Any
-    ){
+        markFavorite: ImageButton){
         retrofit=retrofitInstance.getRetrofitInstance(activity)
         val api: API = retrofit.create(API::class.java)
         val call:Call<Favorites> = api.makeFavoriteUnfavorite(favoritesParameter)
@@ -118,18 +117,7 @@ class FavoritesViewModel : ViewModel() {
                     Log.i("Response", "Response  " + response.code())
                     favoriteResponse.value=response.body()
                     markFavorite.isSelected=success
-                    val database: DealDatabase? = DealDatabase.getInstance(activity!!)
-                    if (database != null) {
-                        dealDao = database.dealDao()
-                    }
-                    val executorService: ExecutorService = Executors.newSingleThreadExecutor()
-                    executorService.execute{
-                        dealDao.update(favoritesParameter.restaurant,favoritesParameter.is_favorite)
-                        activity.runOnUiThread {
-                           //contextFragment.i
-                        }
-                    }
-                    }else if (response.code()==400){
+                }else if (response.code()==400){
                     val gson = GsonBuilder().create()
                     val mError =
                         gson.fromJson(response.errorBody()!!.string(),Error::class.java)

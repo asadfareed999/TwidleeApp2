@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.database.entity.DealRoom
 import com.example.asadfareed.twidlee2.fragments.DealsFragment
+import com.example.asadfareed.twidlee2.fragments.restaurant.RestaurantFragment
 import com.example.asadfareed.twidlee2.glidemodule.GlideApp
 import com.example.asadfareed.twidlee2.utils.utils
 import com.example.asadfareed.twidlee2.viewModel.RestaurantViewModel
@@ -114,9 +115,7 @@ class DealNestedAdapter(dealsList1: ArrayList<DealRoom>,
         }
 
         override fun onClick(v: View?) {
-            val viewModel = ViewModelProviders.of(itemView.context as FragmentActivity).get(
-                RestaurantViewModel::class.java)
-            viewModel.getRestaurantDetails(itemView.context as FragmentActivity, deal.restaurant_id)
+            utils.loadFragment2(RestaurantFragment(deal.restaurant_id), itemView.context as FragmentActivity)
         }
     }
 }

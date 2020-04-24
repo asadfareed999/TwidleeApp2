@@ -25,7 +25,7 @@ data class CompleteRestaurant(
     val food_types : List<String>,
     val rating : Double,
     val deals : List<Deals>,
-    val is_favorite : Boolean,
+    var is_favorite : Boolean,
     val cover_image : String
 ):Serializable {
 }

@@ -14,18 +14,15 @@ import com.example.asadfareed.twidlee2.model.*
 import com.example.asadfareed.twidlee2.utils.retrofitInstance
 import com.example.asadfareed.twidlee2.utils.utils
 import com.google.gson.GsonBuilder
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 class RestaurantViewModel : ViewModel() {
 
-    private  var restaurantDetails: MutableLiveData<Restaurant>
+    var restaurantDetails: MutableLiveData<Restaurant>
     var restaurantsAll: MutableLiveData<ArrayList<CompleteRestaurant>>
     private lateinit var retrofit: Retrofit
     private val sharedPrefFile = "kotlinsharedpreference"
@@ -64,11 +61,6 @@ class RestaurantViewModel : ViewModel() {
                     Log.i("Response", "Response  " + response.code())
                     //  Log.i("Response","Response : "+response.body())
                     restaurantDetails.value=response.body()
-                    restaurantDetails.observeForever(Observer (function = fun(restaurant: Restaurant?) {
-                            restaurant?.let {
-                                utils.loadFragment2(RestaurantFragment(restaurant), activity)
-                            }
-                        }))
                 }else if (response.code()==400){
                     val gson = GsonBuilder().create()
                     val mError =

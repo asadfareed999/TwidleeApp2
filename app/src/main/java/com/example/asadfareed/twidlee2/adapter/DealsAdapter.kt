@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.database.entity.DealRoom
 import com.example.asadfareed.twidlee2.fragments.DealsFragment
+import com.example.asadfareed.twidlee2.fragments.restaurant.RestaurantFragment
 import com.example.asadfareed.twidlee2.model.FavoritesParameter
 import com.example.asadfareed.twidlee2.utils.counter
 import com.example.asadfareed.twidlee2.utils.utils
 import com.example.asadfareed.twidlee2.viewModel.FavoritesViewModel
-import com.example.asadfareed.twidlee2.viewModel.RestaurantViewModel
 import kotlinx.android.synthetic.main.item_list_deal.view.*
 import kotlinx.android.synthetic.main.item_list_feature_deal_recycler.view.*
 import java.text.SimpleDateFormat
@@ -32,6 +32,7 @@ class DealsAdapter(
     var dealList2=Deals
     val contextFragment=contextFragment
     var featureDeals=featureDeals
+
 
     //this method is returning the view for each item in the list
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -172,12 +173,12 @@ class DealsAdapter(
             itemView.markFavorite.setOnClickListener {
                 val viewModel = ViewModelProviders.of(itemView.context as FragmentActivity)
                     .get(FavoritesViewModel::class.java)
-                val favorite = deal.is_favorite
+                val favorite = itemView.markFavorite.isSelected
                 val favoritesParameter =
                     FavoritesParameter(deal.restaurant_id, !favorite)
-                viewModel.makeFavorite(
+                viewModel.makeFavoriteRestaurants(
                     itemView.context as FragmentActivity, favoritesParameter,
-                    itemView.markFavorite, contextFragment
+                    itemView.markFavorite
                 )
             }
         }
@@ -192,8 +193,7 @@ class DealsAdapter(
         }
 
         override fun onClick(v: View?) {
-            val viewModel = ViewModelProviders.of(itemView.context as FragmentActivity).get(RestaurantViewModel::class.java)
-            viewModel.getRestaurantDetails(itemView.context as FragmentActivity, deals.get(adapterPosition-1).restaurant_id)
+            utils.loadFragment2(RestaurantFragment(deals.get(adapterPosition-1).restaurant_id), itemView.context as FragmentActivity)
         }
     }
 }

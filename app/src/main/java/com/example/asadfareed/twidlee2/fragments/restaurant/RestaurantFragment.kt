@@ -6,34 +6,50 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.asadfareed.twidlee2.R
-import com.example.asadfareed.twidlee2.TabAdapter
+import com.example.asadfareed.twidlee2.adapter.TabAdapter
 import com.example.asadfareed.twidlee2.model.FavoritesParameter
 import com.example.asadfareed.twidlee2.model.Restaurant
 import com.example.asadfareed.twidlee2.utils.utils
 import com.example.asadfareed.twidlee2.viewModel.FavoritesViewModel
+import com.example.asadfareed.twidlee2.viewModel.RestaurantViewModel
 import com.example.asadfareed.twidlee2.viewModel.ViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_restaurant.view.*
 
-class RestaurantFragment(restaurant: Restaurant) : Fragment() {
+class RestaurantFragment(id: Int) : Fragment() {
 
     private lateinit var viewModel: ViewModel
-    private var restaurantDetails=restaurant
+    lateinit var restaurantDetails:Restaurant
+    private val idRestaurant = id
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         val view: View = inflater.inflate(R.layout.fragment_restaurant, container, false)
-        setupData(view)
-        setTabs(view)
+        fetchData(view)
         return view
+    }
+
+    private fun fetchData(view: View) {
+        val viewModel = ViewModelProviders.of(this).get(
+            RestaurantViewModel::class.java)
+        viewModel.getRestaurantDetails(view.context as FragmentActivity,idRestaurant )
+        viewModel.restaurantDetails.observeForever(Observer (function = fun(restaurant: Restaurant?) {
+            restaurant?.let {
+                restaurantDetails=restaurant
+                setupData(view)
+                setTabs(view)
+            }
+        }))
     }
 
     private fun setTabs(view: View) {
         val viewPager = view.view_pager
         val tabs = view.restaurantTabs
-        val adapter = TabAdapter(activity!!.supportFragmentManager)
+        val adapter =
+            TabAdapter(activity!!.supportFragmentManager)
         adapter.addFragment(RestaurantDealsFragment(restaurantDetails.deals), getString(R.string.deals))
         adapter.addFragment(RestaurantContactFragment(restaurantDetails), getString(R.string.contact))
         adapter.addFragment(RestaurantReviewsFragment(restaurantDetails.rating_summary), getString(R.string.reviews))
@@ -66,20 +82,19 @@ class RestaurantFragment(restaurant: Restaurant) : Fragment() {
             getListItems(restaurantDetails.cuisines) + "\n" + getListItems(restaurantDetails.food_types)
         view.restaurantAddress.text = restaurantDetails.address.display_address
         viewModel = ViewModelProviders.of(this).get(ViewModel::class.java)
-        favoriteClick(view)
+       favoriteClick(view)
     }
 
     private fun favoriteClick(view: View) {
         view.markFavoriteRestaurantHome.setOnClickListener {
             val viewModel = ViewModelProviders.of(this)
                 .get(FavoritesViewModel::class.java)
-            val favorite = restaurantDetails.is_favorite
+            val favorite = view.markFavoriteRestaurantHome.isSelected
             val favoritesParameter =
                 FavoritesParameter(restaurantDetails.id, !favorite)
-            viewModel.makeFavorite(
+            viewModel.makeFavoriteRestaurants(
                 view.context as FragmentActivity, favoritesParameter,
-                view.markFavoriteRestaurantHome, this
-            )
+                view.markFavoriteRestaurantHome)
         }
     }
 
@@ -95,4 +110,5 @@ class RestaurantFragment(restaurant: Restaurant) : Fragment() {
         val cuisines1:String = sb.toString()
         return cuisines1
     }
+
 }
