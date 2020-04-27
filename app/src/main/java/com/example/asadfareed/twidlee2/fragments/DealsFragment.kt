@@ -13,7 +13,6 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -46,19 +45,21 @@ class DealsFragment: Fragment() {
     private lateinit var restaurants: ArrayList<CompleteRestaurant>
     private lateinit var view2:View
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private  var locationCurrent: Location? =null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         val view:View= inflater.inflate(R.layout.view_tabs_deal, container, false)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.context!!)
-        fetchLastLocation()
+       // fetchLastLocation()
         initData(view)
         clickHandler(view)
         return  view
     }
 
       fun observeDeals() {
+          fetchLastLocation()
         val executorService: ExecutorService = Executors.newSingleThreadExecutor()
         executorService.execute {
             deals = viewModel.getRepoDeals(activity)
@@ -98,7 +99,7 @@ class DealsFragment: Fragment() {
     private fun loadTab(view: View) {
         val tabs = view.Tabs
         val viewPager: ViewPager = view.view_pagerDealsRestaurant
-        viewPager.adapter = ViewPagerAdapter(deals,restaurants,this)
+        viewPager.adapter = ViewPagerAdapter(deals,restaurants,this,locationCurrent)
         tabs.tabGravity = TabLayout.GRAVITY_FILL
         tabs.setupWithViewPager(viewPager)
         setupTabTitle(tabs)
@@ -130,15 +131,14 @@ class DealsFragment: Fragment() {
                     val location= Location("")
                     location.latitude=latitude
                     location.longitude=longitude
-                    val location2=Location("")
-                    location.latitude=31.52
-                    location.longitude=74.35
-                    //val distance:Float=location.distanceTo(location2)
-                    //val distance:Float=SphericalUtil.computeDistanceBetween
-                    val array:FloatArray = FloatArray(1)
-                    Location.distanceBetween(latitude,longitude,31.52,74.35,array)
-                    Toast.makeText(this.context," "+array.get(0),Toast.LENGTH_LONG).show()
+                    locationCurrent=location
                 }
+
+            }
+            .addOnCanceledListener {
+
+            }
+            .addOnFailureListener{
 
             }
 

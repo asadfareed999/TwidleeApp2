@@ -1,5 +1,6 @@
 package com.example.asadfareed.twidlee2.adapter
 
+import android.location.Location
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,21 +19,23 @@ import com.example.asadfareed.twidlee2.utils.utils
 import com.example.asadfareed.twidlee2.viewModel.FavoritesViewModel
 import kotlinx.android.synthetic.main.item_list_deal.view.*
 import kotlinx.android.synthetic.main.item_list_feature_deal_recycler.view.*
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 class DealsAdapter(
-    featureDeals:ArrayList<DealRoom>,
-    Deals:ArrayList<DealRoom>,
-    contextFragment: DealsFragment
-    ) : RecyclerView.Adapter<DealsAdapter.ViewHolder>() {
+    featureDeals: ArrayList<DealRoom>,
+    Deals: ArrayList<DealRoom>,
+    contextFragment: DealsFragment,
+    location: Location?
+) : RecyclerView.Adapter<DealsAdapter.ViewHolder>() {
 
     var dealList2=Deals
     val contextFragment=contextFragment
     var featureDeals=featureDeals
-
+    private val currentLocation:Location?=location
 
     //this method is returning the view for each item in the list
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -51,9 +54,9 @@ class DealsAdapter(
     //this method is binding the data on the list
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (position==0) {
-            holder.bindItems(featureDeals, position, contextFragment)
+            holder.bindItems(featureDeals, position, contextFragment, currentLocation)
         }else{
-            holder.bindItems(dealList2, position-1, contextFragment)
+            holder.bindItems(dealList2, position-1, contextFragment,currentLocation)
         }
     }
 
@@ -81,20 +84,22 @@ class DealsAdapter(
         fun bindItems(
             dealsList1: ArrayList<DealRoom>,
             position: Int,
-            contextFragment: DealsFragment
+            contextFragment: DealsFragment,
+            currentLocation: Location?
         ) {
             if (adapterPosition==0){
-                setUpFeatureDeals(dealsList1, contextFragment)
+                setUpFeatureDeals(dealsList1, contextFragment,currentLocation)
 
             }else {
-                setupDeals(dealsList1, position, contextFragment)
+                setupDeals(dealsList1, position, contextFragment,currentLocation)
             }
         }
 
         private fun setupDeals(
             dealsList1: ArrayList<DealRoom>,
             position: Int,
-            contextFragment: DealsFragment
+            contextFragment: DealsFragment,
+            currentLocation: Location?
         ) {
             imageView = itemView.restaurantCoverImage
             deals = dealsList1
@@ -102,18 +107,19 @@ class DealsAdapter(
                 R.drawable.deal_placeholder,dealsList1.get(position).cover_image)
             val cuisines = getCuisines(dealsList1.get(position))
             var (date, date2) = formatDates(dealsList1.get(position))
-            setViewsData(dealsList1.get(position), cuisines, date, date2, contextFragment)
+            setViewsData(dealsList1.get(position), cuisines, date, date2, contextFragment,currentLocation)
             itemView.setOnClickListener(this)
         }
 
         private fun setUpFeatureDeals(
             deal: ArrayList<DealRoom>,
-            contextFragment: DealsFragment
+            contextFragment: DealsFragment,
+            currentLocation: Location?
         ) {
             recyclerView = itemView.nestedRecyclerViewFeatureRecycler
             recyclerView.layoutManager =
                 LinearLayoutManager(itemView.context, RecyclerView.HORIZONTAL, false)
-            adapter = DealNestedAdapter(deal, contextFragment)
+            adapter = DealNestedAdapter(deal, contextFragment,currentLocation)
             recyclerView.adapter = adapter
             adapter.notifyDataSetChanged()
         }
@@ -150,10 +156,25 @@ class DealsAdapter(
             cuisines: StringBuilder,
             date: String,
             date2: String,
-            contextFragment: DealsFragment
+            contextFragment: DealsFragment,
+            currentLocation: Location?
         ) {
             itemView.restaurantName.text = deal.restaurant_name
-            itemView.restaurantAddress.text = deal.address.display_address
+            if (currentLocation!=null){
+                val location=Location("")
+                location.latitude=deal.address.latitude
+                location.longitude=deal.address.longitude
+                val array:FloatArray = FloatArray(1)
+                Location.distanceBetween(currentLocation.latitude,currentLocation.longitude,
+                    location.latitude,location.longitude,array)
+                val distanceInKM:Float=array.get(0)/1000
+                val decim = DecimalFormat("0.00")
+                val price2: Double = decim.format(distanceInKM).toDouble()
+                val text=deal.address.display_address+" | "+price2.toString()+" KM"
+                itemView.restaurantAddress.text = text
+            }else {
+                itemView.restaurantAddress.text = deal.address.display_address
+            }
             itemView.restaurantCuisines.text = cuisines
             itemView.dealOffer.text = deal.title
             itemView.dealTime.text = date + "-" + date2

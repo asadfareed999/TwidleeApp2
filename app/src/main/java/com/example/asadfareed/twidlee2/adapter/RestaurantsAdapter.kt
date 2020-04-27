@@ -1,5 +1,6 @@
 package com.example.asadfareed.twidlee2.adapter
 
+import android.location.Location
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

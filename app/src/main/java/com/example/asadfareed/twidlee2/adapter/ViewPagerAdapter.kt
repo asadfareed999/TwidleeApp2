@@ -1,5 +1,6 @@
 package com.example.asadfareed.twidlee2.adapter
 
+import android.location.Location
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,8 @@ import kotlinx.android.synthetic.main.deals_view.view.*
 class ViewPagerAdapter(
     list: ArrayList<DealRoom>,
     list2: ArrayList<CompleteRestaurant>,
-    dealsFragment: DealsFragment
+    dealsFragment: DealsFragment,
+    locationCurrent: Location?
 ) :PagerAdapter(),SwipeRefreshLayout.OnRefreshListener {
 
     val dealList=list
@@ -29,6 +31,7 @@ class ViewPagerAdapter(
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     lateinit var dealList2:ArrayList<DealRoom>
     lateinit var featureDeals:ArrayList<DealRoom>
+    var location: Location?=locationCurrent
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val inflater = LayoutInflater.from(container.context)
@@ -57,7 +60,7 @@ class ViewPagerAdapter(
         getLists(dealList)
         adapter =
             DealsAdapter(
-                featureDeals, dealList2, context
+                featureDeals, dealList2, context,location
             )
         recyclerView.adapter = adapter
         adapter.notifyDataSetChanged()

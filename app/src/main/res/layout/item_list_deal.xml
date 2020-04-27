@@ -133,7 +133,6 @@
             android:layout_width="@dimen/BaseLayout_rhythmOneAndAThird_New"
             android:layout_height="@dimen/BaseLayout_rhythmOneAndAThird_New"
             android:layout_marginEnd="@dimen/default_margin"
-            android:background="@drawable/circle_shape_new"
             android:indeterminate="false"
             android:max="100"
             android:progressDrawable="@drawable/circular_progressbar_new"
@@ -146,11 +145,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textSize="@dimen/_9ssp"
+            android:textColor="@color/color_red"
+            android:background="@drawable/rectangle_counter_bg"
+            android:padding="@dimen/_3sdp"
             card_view:layout_constraintBottom_toBottomOf="@+id/counterProgress"
             card_view:layout_constraintEnd_toEndOf="@+id/counterProgress"
             card_view:layout_constraintStart_toStartOf="@+id/counterProgress"
             card_view:layout_constraintTop_toTopOf="@+id/counterProgress"
-            tools:text="03\n11:03"
+            tools:text="03:11:03"
             android:layout_marginBottom="@dimen/_3sdp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
