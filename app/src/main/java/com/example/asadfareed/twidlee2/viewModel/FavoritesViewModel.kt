@@ -15,6 +15,7 @@ import com.example.asadfareed.twidlee2.database.db.DealDatabase
 import com.example.asadfareed.twidlee2.fragments.DealsFragment
 import com.example.asadfareed.twidlee2.model.*
 import com.example.asadfareed.twidlee2.utils.retrofitInstance
+import com.example.asadfareed.twidlee2.utils.utils
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_favorites.view.*
 import retrofit2.Call
@@ -79,7 +80,7 @@ class FavoritesViewModel : ViewModel() {
                         mError.detail,
                         Toast.LENGTH_LONG
                     ).show()
-
+                    utils.logOut(activity)
                 }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
@@ -117,6 +118,14 @@ class FavoritesViewModel : ViewModel() {
                     Log.i("Response", "Response  " + response.code())
                     favoriteResponse.value=response.body()
                     markFavorite.isSelected=success
+                    val database: DealDatabase? = DealDatabase.getInstance(activity!!)
+                    if (database != null) {
+                        dealDao = database.dealDao()
+                    }
+                    val executorService: ExecutorService = Executors.newSingleThreadExecutor()
+                    executorService.execute{
+                        dealDao.update(favoritesParameter.restaurant,favoritesParameter.is_favorite)
+                    }
                 }else if (response.code()==400){
                     val gson = GsonBuilder().create()
                     val mError =
@@ -131,7 +140,7 @@ class FavoritesViewModel : ViewModel() {
                         mError.detail,
                         Toast.LENGTH_LONG
                     ).show()
-
+                    utils.logOut(activity!!)
                 }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
@@ -192,7 +201,7 @@ class FavoritesViewModel : ViewModel() {
                         mError.detail,
                         Toast.LENGTH_LONG
                     ).show()
-
+                    utils.logOut(activity!!)
                 }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()

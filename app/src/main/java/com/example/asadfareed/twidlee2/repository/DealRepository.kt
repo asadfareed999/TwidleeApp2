@@ -12,6 +12,8 @@ import com.example.asadfareed.twidlee2.database.entity.DealRoom
 import com.example.asadfareed.twidlee2.model.Deal
 import com.example.asadfareed.twidlee2.model.Error
 import com.example.asadfareed.twidlee2.model.InvalidToken
+import com.example.asadfareed.twidlee2.utils.retrofitInstance
+import com.example.asadfareed.twidlee2.utils.utils
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -65,7 +67,7 @@ class DealRepository @Inject constructor(
 /*
             if (!userExists) {
 */
-        getRetrofitInstance()
+        retrofit=retrofitInstance.getRetrofitInstance(context1 as FragmentActivity)
         loadDeals()
         /* }*/
             //}
@@ -91,6 +93,7 @@ class DealRepository @Inject constructor(
                     val gson = GsonBuilder().create()
                     var mError =
                         gson.fromJson(response.errorBody()!!.string(), InvalidToken::class.java)
+                    utils.logOut(context1 as FragmentActivity)
                     /*Toast.makeText(
                         context1,
                         mError.detail,
@@ -108,30 +111,6 @@ class DealRepository @Inject constructor(
         })
     }
 
-
-    private fun getRetrofitInstance() {
-        sharedPref = context1.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
-        val token: String = sharedPref.getString("token_key", "")!!
-        val httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
-        httpClient.addInterceptor { chain ->
-            val request = chain.request()
-                .newBuilder()
-                .addHeader("x-api-key", "5f7af37cb35f5cd8")
-                .addHeader("Authorization", "Bearer " + token)
-                .build()
-            chain.proceed(request)
-        }
-        // added logging interceptor
-        val httpLoggingInterceptor = HttpLoggingInterceptor()
-        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        httpClient.addInterceptor(httpLoggingInterceptor)
-
-        retrofit = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(API.BASE_URL)
-            .client(httpClient.build())
-            .build()
-    }
     companion object {
         val FRESH_TIMEOUT = TimeUnit.DAYS.toMillis(1)
     }

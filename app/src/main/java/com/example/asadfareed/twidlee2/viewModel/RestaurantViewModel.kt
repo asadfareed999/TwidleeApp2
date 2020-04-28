@@ -75,7 +75,7 @@ class RestaurantViewModel : ViewModel() {
                         mError.detail,
                         Toast.LENGTH_LONG
                     ).show()
-
+                    utils.logOut(activity)
                 }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
@@ -119,7 +119,7 @@ class RestaurantViewModel : ViewModel() {
                         mError.detail,
                         Toast.LENGTH_LONG
                     ).show()
-
+                    utils.logOut(activity)
                 }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()

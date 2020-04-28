@@ -41,7 +41,7 @@
 
 
             <com.mikhaellopez.circularimageview.CircularImageView
-                android:id="@+id/imageViewProfilePic"
+                android:id="@+id/imageViewProfilePic2"
                 android:layout_width="@dimen/small_action_buttons_width"
                 android:layout_height="@dimen/small_action_buttons_width"
                 android:layout_gravity="center"

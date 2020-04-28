@@ -14,12 +14,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.asadfareed.twidlee2.R
 import com.example.asadfareed.twidlee2.model.UpdateProfile
+import com.example.asadfareed.twidlee2.utils.utils
 import com.example.asadfareed.twidlee2.viewModel.ViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_account.view.*
@@ -109,9 +111,14 @@ class AccountFragment : Fragment() {
         var Name: String = sharedPref.getString("name_key", "Name")!!
         val Email: String = sharedPref.getString("email_key", "email")!!
         val Phone: String = sharedPref.getString("phone_key", "phone")!!
+        val ProfilePic: String = sharedPref.getString("profile_picture_key", "").toString()
         val sharedPushNotifyValue: Boolean = sharedPref.getBoolean("is_push_notification_key", true)
         val sharedEmailNotifyValue: Boolean =
             sharedPref.getBoolean("is_email_notification_key", true)
+        if (!ProfilePic.isEmpty()) {
+            utils.loadImage(view.context as FragmentActivity,view.imageViewProfilePic2,
+                R.drawable.ic_placeholder_avatar,ProfilePic)
+        }
         setData(Name, Email, Phone, view, sharedPushNotifyValue, sharedEmailNotifyValue)
     }
 

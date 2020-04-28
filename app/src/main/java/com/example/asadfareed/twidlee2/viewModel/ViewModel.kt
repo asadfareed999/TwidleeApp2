@@ -130,6 +130,7 @@ class ViewModel : ViewModel() {
                         mError.detail,
                         Toast.LENGTH_LONG
                     ).show()
+                    utils.logOut(activity)
 
                 }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
@@ -199,7 +200,7 @@ class ViewModel : ViewModel() {
                         mError.detail,
                         Toast.LENGTH_LONG
                     ).show()
-
+                    utils.logOut(activity)
                 }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
@@ -250,6 +251,7 @@ class ViewModel : ViewModel() {
                         Toast.LENGTH_LONG
                     ).show()
                     sharedPref.edit().clear().apply()
+                    utils.logOut(activity)
                 }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
@@ -293,7 +295,7 @@ class ViewModel : ViewModel() {
                         mError.detail,
                         Toast.LENGTH_LONG
                     ).show()
-
+                    utils.logOut(activity)
                 }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
@@ -336,7 +338,7 @@ class ViewModel : ViewModel() {
                         mError.detail,
                         Toast.LENGTH_LONG
                     ).show()
-
+                    utils.logOut(activity)
                 }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
@@ -387,7 +389,7 @@ class ViewModel : ViewModel() {
                         mError.detail,
                         Toast.LENGTH_LONG
                     ).show()
-
+                    utils.logOut(activity)
                 }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
@@ -432,7 +434,7 @@ class ViewModel : ViewModel() {
                         mError.detail,
                         Toast.LENGTH_LONG
                     ).show()
-
+                    utils.logOut(activity)
                 }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
@@ -481,7 +483,7 @@ class ViewModel : ViewModel() {
                         mError.detail,
                         Toast.LENGTH_LONG
                     ).show()
-
+                    utils.logOut(activity)
                 }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
@@ -530,7 +532,7 @@ class ViewModel : ViewModel() {
                         mError.detail,
                         Toast.LENGTH_LONG
                     ).show()
-
+                    utils.logOut(activity)
                 }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()
@@ -571,7 +573,7 @@ class ViewModel : ViewModel() {
                         mError.detail,
                         Toast.LENGTH_LONG
                     ).show()
-
+                    utils.logOut(activity)
                 }else {
                     Toast.makeText(activity, "Error  " + response.message(), Toast.LENGTH_LONG)
                         .show()

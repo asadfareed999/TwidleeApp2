@@ -1,5 +1,8 @@
 package com.example.asadfareed.twidlee2.utils
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.Typeface
 import android.text.SpannableString
@@ -10,12 +13,14 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.asadfareed.twidlee2.R
+import com.example.asadfareed.twidlee2.activity.UserManagementActivity
 import com.example.asadfareed.twidlee2.glidemodule.GlideApp
 import java.text.SimpleDateFormat
 import java.util.*
 
 class utils {
     companion object {
+
          fun loadFragment(fragment: Fragment, activity: FragmentActivity?) {
             val transaction = activity!!.supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragmentContainer, fragment)
@@ -70,6 +75,14 @@ class utils {
             spf = SimpleDateFormat("hh:mm aaa")
             date1 = spf.format(newDate)
             return date1
+        }
+        fun logOut(activity: FragmentActivity){
+            val sharedPrefFile = "kotlinsharedpreference"
+            lateinit var sharedPref: SharedPreferences
+            sharedPref = activity.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
+            sharedPref.edit().clear().apply()
+            activity.startActivity(Intent(activity, UserManagementActivity::class.java))
+            activity.finish()
         }
     }
 }
